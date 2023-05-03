@@ -25,14 +25,12 @@ import Contact from "./pages/Contact";
 import Portfolio from "./pages/Portfolio";
 import Vcalculator from "./pages/Vcalculator";
 import Itinerary from "./pages/Itinerary";
-import Event from "./pages/Event";
 import { EventStore } from "./EventStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import AdminRoute from "./components/AdminRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import VendorRoute from "./components/VendorRoute";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(EventStore);
@@ -92,7 +90,10 @@ function App() {
                         </MDBDropdownToggle>
                         <MDBDropdownMenu>
                           <MDBDropdownItem link>
-                            <Link className="nav-link" to="/profilepage/${_Id}">
+                            <Link
+                              className="nav-link"
+                              to={`/profilepage/${userInfo._id}`}
+                            >
                               Profile
                             </Link>
                           </MDBDropdownItem>
@@ -129,19 +130,19 @@ function App() {
             <Route path="/vendors" element={<Vendors />} />
 
             <Route path="/profilepage/:id" element={<ProfilePage />} />
-            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/calendar/:id" element={<Calendar />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route
-              path="/vcalculator"
+              path="/vcalculator/:id"
               element={
                 <ProtectedRoute>
                   <Vcalculator />
                 </ProtectedRoute>
               }
             />
-            <Route path="/itinerary" element={<Itinerary />} />
-            <Route path="/event" element={<Event />} />
+            <Route path="/itinerary/:id" element={<Itinerary />} />
+
             <Route
               path="/admin/dashboard"
               element={

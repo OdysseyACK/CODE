@@ -43,7 +43,7 @@ function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("/api/users/vendors")
+      .get("/api/users/dashboard")
       .then((response) => {
         setUsers(response.data);
         dispatch({ type: "FETCH_SUCCESS" });

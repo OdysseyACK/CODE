@@ -38,6 +38,12 @@ app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
 
+const __dirname = path.resolve(); // returns current directory
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+);
+
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });

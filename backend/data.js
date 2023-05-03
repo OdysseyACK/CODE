@@ -186,6 +186,8 @@ const data = {
     },
   ],
   events: [{}],
+  tasks: [{}],
+  agenda: [{}],
 };
 
 export default data;

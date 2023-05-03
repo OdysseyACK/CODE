@@ -40,7 +40,6 @@ const reducer = (state, action) => {
         loadingUpload: false,
         errorUpload: "",
       };
-
     case "UPLOAD_FAIL":
       return { ...state, loadingUpload: false, errorUpload: action.payload };
 
@@ -105,7 +104,7 @@ export default function EditProfileButton() {
         dispatch({
           type: "UPDATE_SUCCESS",
         });
-        ctxDispatch({ type: "USER_LOGIN", payload: data });
+        ctxDispatch({ type: "UPDATE_SUCCESS", payload: data });
         localStorage.setItem("userInfo", JSON.stringify(data));
         toast.success("User updated successfully");
       } catch (err) {

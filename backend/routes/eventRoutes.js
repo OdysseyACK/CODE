@@ -8,15 +8,13 @@ const eventRouter = express.Router();
 // create new event
 eventRouter.post("/", isAuth, async (req, res) => {
   try {
-    const { name, type, startDate, endDate, startTime, endTime } = req.body;
+    const { name, type, startDate, startTime } = req.body;
     const createdBy = req.user._id;
     const event = new Event({
       name,
       type,
       startDate,
-      endDate,
       startTime,
-      endTime,
       createdBy,
     });
     const newEvent = await event.save();
@@ -49,6 +47,19 @@ eventRouter.get(
       res.json(fetchEvents);
     } catch (error) {
       throw new Error(error);
+    }
+  })
+);
+
+eventRouter.get(
+  "/:id",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const event = await Event.findById(req.params.id);
+    if (event) {
+      res.send(event);
+    } else {
+      res.status(404).send({ message: "Event not found" });
     }
   })
 );

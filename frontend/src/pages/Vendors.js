@@ -1,41 +1,39 @@
-import { Tab, Tabs, Col } from "react-bootstrap";
-import Vendor from "../components/Vendor";
-import { useReducer, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Row } from "react-bootstrap";
+import Vendor from "../components/Vendor";
 import { getError } from "../utils";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_REQUEST":
-      return { ...state, loading: true };
-    case "FETCH_SUCCESS":
-      return { ...state, users: action.payload, loading: false };
-    case "FETCH_FAILURE":
-      return { ...state, loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
+import {
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsContent,
+  MDBTabsPane,
+  MDBRow,
+  MDBCol,
+} from "mdb-react-ui-kit";
 
 function Vendors() {
-  const [{ loading, error, users }, dispatch] = useReducer(reducer, {
-    users: [],
-    loading: true,
-    error: "",
-  });
+  const [vendors, setVendors] = useState([]);
+  const [activeTab, setActiveTab] = useState("Artiste");
 
   useEffect(() => {
     axios
-      .get("/api/users/vendors")
+      .get(`/api/users/vendors`)
       .then((response) => {
-        dispatch({ type: "FETCH_SUCCESS", payload: response.data });
+        setVendors(response.data);
       })
       .catch((error) => {
         console.log(error);
-        dispatch({ type: "FETCH_FAILURE", payload: getError(error) });
+        console.log(getError(error));
       });
   }, []);
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const filteredVendors = vendors.filter(
+    (vendor) => vendor.vendorType === activeTab
+  );
 
   return (
     <div>
@@ -49,11 +47,100 @@ function Vendors() {
       </section>
       <div className="container mt-5">
         <section className="vendors">
-          <div>
-            {users.map((user) => (
-              <Vendor user={user}></Vendor>
+          <MDBTabs justify className="mb-3">
+            {[
+              "Artiste",
+              "Catering",
+              "Decor",
+              "Florist",
+              "Photography",
+              "Organiser",
+              "Venue",
+              "Others",
+            ].map((tab) => (
+              <MDBTabsItem
+                key={tab}
+                onClick={() => handleTabClick(tab)}
+                active={activeTab === tab}
+              >
+                {tab}
+              </MDBTabsItem>
             ))}
-          </div>
+          </MDBTabs>
+          <MDBTabsContent>
+            <MDBTabsPane show={activeTab === "Artiste"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Catering"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Decor"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Florist"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Photography"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Organiser"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Venue"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+            <MDBTabsPane show={activeTab === "Others"}>
+              <MDBRow>
+                {filteredVendors.map((vendor) => (
+                  <MDBCol sm="6" md="4" lg="3" key={vendor._id}>
+                    <Vendor user={vendor} />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+            </MDBTabsPane>
+          </MDBTabsContent>
         </section>
       </div>
     </div>

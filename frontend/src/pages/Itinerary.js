@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useReducer } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,12 +6,33 @@ import listPlugin from "@fullcalendar/list";
 import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { getError } from "../utils";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return { ...state, loading: false };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
 
 function Itinerary() {
+  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const calendarComponentRef = useRef(null);
 
   const [calendarEvents, setCalendarEvents] = useState([]);
-
+  const [event, setEvent] = useState([]);
   const [events, setEvents] = useState([
     { title: "Event 1", id: "1" },
     { title: "Event 2", id: "2" },
@@ -19,6 +40,10 @@ function Itinerary() {
     { title: "Event 4", id: "4" },
     { title: "Event 5", id: "5" },
   ]);
+
+  const params = useParams();
+  const { id: eventId } = params;
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     let draggableEl = document.getElementById("external-events");
@@ -33,7 +58,18 @@ function Itinerary() {
         };
       },
     });
-  }, []);
+
+    axios
+      .get(`/api/events/${eventId}`)
+      .then((response) => {
+        setEvent(response.data);
+        dispatch({ type: "FETCH_SUCCESS" });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: "FETCH_FAIL", payload: getError(error) });
+      });
+  }, [eventId]);
 
   const eventClick = (eventClick) => {
     Alert.fire({
@@ -114,6 +150,16 @@ function Itinerary() {
 
   const handleRemove = (event) => {
     setEvents(events.filter((e) => e.id !== event.id));
+  };
+
+  const navigate = useNavigate();
+
+  const back = (event) => {
+    navigate(`/calendar/${eventId}`);
+  };
+
+  const save = (userInfo) => {
+    navigate(`/profilepage/${userInfo?._id}`);
   };
 
   return (
@@ -235,16 +281,19 @@ function Itinerary() {
       </Row>
       <div className="nextBack-btn">
         <MDBBtn
-          href="/calendar"
-          onClick={() =>
-            window.confirm(
-              "Are you sure? Programme Rundown set for this event will not be saved."
-            )
-          }
+          onClick={() => {
+            if (
+              window.confirm(
+                "Are you sure? Itinerary set for this event will not be saved."
+              )
+            ) {
+              back();
+            }
+          }}
         >
           Back
         </MDBBtn>
-        <MDBBtn href="/account">Save Event</MDBBtn>
+        <MDBBtn onClick={() => save(userInfo)}>Save Event</MDBBtn>
       </div>
     </div>
   );

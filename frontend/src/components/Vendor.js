@@ -1,8 +1,4 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { MDBCard } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-import { EventStore } from "../EventStore";
 
 export default function Vendor(props) {
   const { user } = props;
@@ -11,7 +7,16 @@ export default function Vendor(props) {
     <div>
       <div key={user._id}>
         <Link to={`/profilepage/${user._id}`}>
-          <img src={user.profilePic} alt="" />
+          <img
+            style={{
+              maxHeight: "220px",
+              maxWidth: "220px",
+              minWidth: "220px",
+              minHeight: "220px",
+            }}
+            src={user.profilePic}
+            alt=""
+          />
         </Link>
       </div>
     </div>

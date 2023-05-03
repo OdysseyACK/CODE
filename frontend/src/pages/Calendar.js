@@ -1,11 +1,29 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import React, { useEffect, useState, useRef, useReducer } from "react";
+import { Col, Row } from "react-bootstrap";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { getError } from "../utils";
+import { Form } from "react-bootstrap";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return { ...state, loading: false };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
 
 function Calendar() {
   const calendarComponentRef = useRef(null);
@@ -24,6 +42,15 @@ function Calendar() {
   ]);
 
   const [events, setEvents] = useState([{ title: "Event 1", id: "1" }]);
+  const [event, setEvent] = useState([]);
+  const [warning, setWarning] = useState("");
+  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
+
+  const params = useParams();
+  const { id: eventId } = params;
 
   useEffect(() => {
     let draggableEl = document.getElementById("external-events");
@@ -38,7 +65,18 @@ function Calendar() {
         };
       },
     });
-  }, []);
+
+    axios
+      .get(`/api/events/${eventId}`)
+      .then((response) => {
+        setEvent(response.data);
+        dispatch({ type: "FETCH_SUCCESS" });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: "FETCH_FAIL", payload: getError(error) });
+      });
+  }, [eventId]);
 
   const eventClick = (eventClick) => {
     Alert.fire({
@@ -121,8 +159,18 @@ function Calendar() {
     setEvents(events.filter((e) => e.id !== event.id));
   };
 
+  const navigate = useNavigate();
+
+  const next = (event) => {
+    navigate(`/itinerary/${eventId}`);
+  };
+
+  const back = (event) => {
+    navigate(`/vcalculator/${eventId}`);
+  };
+
   return (
-    <div className="animated fadeIn p-4">
+    <div className="animated fadeIn">
       <Row>
         <Col lg={3} sm={3} md={3}>
           <div
@@ -194,27 +242,40 @@ function Calendar() {
                 </div>
               </div>
             ))}
-            <div className="mt-5 mb-3 add-input">
-              <MDBInput
-                type="text"
-                label="Enter new event"
-                value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}
-              />
-              {""}
+
+            <p>{warning}</p>
+            <Form onSubmit={handleAddTask}>
+              <div className="mt-5 mb-3 add-input">
+                <MDBInput
+                  type="text"
+                  name="task"
+                  label="Enter new event"
+                  value={newTask}
+                  onChange={(e) => setNewTask(e.target.value)}
+                />
+                {""}
+                <Form.Control
+                  type="date"
+                  className="w-25 m-1"
+                  name="date"
+                  placeholder="Start Date"
+                  required
+                  // onChange={(e) => setstartDate(e.target.value)}
+                />
+              </div>
               <MDBBtn
-                onClick={handleAddTask}
+                type="submit"
                 style={{
-                  width: "90px",
+                  width: "100%",
                   backgroundColor: "#481449",
                 }}
               >
                 Add
               </MDBBtn>
-            </div>
+            </Form>
           </div>
         </Col>
-
+        {/* ========================================Calendar================================================================ */}
         <Col lg={9} sm={9} md={9}>
           <div className="calendar" id="mycalendar">
             <FullCalendar
@@ -241,16 +302,19 @@ function Calendar() {
       </Row>
       <div className="nextBack-btn">
         <MDBBtn
-          href="/vcalculator"
-          onClick={() =>
-            window.confirm(
-              "Are you sure? To-do List set for this event will not be saved."
-            )
-          }
+          onClick={() => {
+            if (
+              window.confirm(
+                "Are you sure? To-do List set for this event will not be saved."
+              )
+            ) {
+              back();
+            }
+          }}
         >
           Back
         </MDBBtn>
-        <MDBBtn href="/itinerary">Next</MDBBtn>
+        <MDBBtn onClick={next}>Next</MDBBtn>
       </div>
     </div>
   );

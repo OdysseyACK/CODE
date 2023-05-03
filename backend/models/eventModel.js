@@ -23,14 +23,6 @@ const eventSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  eventTasks: {
-    type: [String],
-    required: false,
-  },
-  agenda: {
-    type: [String],
-    required: false,
-  },
 });
 
 const Event = mongoose.model("Event", eventSchema);
