@@ -1,0 +1,655 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.site-container {
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.hero {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  position: relative;
+}
+
+.hero-slideshow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  animation: fade 30s infinite;
+}
+
+.slide:nth-child(1) {
+  background-image: url("../public/images/homepage-bg.jpeg");
+  animation-delay: 0s;
+  filter: brightness(0.8);
+}
+
+.slide:nth-child(2) {
+  background-image: url("../public/images/homepage-bg.jpg");
+  animation-delay: 15s;
+  filter: brightness(0.8);
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  color: white;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 7vw;
+}
+
+.hero-content p {
+  color: white;
+  font-style: italic;
+  font-size: 2vh;
+}
+
+.sliding-text-container {
+  overflow: hidden;
+}
+
+.sliding-text {
+  margin-top: 20%;
+  animation: slide-down 2s forwards;
+  animation-delay: 0; /* Add 1 second delay */
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.sliding-subtext {
+  animation: slide-in 2s forwards;
+  animation-delay: 0;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(200%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modal-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+.start-button {
+  animation: fadeIn 5s;
+}
+
+.form-control {
+  width: 30%;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.transparent-navbar {
+  background-color: transparent;
+}
+
+.transparent-navbar .navbar-toggler {
+  background-color: #fff;
+}
+
+.navbar {
+  position: sticky;
+}
+
+.features-row {
+  justify-content: center;
+  text-align: center;
+  color: #00525f;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.features h1 {
+  font-size: 3vw;
+}
+
+.features h3,
+i {
+  font-size: 2.5vw;
+}
+
+.features p {
+  font-size: 2vw;
+}
+
+.features h1 {
+  color: #fc854f;
+}
+
+.event-card {
+  width: 13vw;
+  height: 10vw;
+  margin: 0 25px;
+}
+
+.service-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.service-item {
+  background-color: #ffab40;
+  color: white;
+  border-radius: 50%;
+  height: 8vw;
+  width: 8vw;
+  text-align: center;
+  align-items: center;
+}
+
+.service-item-content {
+  margin: 20% 0;
+}
+
+.service-item-content h5,
+.service-item-content i {
+  font-size: 1vw;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0 10%;
+  height: 15vw;
+}
+
+.team-card {
+  height: 10vw;
+  width: 10vw;
+  background-color: wheat;
+  margin-left: 25%;
+}
+
+.partners-container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  height: 13vw;
+}
+
+.partners-title,
+.contact-title {
+  background-color: #f8f4ec;
+  width: 13vw;
+  height: 13vw;
+  display: flex;
+  align-items: center;
+}
+
+.partners-title h2,
+.contact-title h2 {
+  text-align: center;
+  font-size: 2.5vw;
+  color: #fc854f;
+}
+
+.sponsors-container {
+  height: 13vw;
+  overflow: hidden;
+}
+
+.slider {
+  background: none;
+  height: 13vw;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider:before {
+  left: 0;
+  top: 0;
+}
+.slider:after,
+.slider:before {
+  background: linear-gradient(to right, #f8f4ec 0%, hsla(0, 0%, 100%, 0) 100%);
+  content: "";
+  height: 13vw;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+.slider:after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
+.slider .slide-track {
+  animation: scroll-l 30s linear infinite;
+  display: flex;
+  width: 2000px;
+}
+
+.slider .logo-slide {
+  height: 13vw;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.slider .img {
+  width: 180px;
+  padding: 1pc;
+  vertical-align: middle;
+  margin: 0 auto;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes scroll-l {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  height: 13vw;
+}
+
+.social-container {
+  height: 13vw;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+/*********** VENDOR PAGE ************/
+
+/************************************************************ ACCOUNTS PAGE ************************************************************************/
+.account-content {
+  display: flex;
+  justify-content: space-around;
+  height: 45vw;
+  width: 50vw;
+  margin: auto;
+}
+
+.account-cards {
+  margin: 2vw;
+  height: auto;
+  width: 30vw;
+}
+
+.gallery {
+  width: 50vw;
+  padding: 1%;
+}
+
+.gallery-item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.gallery-image {
+  width: 15vw;
+  height: 15vw;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.gallery-image:hover {
+  filter: brightness(50%);
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .gallery-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+/************************************************************ VENDORS-ACCOUNTS PAGE **************************************************/
+.vaccount-header {
+  display: flex;
+  justify-content: space-around;
+  height: 25vw;
+  width: 35vw;
+  margin: auto;
+  margin-top: 10vh;
+}
+
+.vaccount-photo {
+  flex-direction: column;
+  align-items: center;
+}
+
+.vedit-photo {
+  width: 10vw;
+  height: 3vw;
+  margin-left: 20%;
+}
+
+.vedit-photo p {
+  font-size: 1vw;
+}
+
+.vedit-button {
+  width: 7vw;
+  height: 3vw;
+}
+
+.vedit-button p {
+  font-size: 1vw;
+}
+
+.vaccount-content {
+  display: flex;
+  justify-content: space-around;
+  height: 45vw;
+  width: 70vw;
+  margin: auto;
+}
+
+.vaccount-cards {
+  margin: 2vw;
+  height: auto;
+  width: 30vw;
+}
+
+.about-co {
+  text-align: center;
+}
+
+.about-co h5 {
+  font-style: italic;
+}
+
+.about-co p {
+  text-align: justify;
+}
+
+.vaccount-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 6vw);
+  grid-gap: 10px;
+}
+
+.gallery-cards {
+  margin: 2vw;
+}
+
+/************************************************************ CALENDAR PAGE ***************************************************************/
+.calendar {
+  margin-top: 10%;
+}
+
+.month-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+
+.month-indicator h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.month-indicator button {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.day-of-week,
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: white;
+  outline: 1px solid;
+  outline-color: #ffab40;
+}
+
+.day-of-week div {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  outline: 1px solid;
+  outline-color: #ffab40;
+}
+
+.date-grid {
+  height: 30vw;
+}
+
+.date-grid div {
+  padding: 10px;
+  text-align: right;
+  outline: 1px solid;
+  outline-color: #ffab40;
+}
+
+.date-grid div:hover {
+  background-color: #d9d9d9;
+}
+
+.date-grid div:first-child {
+  grid-column: 1;
+}
+
+/* .checklist {
+  background-color: white;
+  outline: 2px solid;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+} */
+
+/* .add-checklist {
+  margin-top: 90%;
+} */
+
+.todo-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.add-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/************************************************************ PORTFOLIO PAGE ************************************************************/
+.portfolio-img {
+  max-width: 100%;
+  display: block;
+}
+
+.portfolio-grid {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+.portfolio figure > img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+.portfolio {
+  column-count: 4;
+  column-gap: 10px;
+}
+
+/************************************************************CONTACT-PAGE*******************************************************************************/
+.contact-page {
+  background-image: url(../public/images/empty-letter.jpg);
+  width: 100vw;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+.contact-form {
+  background-color: aliceblue;
+  height: auto;
+  width: 35vw;
+  border-radius: 5%;
+  padding: 3vw;
+  margin: auto;
+  margin-top: 20vh;
+  font-size: 1vw;
+}
+.contact-form h2 {
+  text-align: center;
+}
+
+.contact-form .form-control {
+  height: 39px;
+}
+
+/*****************VENDOR+CALCULATOR PAGE*************/
+.btn:hover .vcard-text {
+  opacity: 1;
+}
+
+.vcalculator h2,
+p {
+  margin-top: 5vw;
+  text-align: center;
+}
+
+.v-vendors {
+  width: 70vw;
+  height: auto;
+}
+.filter {
+  background-color: #79bec6;
+  color: #fff;
+  margin: 2vw;
+  height: auto;
+  padding: 1vw;
+  width: 23vw;
+  border-radius: 8%;
+  text-align: center;
+}
+
+.calculator {
+  background-color: #79bec6;
+  color: #fff;
+  margin: 2vw;
+  padding: 1vw;
+  height: auto;
+  width: 23vw;
+  border-radius: 8%;
+}
+
+.calculator ul {
+  background-color: aliceblue;
+  color: #033439;
+  max-height: 25vw;
+  overflow-y: scroll;
+  margin: 0.1vw;
+}
+
+.calculator li {
+  display: flex;
+  align-items: center;
+  padding: 0.3vw;
+  justify-content: space-between;
+}
+
+.vcal-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 40%;
+}
+
+.clearCart {
+  margin: auto;
+}
+
+.nextBack-btn {
+  display: flex;
+  justify-content: space-between;
+}
