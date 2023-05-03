@@ -146,7 +146,7 @@ userRouter.get(
   "/vendors",
   expressAsyncHandler(async (req, res) => {
     try {
-      const fetchUsers = await User.find();
+      const fetchUsers = await User.find({ isVendor: true });
       res.json(fetchUsers);
     } catch (error) {
       throw new Error(error);
@@ -154,7 +154,19 @@ userRouter.get(
   })
 );
 
-userRouter.get;
+userRouter.get("/users/:userId", async (req, res) => {
+  try {
+    const user = await User.findOne({ userId: req.params.userId });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    // return user data as JSON object
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 userRouter.put(
   "/dashboard",

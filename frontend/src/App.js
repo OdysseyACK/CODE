@@ -92,7 +92,7 @@ function App() {
                         </MDBDropdownToggle>
                         <MDBDropdownMenu>
                           <MDBDropdownItem link>
-                            <Link className="nav-link" to="/profilepage">
+                            <Link className="nav-link" to="/profilepage/${_Id}">
                               Profile
                             </Link>
                           </MDBDropdownItem>
@@ -128,7 +128,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/vendors" element={<Vendors />} />
 
-            <Route path="/profilepage" element={<ProfilePage />} />
+            <Route path="/profilepage/:id" element={<ProfilePage />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/portfolio" element={<Portfolio />} />

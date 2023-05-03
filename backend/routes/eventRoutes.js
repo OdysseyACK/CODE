@@ -40,4 +40,17 @@ eventRouter.get(
   })
 );
 
+// fetch events from db into itinerary
+eventRouter.get(
+  "/itinerary",
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const fetchEvents = await Event.find();
+      res.json(fetchEvents);
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+);
+
 export default eventRouter;
