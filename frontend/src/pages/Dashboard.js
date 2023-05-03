@@ -38,11 +38,12 @@ function Dashboard() {
   const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
+    loadingUpdate: "",
   });
 
   useEffect(() => {
     axios
-      .get("/api/users/dashboard")
+      .get("/api/users/vendors")
       .then((response) => {
         setUsers(response.data);
         dispatch({ type: "FETCH_SUCCESS" });

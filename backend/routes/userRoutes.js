@@ -143,7 +143,7 @@ userRouter.get(
 );
 
 userRouter.get(
-  "/",
+  "/vendors",
   expressAsyncHandler(async (req, res) => {
     try {
       const fetchUsers = await User.find();
@@ -153,6 +153,8 @@ userRouter.get(
     }
   })
 );
+
+userRouter.get;
 
 userRouter.put(
   "/dashboard",

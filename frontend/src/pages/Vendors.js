@@ -1,8 +1,9 @@
 import { Tab, Tabs, Col } from "react-bootstrap";
 import Vendor from "../components/Vendor";
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import { Row } from "react-bootstrap";
+import { getError } from "../utils";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -18,6 +19,7 @@ const reducer = (state, action) => {
 };
 
 function Vendors() {
+  const [user, setUser] = useState([]);
   const [{ loading, error, users }, dispatch] = useReducer(reducer, {
     users: [],
     loading: true,
@@ -25,16 +27,16 @@ function Vendors() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
-      try {
-        const result = await axios.get("/api/users");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-      } catch (err) {
-        dispatch({ type: "FETCH_FAILURE", payload: err.message });
-      }
-    };
-    fetchData();
+    axios
+      .get("/api/users/dashboard")
+      .then((response) => {
+        setUser(response.data);
+        dispatch({ type: "FETCH_SUCCESS" });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: "FETCH_FAIL", payload: getError(error) });
+      });
   }, []);
 
   return (
