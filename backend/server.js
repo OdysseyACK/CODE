@@ -6,6 +6,8 @@ import userRouter from "./routes/userRoutes.js";
 import multer from "multer";
 import path from "path";
 import eventRouter from "./routes/eventRoutes.js";
+import taskRouter from "./routes/taskRoutes.js";
+import agendaRouter from "./routes/agendaRoutes.js";
 
 dotenv.config();
 
@@ -20,23 +22,14 @@ mongoose
 
 const app = express();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
+app.use("/api/tasks", taskRouter);
+app.use("/api/agenda", agendaRouter);
 
 const __dirname = path.resolve(); // returns current directory
 app.use(express.static(path.join(__dirname, "/frontend/build")));
