@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { getError } from "../utils";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Alert from "sweetalert2";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +26,7 @@ const reducer = (state, action) => {
   }
 };
 
-function Todolist({ onTaskAdded }) {
+function Todolist({ addEventToCalendar }) {
   const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
@@ -75,10 +76,19 @@ function Todolist({ onTaskAdded }) {
           },
         }
       );
-      onTaskAdded(response.data);
+      // Update the tasks state with the new task
       setTasks((prevTasks) => [...prevTasks, response.data]);
+      addEventToCalendar({
+        name: response.data.name,
+        date: response.data.date,
+      });
       setTaskName(""); // reset taskName state
       setTaskDate(""); // reset taskDate state
+      Alert.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Task successfully added.",
+      });
     } catch (err) {
       toast.error(getError(err));
     }
@@ -163,6 +173,7 @@ function Todolist({ onTaskAdded }) {
             className=" m-1"
             name="date"
             placeholder="Start Date"
+            value={taskDate}
             onChange={(e) => setTaskDate(e.target.value)}
           />
         </div>

@@ -166,7 +166,7 @@ function Register() {
           <div className="d-flex align-items-center justify-content-center mb-4">
             <img
               id="imgId"
-              className="gallery-image"
+              className="registerProfile"
               src={src ? src : "./images/default.jpg"}
               onClick={toggleShow}
               alt=""

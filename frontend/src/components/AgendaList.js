@@ -6,6 +6,7 @@ import { getError } from "../utils";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { EventStore } from "../EventStore";
+import Alert from "sweetalert2";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -26,7 +27,7 @@ const reducer = (state, action) => {
   }
 };
 
-function AgendaList({ onAgendaAdded }) {
+function AgendaList({ addAgendaToCalendar }) {
   const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
@@ -99,10 +100,19 @@ function AgendaList({ onAgendaAdded }) {
           },
         }
       );
-      onAgendaAdded(response.data);
       setAgenda((prevAgenda) => [...prevAgenda, response.data]);
+      addAgendaToCalendar({
+        name: response.data.name,
+        date: response.data.date,
+        startTime: response.data.startTime,
+      });
       setAgendaName(""); // reset taskName state
       setAgendaStartTime(""); // reset StartTime state
+      Alert.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Task successfully added.",
+      });
     } catch (err) {
       toast.error(getError(err));
     }
@@ -186,7 +196,7 @@ function AgendaList({ onAgendaAdded }) {
             className="m-1"
             name="time"
             value={agendaStartTime}
-            placeholder="Star Time"
+            placeholder="Start Time"
             onChange={(e) => setAgendaStartTime(e.target.value)}
           />
         </div>

@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import seedRouter from "./routes/seedRoutes.js";
 import userRouter from "./routes/userRoutes.js";
-import multer from "multer";
 import path from "path";
 import eventRouter from "./routes/eventRoutes.js";
 import taskRouter from "./routes/taskRoutes.js";
 import agendaRouter from "./routes/agendaRoutes.js";
+import galleryRouter from "./routes/galleryRoutes.js";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -22,14 +23,17 @@ mongoose
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
 app.use("/api/tasks", taskRouter);
 app.use("/api/agenda", agendaRouter);
+app.use("/api/gallery", galleryRouter);
 
 const __dirname = path.resolve(); // returns current directory
 app.use(express.static(path.join(__dirname, "/frontend/build")));

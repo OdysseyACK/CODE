@@ -18,8 +18,8 @@ import Countdown from "./Countdown";
 export default function UserProfile({ userId }) {
   const [justifyActive, setJustifyActive] = useState("tab1");
   const [events, setEvents] = useState([]);
-  const [ongoingEvents, setUpcomingEvents] = useState([]);
-  const [upcomingEvents, setOngoingEvents] = useState([]);
+  const [ongoingEvents, setOngoingEvents] = useState([]);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
 
   useEffect(() => {
@@ -46,35 +46,21 @@ export default function UserProfile({ userId }) {
       });
   }, [userId]);
 
-  const filterEvents = (event) => {
-    const today = new Date();
-    const eventDate = new Date(event.startDate);
+  const filterEvents = (events) => {
+    const now = new Date();
 
-    const filterEvents = (events) => {
-      const now = new Date();
-  
-      const upcoming = events.filter(
-        (event) =>
-          new Date(event.startDate) <= now &&
-          (!event.endDate || new Date(event.endDate) >= now)
-      );
-      const ongoing = events.filter((event) => new Date(event.startDate) > now);
-      const past = events.filter(
-        (event) =>
-          new Date(event.startDate) < now &&
-          event.endDate &&
-          new Date(event.endDate) < now
-      );
-  
-      setOngoingEvents(ongoing);
-      setUpcomingEvents(
-        upcoming.map((event) => ({
-          ...event,
-          startDate: new Date(event.startDate).toISOString(),
-        }))
-      );
-      setPastEvents(past);
-    };
+    const upcoming = events.filter((event) => new Date(event.startDate) > now);
+    const ongoing = events.filter(
+      (event) =>
+        new Date(event.startDate) <= now && new Date(event.endDate) >= now
+    );
+
+    const past = events.filter((event) => new Date(event.startDate) < now);
+
+    setOngoingEvents(ongoing);
+    setUpcomingEvents(upcoming);
+    setPastEvents(past);
+  };
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -91,7 +77,7 @@ export default function UserProfile({ userId }) {
             onClick={() => handleJustifyClick("tab1")}
             active={justifyActive === "tab1"}
           >
-            Ongoing Events
+            Upcoming Events
           </MDBTabsLink>
         </MDBTabsItem>
         <MDBTabsItem>
@@ -99,7 +85,7 @@ export default function UserProfile({ userId }) {
             onClick={() => handleJustifyClick("tab2")}
             active={justifyActive === "tab2"}
           >
-            Upcoming Events
+            Ongoing Events
           </MDBTabsLink>
         </MDBTabsItem>
         <MDBTabsItem>
@@ -115,16 +101,19 @@ export default function UserProfile({ userId }) {
       <MDBTabsContent>
         <MDBTabsPane show={justifyActive === "tab1"}>
           <MDBRow>
-            {ongoingEvents.map((event) => (
+            {upcomingEvents.map((event) => (
               <MDBCol key={event._id} md="6" lg="4" className="mb-4">
                 <MDBCard>
                   <MDBCardBody>
                     <MDBCardTitle>{event.name}</MDBCardTitle>
-                    <MDBCardText>{event.description}</MDBCardText>
                     <MDBCardText>
-                      <small className="text-muted">
-                        {new Date(event.startDate).toLocaleDateString()}
-                      </small>
+                      {new Intl.DateTimeFormat("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      }).format(new Date(event.startDate))}
+                      {/* {new Date(event.startDate).toLocaleDateString()} */}
+                      <Countdown eventStartDate={event.startDate} />
                     </MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
@@ -135,16 +124,19 @@ export default function UserProfile({ userId }) {
 
         <MDBTabsPane show={justifyActive === "tab2"}>
           <MDBRow>
-            {upcomingEvents.map((event) => (
+            {ongoingEvents.map((event) => (
               <MDBCol key={event._id} md="6" lg="4" className="mb-4">
                 <MDBCard>
                   <MDBCardBody>
                     <MDBCardTitle>{event.name}</MDBCardTitle>
                     <MDBCardText>{event.description}</MDBCardText>
                     <MDBCardText>
-                      <small className="text-muted">
-                        {new Date(event.startDate).toLocaleDateString()}
-                      </small>
+                      {new Intl.DateTimeFormat("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      }).format(new Date(event.startDate))}
+                      {/* {new Date(event.startDate).toLocaleDateString()} */}
                       <Countdown eventStartDate={event.startDate} />
                     </MDBCardText>
                   </MDBCardBody>
@@ -163,9 +155,15 @@ export default function UserProfile({ userId }) {
                     <MDBCardTitle>{event.name}</MDBCardTitle>
                     <MDBCardText>{event.description}</MDBCardText>
                     <MDBCardText>
-                      <small className="text-muted">
-                        {new Date(event.startDate).toLocaleDateString()}
-                      </small>
+                      {new Intl.DateTimeFormat("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      }).format(new Date(event.startDate))}
+                      {/* {new Date(event.startDate).toLocaleDateString()} */}
+                      <h3 style={{ color: "red", fontWeight: "bold" }}>
+                        Event Ended
+                      </h3>
                     </MDBCardText>
                   </MDBCardBody>
                 </MDBCard>

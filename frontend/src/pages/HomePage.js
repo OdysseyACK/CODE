@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Card, Form } from "react-bootstrap";
+import React from "react";
+import { MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { Card } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import GetStartedButton from "../components/GetStartedButton";
 
@@ -7,15 +8,9 @@ export default function HomePage() {
   return (
     <div className="wrapper">
       <section className="hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-slideshow">
-          <div className="slide"></div>
-          <div className="slide"></div>
-        </div>
-        <div className="hero-content text-center sliding-text-container">
-          <div />
-          <h1 className="sliding-text">Plan Your Perfect Event</h1>
-          <p className="sliding-subtext">
+        <div>
+          <h1 className="heroTitle text-focus-in">Plan Your Perfect Event</h1>
+          <p className="heroBody text-focus-in">
             From weddings to corporate gatherings, our virtual event planner has
             everything you need to make your event a success.
           </p>
@@ -26,89 +21,94 @@ export default function HomePage() {
       <div className="home-body">
         <section className="features">
           <div className="container">
-            <h1 className="text-center my-5">Features</h1>
-            <div className="row features-row">
-              <div className="col-md-4">
-                <div className="feature">
-                  <i className="fa fa-calendar"></i>
-                  <h3>Event Calendar</h3>
-                  <p>
+            <h1 className="featuresTitle text-center my-5">Features</h1>
+            <MDBRow>
+              <MDBCol sm={12} md={4} lg={4}>
+                <div className=" feature text-center">
+                  <h3 className="featureTitle">Event Calendar</h3>
+                  <p className="featureBody">
                     Keep track of important dates and deadlines with our
                     built-in event calendar.
                   </p>
                 </div>
-              </div>
-              <div className="col-md-4">
-                <div className="feature"></div>
-                <i className="fa fa-file-text"></i>
-                <h3>Checklists & Templates</h3>
-                <p>
-                  Choose from a variety of pre-made checklists and templates to
-                  help you plan your event.
-                </p>
-              </div>
-              <div className="col-md-4">
-                <div className="feature"></div>
-                <i className="fa-solid fa-calculator"></i>
-                <h3>Budget Calculator</h3>
-                <p>
-                  Stay on track with your finances with our budget calculator.
-                </p>
-              </div>
-              <div className="col-md-4">
-                <div className="feature"></div>
-                <i className="fa fa-user"></i>
-                <h3>Vendor Directory</h3>
-                <p>
-                  Browse and book vendors for your event directly through our
-                  site.
-                </p>
-              </div>
-            </div>
+              </MDBCol>
+              <MDBCol sm={12} md={4} lg={4}>
+                <div className="feature text-center">
+                  <h3 className="featureTitle">Budget Calculator</h3>
+                  <p className="featureBody">
+                    Stay on track with your finances with our budget calculator.
+                  </p>
+                </div>
+              </MDBCol>
+              <MDBCol sm={12} md={4} lg={4}>
+                <div className="feature text-center">
+                  <h3 className="featureTitle">Vendor Directory</h3>
+                  <p className="featureBody">
+                    Browse and book vendors for your event directly through our
+                    site.
+                  </p>
+                </div>
+              </MDBCol>
+            </MDBRow>
 
             <h1 className="text-center my-5">Types of Events</h1>
-            <div className="features-row">
-              <Card className="event-card">
-                <Card.Img
-                  variant="top"
-                  src="/images/birthday.jpg"
-                  style={{ width: "13vw", height: "15vw" }}
-                />
-                <Card.Body>
-                  <Card.Text style={{ fontSize: "1vw" }}>Birthdays</Card.Text>
-                </Card.Body>
-              </Card>
-              <Card className="event-card">
-                <Card.Img
-                  variant="top"
-                  src="/images/corporate.jpg"
-                  style={{ width: "13vw", height: "15vw" }}
-                />
-                <Card.Body>
-                  <Card.Text style={{ fontSize: "1vw" }}>Corporate</Card.Text>
-                </Card.Body>
-              </Card>
-              <Card className="event-card">
-                <Card.Img
-                  variant="top"
-                  src="/images/party.jpg"
-                  style={{ width: "13vw", height: "15vw" }}
-                />
-                <Card.Body>
-                  <Card.Text style={{ fontSize: "1vw" }}>Parties</Card.Text>
-                </Card.Body>
-              </Card>
-              <Card className="event-card">
-                <Card.Img
-                  variant="top"
-                  src="/images/wedding.jpg"
-                  style={{ width: "13vw", height: "15vw" }}
-                />
-                <Card.Body>
-                  <Card.Text style={{ fontSize: "1vw" }}>Weddings</Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
+            <MDBRow className="text-center">
+              <MDBCol sm={12} md={3} lg={3}>
+                <div className="event-card">
+                  <img
+                    variant="top"
+                    src="/images/birthday.jpg"
+                    style={{ maxWidth: "300px", maxHeight: "425px" }}
+                    alt=""
+                  />
+                  <div>
+                    <h3 style={{ fontSize: "1vw" }}>Birthdays</h3>
+                  </div>
+                </div>
+              </MDBCol>
+
+              <MDBCol sm={12} md={3} lg={3}>
+                <div className="event-card">
+                  <img
+                    variant="top"
+                    src="/images/corporate.jpg"
+                    style={{ maxHeight: "500px" }}
+                    alt=""
+                  />
+                  <div>
+                    <h3 style={{ fontSize: "1vw" }}>Corporate</h3>
+                  </div>
+                </div>
+              </MDBCol>
+
+              <MDBCol sm={12} md={3} lg={3}>
+                <div className="event-card">
+                  <img
+                    variant="top"
+                    src="/images/party.jpg"
+                    style={{ maxWidth: "300px", maxHeight: "425px" }}
+                    alt=""
+                  />
+                  <div>
+                    <h3 style={{ fontSize: "1vw" }}>Parties</h3>
+                  </div>
+                </div>
+              </MDBCol>
+
+              <MDBCol sm={12} md={3} lg={3}>
+                <div className="event-card">
+                  <img
+                    variant="top"
+                    src="/images/wedding.jpg"
+                    style={{ maxWidth: "300px", maxHeight: "425px" }}
+                    alt=""
+                  />
+                  <div>
+                    <h3 style={{ fontSize: "1vw" }}>Weddings</h3>
+                  </div>
+                </div>
+              </MDBCol>
+            </MDBRow>
 
             <h1 className="text-center my-5">What We Offer</h1>
             <div className="service-container">

@@ -103,15 +103,11 @@ function Calendar() {
     navigate(`/vcalculator/${eventId}`);
   };
 
-  // const handleTaskAdded = (newTask) => {
-  //   setCalendarEvents([...calendarEvents, newTask]);
-  // };
-
   function renderEventContent(taskInfo) {
     return (
       <>
         <h5
-          style={{ textAlign: "center", fontStyle: "italic", color: "green" }}
+          style={{ textAlign: "center", fontStyle: "italic", color: "white" }}
         >
           {taskInfo.event.extendedProps.name}
         </h5>
@@ -119,35 +115,15 @@ function Calendar() {
     );
   }
 
-  const handleTaskAdded = async (newTask) => {
-    try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      await axios.post(`/api/tasks/calendar/${eventId}`, newTask, {
-        headers: {
-          Authorization: `Bearer ${userInfo?.token}`,
-        },
-      });
-      setCalendarEvents([...calendarEvents, newTask]);
-      Alert.fire({
-        icon: "success",
-        title: "Success!",
-        text: "Task successfully added.",
-      });
-    } catch (error) {
-      console.log(error);
-      Alert.fire({
-        icon: "error",
-        title: "Failed to add task.",
-        text: "Please try again.",
-      });
-    }
-  };
-
   return (
     <div className="animated fadeIn">
       <Row>
         <Col lg={3} sm={3} md={3}>
-          <Todolist onTaskAdded={handleTaskAdded} />
+          <Todolist
+            addEventToCalendar={(newTask) =>
+              calendarComponentRef.current.getApi().addEvent(newTask)
+            }
+          />
         </Col>
         <Col lg={9} sm={9} md={9}>
           <div className="calendar" id="mycalendar">
@@ -164,7 +140,6 @@ function Calendar() {
                 rerenderDelay={10}
                 eventDurationEditable={false}
                 ref={calendarComponentRef}
-                onTaskAdded={handleTaskAdded}
                 events={calendarEvents}
                 selectable={true}
                 eventContent={renderEventContent}

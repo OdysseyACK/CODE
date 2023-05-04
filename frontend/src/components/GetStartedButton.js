@@ -56,13 +56,13 @@ export default function GetStartedButton() {
 
   return (
     <div className="modal-button">
-      <MDBBtn
-        onClick={toggleShow}
-        className="start-button"
-        style={{ marginTop: 7 }}
-      >
-        Get Started
-      </MDBBtn>
+      <button onClick={toggleShow} className="learn-more slide-in-left">
+        <span className="circle" aria-hidden="true">
+          <span className="icon arrow"></span>
+        </span>
+        <span className="button-text">Learn More</span>
+      </button>
+
       <MDBModal
         staticBackdrop
         show={basicModal}

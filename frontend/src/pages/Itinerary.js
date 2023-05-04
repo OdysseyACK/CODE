@@ -104,34 +104,6 @@ function Itinerary() {
     navigate(`/profilepage/${userInfo?._id}`);
   };
 
-  // const handleAgendaAdded = (newAgenda) => {
-  //   setCalendarEvents([...calendarEvents, newAgenda]);
-  // };
-
-  const handleAgendaAdded = async (newAgenda) => {
-    try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      await axios.post(`/api/agenda/itinerary/${eventId}`, newAgenda, {
-        headers: {
-          Authorization: `Bearer ${userInfo?.token}`,
-        },
-      });
-      setCalendarEvents([...calendarEvents, newAgenda]);
-      Alert.fire({
-        icon: "success",
-        title: "Success!",
-        text: "Agenda successfully added.",
-      });
-    } catch (error) {
-      console.log(error);
-      Alert.fire({
-        icon: "error",
-        title: "Failed to add agenda.",
-        text: "Please try again.",
-      });
-    }
-  };
-
   function renderEventContent(taskInfo) {
     return (
       <>
@@ -146,7 +118,11 @@ function Itinerary() {
     <div className="animated fadeIn p-4">
       <Row>
         <Col lg={3} sm={3} md={3}>
-          <AgendaList onAgendaAdded={handleAgendaAdded} />
+          <AgendaList
+            addAgendaToCalendar={(newAgenda) =>
+              calendarComponentRef.current.getApi().addEvent(newAgenda)
+            }
+          />
         </Col>
         <Col lg={9} sm={9} md={9}>
           <div className="itinerary mt-5" id="myitinerary">
@@ -162,7 +138,6 @@ function Itinerary() {
                 }}
                 rerenderDelay={10}
                 eventDurationEditable={false}
-                onAgendaAdded={handleAgendaAdded}
                 ref={calendarComponentRef}
                 events={calendarEvents}
                 selectable={true}

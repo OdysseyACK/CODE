@@ -37,6 +37,7 @@ function ProfilePage() {
       .then((response) => {
         setUser(response.data);
         setIsVendor(response.data.isVendor);
+        console.log(`Is vendor: ${response.data.isVendor}`);
         setLoading(false);
         if (loggedInUserId === id) {
           setShowEditButton(true);
@@ -46,7 +47,7 @@ function ProfilePage() {
         setError("Failed to fetch user data");
         setLoading(false);
       });
-  }, [id]);
+  }, [loggedInUserId, id]);
 
   if (loading) {
     return <div>Loading...</div>;
