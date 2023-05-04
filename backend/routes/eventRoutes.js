@@ -64,4 +64,13 @@ eventRouter.get(
   })
 );
 
+eventRouter.get("/user/:userId", async (req, res) => {
+  try {
+    const events = await Event.find({ createdBy: req.params.userId });
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user events" });
+  }
+});
+
 export default eventRouter;

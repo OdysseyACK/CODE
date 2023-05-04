@@ -11,6 +11,11 @@ function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isVendor, setIsVendor] = useState(false);
+  const [showEditButton, setShowEditButton] = useState(false);
+
+  const loggedInUserId = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))._id
+    : null;
 
   useEffect(() => {
     const token = localStorage.getItem("userInfo")
@@ -33,6 +38,9 @@ function ProfilePage() {
         setUser(response.data);
         setIsVendor(response.data.isVendor);
         setLoading(false);
+        if (loggedInUserId === id) {
+          setShowEditButton(true);
+        }
       })
       .catch((error) => {
         setError("Failed to fetch user data");
@@ -50,18 +58,14 @@ function ProfilePage() {
 
   return (
     <div>
-      {user && (
-        <div className="profile-container">
-          <img
-            className="profile-pic"
-            src={user.profilePic}
-            alt="Profile pic"
-          />
-          <h1 style={{ marginTop: "10rem" }}>{user.name}</h1>
-          <EditProfileButton />
-        </div>
-      )}
-      {isVendor ? <VendorProfile /> : <UserProfile />}
+      <div className="profile-container">
+        <img className="profile-pic" src={user.profilePic} alt="Profile pic" />
+        <h1 style={{ marginTop: "10rem" }}>{user.name}</h1>
+        {isVendor ? <h1>{user.email}</h1> : ""}
+        {isVendor ? <h1>{user.vendorType}</h1> : ""}
+        {showEditButton && <EditProfileButton />}
+      </div>
+      {isVendor ? <VendorProfile userId={id} /> : <UserProfile userId={id} />}
     </div>
   );
 }

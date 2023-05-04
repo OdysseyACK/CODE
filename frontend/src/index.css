@@ -175,8 +175,7 @@ main {
   font-size: 3vw;
 }
 
-.features h3,
-i {
+.features h3 {
   font-size: 2.5vw;
 }
 
@@ -240,7 +239,7 @@ i {
 
 .partners-title,
 .contact-title {
-  background-color: #f8f4ec;
+  background-color: #bababa;
   width: 13vw;
   height: 13vw;
   display: flex;
@@ -273,7 +272,7 @@ i {
 }
 .slider:after,
 .slider:before {
-  background: linear-gradient(to right, #f8f4ec 0%, hsla(0, 0%, 100%, 0) 100%);
+  background: linear-gradient(to right, #bababa 0%, hsla(0, 0%, 100%, 0) 100%);
   content: "";
   height: 13vw;
   position: absolute;
@@ -330,8 +329,6 @@ i {
   display: flex;
   align-items: center;
 }
-
-/*********** VENDOR PAGE ************/
 
 /************************************************************ ACCOUNTS PAGE ************************************************************************/
 
@@ -508,7 +505,7 @@ i {
 
 .add-input {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -631,4 +628,66 @@ p {
 .nextBack-btn {
   display: flex;
   justify-content: space-between;
+}
+
+.budget-calculator {
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px auto;
+}
+
+.budget-calculator h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.budget-calculator form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.budget-calculator form label {
+  margin-bottom: 5px;
+}
+
+.budget-calculator form input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.budget-calculator form button {
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.budget-items {
+  margin-bottom: 10px;
+}
+
+.budget-items div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.budget-items p {
+  margin: 0;
+}
+
+.budget-items button {
+  padding: 2px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.over-budget {
+  color: red;
 }

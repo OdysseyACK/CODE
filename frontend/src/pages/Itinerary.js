@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useReducer } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useReducer,
+  useContext,
+} from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -9,6 +15,8 @@ import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { getError } from "../utils";
+import { EventStore } from "../EventStore";
+import AgendaList from "../components/AgendaList";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -18,6 +26,12 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "UPDATE_REQUEST":
+      return { ...state, loadingUpdate: true };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false };
+    case "UPDATE_FAIL":
+      return { ...state, loadingUpdate: false };
 
     default:
       return state;
@@ -25,134 +39,62 @@ const reducer = (state, action) => {
 };
 
 function Itinerary() {
+  const calendarComponentRef = useRef(null);
+  const [calendarEvents, setCalendarEvents] = useState([]);
+  const [date, setDate] = useState(null);
+  const navigate = useNavigate();
+  const [event, setEvent] = useState([]);
   const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
-  const calendarComponentRef = useRef(null);
-
-  const [calendarEvents, setCalendarEvents] = useState([]);
-  const [event, setEvent] = useState([]);
-  const [events, setEvents] = useState([
-    { title: "Event 1", id: "1" },
-    { title: "Event 2", id: "2" },
-    { title: "Event 3", id: "3" },
-    { title: "Event 4", id: "4" },
-    { title: "Event 5", id: "5" },
-  ]);
 
   const params = useParams();
   const { id: eventId } = params;
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const { state } = useContext(EventStore);
+  const { userInfo } = state;
 
   useEffect(() => {
-    let draggableEl = document.getElementById("external-events");
-    new Draggable(draggableEl, {
-      itemSelector: ".fc-event",
-      eventData: function (eventEl) {
-        let title = eventEl.getAttribute("title");
-        let id = eventEl.getAttribute("data");
-        return {
-          title: title,
-          id: id,
-        };
-      },
-    });
-
+    console.log("eventId:", eventId); // Add this line
     axios
-      .get(`/api/events/${eventId}`)
+      .get(`/api/events/${eventId}`, {
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+        },
+      })
       .then((response) => {
         setEvent(response.data);
+        setDate(new Date(response.data.startDate)); // set the initialDate to the event's startDate
         dispatch({ type: "FETCH_SUCCESS" });
       })
       .catch((error) => {
         console.log(error);
         dispatch({ type: "FETCH_FAIL", payload: getError(error) });
       });
-  }, [eventId]);
+  }, [eventId, userInfo]);
 
-  const eventClick = (eventClick) => {
-    Alert.fire({
-      title: eventClick.event.title,
-      html:
-        `<div class="table-responsive">
-          <table class="table">
-          <tbody>
-          <tr >
-          <td>Title</td>
-          <td><strong>` +
-        eventClick.event.title +
-        `</strong></td>
-          </tr>
-          <tr >
-          <td>Start Time</td>
-          <td><strong>
-          ` +
-        eventClick.event.start +
-        `
-          </strong></td>
-          </tr>
-          </tbody>
-          </table>
-          </div>`,
-
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#lightgrey",
-      confirmButtonText: "Remove Event",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.value) {
-        eventClick.event.remove();
-        Alert.fire("Deleted!", "Your Event has been deleted.", "success");
+  useEffect(() => {
+    const fetchAgenda = async () => {
+      try {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const response = await axios.get(`/api/agenda/itinerary/${eventId}`, {
+          headers: {
+            Authorization: `Bearer ${userInfo?.token}`,
+          },
+        });
+        setCalendarEvents(
+          response.data.map((agenda) => ({
+            name: agenda.name,
+            date: agenda.date,
+            startTime: agenda.startTime,
+          }))
+        );
+      } catch (error) {
+        console.log(error);
       }
-    });
-  };
-
-  const drop = (eventDrop) => {
-    const newEvents = [...calendarEvents];
-    const index = newEvents.findIndex(
-      (event) => event.id === eventDrop.event.id
-    );
-    newEvents[index] = { ...newEvents[index], start: eventDrop.event.start };
-    setCalendarEvents(newEvents);
-  };
-
-  const eventReceive = (eventReceive) => {
-    setCalendarEvents([...calendarEvents, eventReceive.event]);
-  };
-
-  const [newTask, setNewTask] = useState("");
-  const [strikedEvents, setStrikedEvents] = useState([]);
-
-  const handleAddTask = () => {
-    if (newTask.trim() !== "") {
-      const newEvent = {
-        title: newTask.trim(),
-        id: events.length + 1,
-      };
-      setEvents([...events, newEvent]);
-      setNewTask("");
-    }
-  };
-
-  const handleStrike = (event) => {
-    if (!strikedEvents.includes(event)) {
-      setStrikedEvents([...strikedEvents, event]);
-    } else {
-      setStrikedEvents(strikedEvents.filter((e) => e !== event));
-    }
-  };
-
-  const isStriked = (event) => {
-    return strikedEvents.includes(event);
-  };
-
-  const handleRemove = (event) => {
-    setEvents(events.filter((e) => e.id !== event.id));
-  };
-
-  const navigate = useNavigate();
+    };
+    fetchAgenda();
+  }, [eventId]);
 
   const back = (event) => {
     navigate(`/calendar/${eventId}`);
@@ -162,120 +104,71 @@ function Itinerary() {
     navigate(`/profilepage/${userInfo?._id}`);
   };
 
+  // const handleAgendaAdded = (newAgenda) => {
+  //   setCalendarEvents([...calendarEvents, newAgenda]);
+  // };
+
+  const handleAgendaAdded = async (newAgenda) => {
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      await axios.post(`/api/agenda/itinerary/${eventId}`, newAgenda, {
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+        },
+      });
+      setCalendarEvents([...calendarEvents, newAgenda]);
+      Alert.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Agenda successfully added.",
+      });
+    } catch (error) {
+      console.log(error);
+      Alert.fire({
+        icon: "error",
+        title: "Failed to add agenda.",
+        text: "Please try again.",
+      });
+    }
+  };
+
+  function renderEventContent(taskInfo) {
+    return (
+      <>
+        <h6 style={{ textAlign: "center", fontStyle: "italic" }}>
+          {taskInfo.event.extendedProps.name}
+        </h6>
+      </>
+    );
+  }
+
   return (
     <div className="animated fadeIn p-4">
       <Row>
         <Col lg={3} sm={3} md={3}>
-          <div
-            id="external-events"
-            style={{
-              padding: "10%",
-              marginTop: "50%",
-              marginLeft: "10%",
-              width: "auto",
-              height: "auto",
-              maxHeight: "-webkit-fill-available",
-              backgroundColor: "white",
-              borderRadius: "20px",
-              borderStyle: "solid",
-            }}
-          >
-            <p align="center">
-              <h4> Programme Rundown</h4>
-            </p>
-            {events.map((event) => (
-              <div
-                className="fc-event todo-list"
-                style={{
-                  cursor: "move",
-                  textDecoration: isStriked(event) ? "line-through" : "none",
-                }}
-                title={event.title}
-                data={event.id}
-                key={event.id}
-              >
-                {event.title}
-                <div className="todo-btn">
-                  <MDBBtn
-                    className="ms-2"
-                    tag="a"
-                    color="success"
-                    outline
-                    floating
-                    onClick={() => handleStrike(event)}
-                    style={{ height: "30px", width: "30px" }}
-                  >
-                    <i
-                      class="fa fa-check"
-                      style={{
-                        fontSize: "20px",
-                        textAlign: "center",
-                        marginTop: "2px",
-                      }}
-                    ></i>
-                  </MDBBtn>
-                  <MDBBtn
-                    className="ms-2"
-                    tag="a"
-                    color="danger"
-                    outline
-                    floating
-                    onClick={() => handleRemove(event)}
-                    style={{ height: "30px", width: "30px" }}
-                  >
-                    <i
-                      class="fa fa-close"
-                      style={{
-                        fontSize: "20px",
-                        textAlign: "center",
-                        marginTop: "2px",
-                      }}
-                    ></i>
-                  </MDBBtn>
-                </div>
-              </div>
-            ))}
-            <div className="mt-5 mb-3 add-input">
-              <MDBInput
-                type="text"
-                label="Enter new event"
-                value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}
-              />
-              {""}
-              <MDBBtn
-                onClick={handleAddTask}
-                style={{
-                  width: "90px",
-                  backgroundColor: "#481449",
-                }}
-              >
-                Add
-              </MDBBtn>
-            </div>
-          </div>
+          <AgendaList onAgendaAdded={handleAgendaAdded} />
         </Col>
         <Col lg={9} sm={9} md={9}>
           <div className="itinerary mt-5" id="myitinerary">
-            <FullCalendar
-              initialView="timeGridDay"
-              plugins={[listPlugin, timeGridPlugin, interactionPlugin]}
-              headerToolbar={{
-                left: "prev,next",
-                center: "title",
-                right: "timeGridDay",
-              }}
-              rerenderDelay={10}
-              eventDurationEditable={true}
-              editable={true}
-              droppable={true}
-              ref={calendarComponentRef}
-              events={calendarEvents}
-              eventDrop={drop}
-              eventReceive={eventReceive}
-              eventClick={eventClick}
-              selectable={true}
-            />
+            {date && (
+              <FullCalendar
+                initialView="timeGridDay"
+                initialDate={date}
+                plugins={[listPlugin, timeGridPlugin, interactionPlugin]}
+                headerToolbar={{
+                  left: "",
+                  center: "title",
+                  right: "",
+                }}
+                rerenderDelay={10}
+                eventDurationEditable={false}
+                onAgendaAdded={handleAgendaAdded}
+                ref={calendarComponentRef}
+                events={calendarEvents}
+                selectable={true}
+                eventContent={renderEventContent}
+              />
+            )}
           </div>
         </Col>
       </Row>
@@ -284,7 +177,7 @@ function Itinerary() {
           onClick={() => {
             if (
               window.confirm(
-                "Are you sure? Itinerary set for this event will not be saved."
+                "Are you sure? Itinerary set for this event may not be saved."
               )
             ) {
               back();

@@ -53,12 +53,12 @@ export default function UserProfile({ userId }) {
     const filterEvents = (events) => {
       const now = new Date();
   
-      const  = events.filter(
+      const upcoming = events.filter(
         (event) =>
           new Date(event.startDate) <= now &&
           (!event.endDate || new Date(event.endDate) >= now)
       );
-      const ongoingupcoming = events.filter((event) => new Date(event.startDate) > now);
+      const ongoing = events.filter((event) => new Date(event.startDate) > now);
       const past = events.filter(
         (event) =>
           new Date(event.startDate) < now &&

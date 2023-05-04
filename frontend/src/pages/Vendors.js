@@ -19,7 +19,7 @@ function Vendors() {
     axios
       .get(`/api/users/vendors`)
       .then((response) => {
-        setVendors(response.data);
+        setVendors(response.data.filter((vendor) => vendor.isActive));
       })
       .catch((error) => {
         console.log(error);

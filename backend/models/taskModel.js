@@ -6,11 +6,12 @@ const taskSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: Date,
+    type: String,
   },
   isDone: {
     type: Boolean,
     required: true,
+    default: false,
   },
   belongsTo: {
     type: mongoose.Schema.Types.ObjectId,

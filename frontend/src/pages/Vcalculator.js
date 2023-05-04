@@ -96,18 +96,39 @@ function Vcalculator() {
   const [budget, setBudget] = useState("");
   const [totalColor, setTotalColor] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [remainingAmount, setRemainingAmount] = useState(totalAmount);
+  const [totalLeft, setTotalLeft] = useState(null);
+  const [customItemName, setCustomItemName] = useState("");
+  const [customItemPrice, setCustomItemPrice] = useState("");
+
+  useEffect(() => {
+    if (budget !== "" && totalAmount !== null) {
+      setTotalLeft(budget - totalAmount);
+    }
+  }, [budget, totalAmount]);
 
   const addItem = (user) => {
     const existingItem = cartItems.find(
       (cartItem) => cartItem._id === user._id
     );
-    if (existingItem) {
-      existingItem.quantity += 1;
-      setCartItems([...cartItems]);
+    if (customItemName && customItemPrice) {
+      setCartItems([
+        ...cartItems,
+        {
+          name: customItemName,
+          vendorPrice: Number(customItemPrice),
+          quantity: 1,
+        },
+      ]);
+      setTotalAmount(totalAmount + Number(customItemPrice));
+      setRemainingAmount(remainingAmount + Number(customItemPrice));
+      setCustomItemName("");
+      setCustomItemPrice("");
     } else {
       setCartItems([...cartItems, { ...user, quantity: 1 }]);
     }
     setTotalAmount(totalAmount + user.vendorPrice);
+    setRemainingAmount(remainingAmount + user.vendorPrice);
   };
 
   const removeItem = (user) => {
@@ -121,8 +142,10 @@ function Vcalculator() {
       setCartItems(cartItems.filter((cartItem) => cartItem._id !== user._id));
     }
     setTotalAmount(totalAmount - user.vendorPrice);
+    setRemainingAmount(
+      remainingAmount - user.vendorPrice * existingItem.quantity
+    );
   };
-
   const clearCart = () => {
     setCartItems([]);
     setTotalAmount(0);
@@ -133,17 +156,17 @@ function Vcalculator() {
   };
 
   const sortUsers = (order) => {
-    const sortedUsers = [...users];
+    const sortedVendors = [...vendors];
     if (order === "asc") {
-      sortedUsers.sort((a, b) => a.name.localeCompare(b.name));
+      sortedVendors.sort((a, b) => a.name.localeCompare(b.name));
     } else if (order === "desc") {
-      sortedUsers.sort((a, b) => b.name.localeCompare(a.name));
+      sortedVendors.sort((a, b) => b.name.localeCompare(a.name));
     } else if (order === "highest") {
-      sortedUsers.sort((a, b) => b.vendorPrice - a.vendorPrice);
+      sortedVendors.sort((a, b) => b.vendorPrice - a.vendorPrice);
     } else if (order === "lowest") {
-      sortedUsers.sort((a, b) => a.vendorPrice - b.vendorPrice);
+      sortedVendors.sort((a, b) => a.vendorPrice - b.vendorPrice);
     }
-    setUsers(sortedUsers);
+    setVendors(sortedVendors);
     setSortOrder(order);
   };
 
@@ -212,7 +235,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -221,7 +244,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -230,7 +253,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -239,7 +262,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -248,7 +271,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -257,7 +280,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -266,7 +289,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -275,7 +298,7 @@ function Vcalculator() {
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
                     <MDBCol md="4" key={vendor._id}>
-                      <VendorCard user={vendor} />
+                      <VendorCard user={vendor} addItem={addItem} />
                     </MDBCol>
                   ))}
                 </MDBRow>
@@ -313,6 +336,52 @@ function Vcalculator() {
               onChange={handleBudgetChange}
               className="bg-white"
             />
+            <div className="custom-item">
+              <MDBInput
+                label="Item name"
+                type="text"
+                id="custom-item-name"
+                name="custom-item-name"
+                value={customItemName}
+                onChange={(event) => setCustomItemName(event.target.value)}
+                className="bg-white"
+              />
+              <MDBInput
+                label="Item price"
+                type="number"
+                id="custom-item-price"
+                name="custom-item-price"
+                value={customItemPrice}
+                onChange={(event) => setCustomItemPrice(event.target.value)}
+                className="bg-white"
+              />
+              <MDBBtn
+                size="sm"
+                color="secondary"
+                style={{ fontWeight: "bold" }}
+                onClick={() => {
+                  if (customItemName && customItemPrice) {
+                    setCartItems([
+                      ...cartItems,
+                      {
+                        name: customItemName,
+                        vendorPrice: Number(customItemPrice),
+                        quantity: 1,
+                      },
+                    ]);
+                    setTotalAmount(totalAmount + Number(customItemPrice));
+                    setRemainingAmount(
+                      remainingAmount + Number(customItemPrice)
+                    );
+                    setCustomItemName("");
+                    setCustomItemPrice("");
+                  }
+                }}
+              >
+                Add
+              </MDBBtn>
+            </div>
+
             <ul>
               {cartItems.map((user) => (
                 <li key={user._id}>
@@ -338,7 +407,12 @@ function Vcalculator() {
                 </li>
               ))}
             </ul>
-            <p className={"text-" + totalColor}>Total Amount: ${totalAmount}</p>
+            <p>Budget: ${budget}</p>
+            <p>Total Amount: ${totalAmount}</p>
+            <p className={"text-" + totalColor}>
+              Remaining Budget: {totalLeft === null ? "-" : `$${totalLeft}`}
+            </p>
+
             <div style={{ textAlign: "center" }}>
               <MDBBtn onClick={clearCart} className="clearCart">
                 Clear Cart

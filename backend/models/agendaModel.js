@@ -6,14 +6,10 @@ const agendaSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: Date,
-    required: true,
-  },
-  startTime: {
     type: String,
     required: true,
   },
-  endTime: {
+  startTime: {
     type: String,
   },
   belongsTo: {

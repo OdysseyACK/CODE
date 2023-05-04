@@ -79,8 +79,13 @@ export default function EditProfileButton() {
 
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
+  const [vendorDesc, setVendorDesc] = useState(userInfo.vendorDesc);
+  const [vendorType, setVendorType] = useState(userInfo.vendorType);
+  const [vendorPrice, setVendorPrice] = useState(userInfo.vendorPrice);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const isVendor = userInfo.isVendor;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -89,23 +94,27 @@ export default function EditProfileButton() {
       toast.error("Password does not match");
     } else {
       try {
-        const { data } = await axios.put(
-          "/api/users/account",
-          {
-            name,
-            email,
-            password,
-            profilePic: preview,
-          },
-          {
-            headers: { Authorization: `Bearer ${userInfo.token}` },
-          }
-        );
+        const data = {
+          name,
+          email,
+          password,
+          profilePic: preview,
+        };
+
+        if (isVendor) {
+          data.vendorDesc = vendorDesc;
+          data.vendorType = vendorType;
+          data.vendorPrice = vendorPrice;
+        }
+
+        const { data: resData } = await axios.put("/api/users/account", data, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
         dispatch({
           type: "UPDATE_SUCCESS",
         });
-        ctxDispatch({ type: "UPDATE_SUCCESS", payload: data });
-        localStorage.setItem("userInfo", JSON.stringify(data));
+        ctxDispatch({ type: "UPDATE_SUCCESS", payload: resData });
+        localStorage.setItem("userInfo", JSON.stringify(resData));
         toast.success("User updated successfully");
       } catch (err) {
         dispatch({
@@ -165,6 +174,56 @@ export default function EditProfileButton() {
                     required
                   />
                 </Form.Group>
+                <Form.Group className="mb-3" controlId="desc">
+                  {userInfo.isVendor && (
+                    <>
+                      <Form.Label>About the Company</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        value={vendorDesc}
+                        onChange={(e) => setVendorDesc(e.target.value)}
+                        rows={4}
+                      />
+                    </>
+                  )}
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="vendorType">
+                  {userInfo.isVendor && (
+                    <>
+                      <Form.Label>Vendor Type</Form.Label>
+                      <Form.Select
+                        required
+                        aria-label="Default select example"
+                        onChange={(e) => setVendorType(e.target.value)}
+                      >
+                        <option>Type of Vendor</option>
+                        <option value="Artiste">Artiste</option>
+                        <option value="Catering">Caterer</option>
+                        <option value="Decor">Decor</option>
+                        <option value="Florist">Florist</option>
+                        <option value="Photography">
+                          Photography / Videography
+                        </option>
+                        <option value="Organiser">Organiser</option>
+                        <option value="Venue">Venue</option>
+                        <option value="Others">Others</option>
+                      </Form.Select>
+                    </>
+                  )}
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  {userInfo.isVendor && (
+                    <>
+                      <Form.Label>Pricing</Form.Label>
+                      <Form.Control
+                        required
+                        value={vendorPrice}
+                        onChange={(e) => setVendorPrice(e.target.value)}
+                      />
+                    </>
+                  )}
+                </Form.Group>
+
                 <Form.Group className="mb-3" controlId="password">
                   <Form.Label>Change Password</Form.Label>
                   <Form.Control
