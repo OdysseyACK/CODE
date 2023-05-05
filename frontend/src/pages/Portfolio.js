@@ -1,28 +1,32 @@
 import React from "react";
+import Footer from "../components/Footer";
 
 function Portfolio() {
   return (
-    <div>
-      <section className="hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-slideshow">
-          <div class="slide"></div>
-          <div class="slide"></div>
-        </div>
-        <div className="hero-content text-center sliding-text-container"></div>
-      </section>
-      <h2 className="text-center">Portfolio</h2>
+    <div style={{ marginTop: "10rem", paddingBottom: "10rem" }}>
+      <h2
+        style={{
+          marginBottom: "2rem",
+          fontSize: "60px",
+          color: "white",
+          fontFamily: "lato",
+          fontStyle: "italic",
+        }}
+        className="text-center"
+      >
+        Portfolio
+      </h2>
       <div className="container portfolio">
         <figure className="portfolio-grid">
           <img
-            src="https://assets.codepen.io/12005/windmill.jpg"
-            alt="A windmill"
+            src="../images/andra-c-taylor-jr-soJBvazDKL0-unsplash.jpg"
+            alt=""
             className="portfolio-img"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
-            src="https://assets.codepen.io/12005/suspension-bridge.jpg"
+            src="../images/ben-rosett-nYugmV-SY6s-unsplash.jpg"
             alt="The Clifton Suspension Bridge"
             className="portfolio-img"
           />
@@ -30,67 +34,106 @@ function Portfolio() {
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/sunset.jpg"
+            src="../images/bruno-cervera-ZpNBwBR38fA-unsplash.jpg"
             alt="Sunset and boats"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/snowy.jpg"
+            src="../images/CompanyDnD.jpg"
             alt="a river in the snow"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/bristol-balloons1.jpg"
+            src="../images/corporate.jpg"
             alt="a single checked balloon"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/dog-balloon.jpg"
+            src="../images/kal-visuals-sAANwlejqTQ-unsplash.jpg"
             alt="a hot air balloon shaped like a dog"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/abq-balloons.jpg"
+            src="../images/DJ4.jpg"
             alt="View from a hot air balloon of other balloons"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/disney-balloon.jpg"
+            src="../images/events2.jpg"
             alt="a balloon fairground ride"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/bristol-harbor.jpg"
+            src="../images/mohammad-saifullah-NEqPK_bF3HQ-unsplash.jpg"
             alt="sunrise over a harbor"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/bristol-balloons2.jpg"
+            src="../images/danny-howe-bn-D2bCvpik-unsplash.jpg"
             alt="three hot air balloons in a blue sky"
           />
         </figure>
         <figure className="portfolio-grid">
           <img
             className="portfolio-img"
-            src="https://assets.codepen.io/12005/toronto.jpg"
+            src="../images/dave-lastovskiy-RygIdTavhkQ-unsplash.jpg"
+            alt=""
+          />
+        </figure>
+        <figure className="portfolio-grid">
+          <img
+            className="portfolio-img"
+            src="../images/wedding.jpg"
             alt="the Toronto light up sign at night"
           />
         </figure>
+        <figure className="portfolio-grid">
+          <img className="portfolio-img" src="../images/Drummer2.jpg" alt="" />
+        </figure>
+        <figure className="portfolio-grid">
+          <img
+            className="portfolio-img"
+            src="../images/nathan-dumlao-5BB_atDT4oA-unsplash.jpg"
+            alt=""
+          />
+        </figure>
+        <figure className="portfolio-grid">
+          <img
+            className="portfolio-img"
+            src="../images/andrea-mininni-VLlkOJdzLG0-unsplash.jpg"
+            alt=""
+          />
+        </figure>
+        <figure className="portfolio-grid">
+          <img
+            className="portfolio-img"
+            src="../images/kal-visuals-6TNTdttwMC8-unsplash.jpg"
+            alt=""
+          />
+        </figure>
+        <figure className="portfolio-grid">
+          <img
+            className="portfolio-img"
+            src="../images/photos-by-lanty-O38Id_cyV4M-unsplash.jpg"
+            alt=""
+          />
+        </figure>
       </div>
+      <Footer />
     </div>
   );
 }

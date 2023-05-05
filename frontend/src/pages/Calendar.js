@@ -17,6 +17,7 @@ import { getError } from "../utils";
 import { EventStore } from "../EventStore";
 import Todolist from "../components/Todolist";
 import Alert from "sweetalert2";
+import Footer from "../components/Footer";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -148,7 +149,7 @@ function Calendar() {
           </div>
         </Col>
       </Row>
-      <div className="nextBack-btn">
+      <div className="nextBack-btn mt-5">
         <MDBBtn
           onClick={() => {
             if (
@@ -164,6 +165,7 @@ function Calendar() {
         </MDBBtn>
         <MDBBtn onClick={next}>Next</MDBBtn>
       </div>
+      <Footer />
     </div>
   );
 }

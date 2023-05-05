@@ -4,6 +4,7 @@ import UserProfile from "../components/UserProfile";
 import VendorProfile from "../components/VendorProfile";
 import { useParams } from "react-router-dom";
 import EditProfileButton from "../components/EditProfileButton";
+import Footer from "../components/Footer";
 
 function ProfilePage() {
   const { id } = useParams();
@@ -60,7 +61,7 @@ function ProfilePage() {
   }
 
   return (
-    <div>
+    <div className="profile-page">
       <div className="profile-container">
         <img className="profile-pic" src={user.profilePic} alt="Profile pic" />
         <h1 style={{ marginTop: "10rem" }}>{user.name}</h1>
@@ -71,6 +72,7 @@ function ProfilePage() {
         )}
       </div>
       {isVendor ? <VendorProfile userId={id} /> : <UserProfile userId={id} />}
+      <Footer />
     </div>
   );
 }

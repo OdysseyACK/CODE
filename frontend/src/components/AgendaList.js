@@ -125,6 +125,11 @@ function AgendaList({ addAgendaToCalendar }) {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       setAgenda(agenda.filter((item) => item._id !== agendaItem._id));
+      Alert.fire({
+        icon: "error",
+        title: "Deleted!",
+        text: "Task successfully deleted.",
+      });
     } catch (error) {
       console.log(error);
       toast.error(getError(error));
@@ -158,26 +163,19 @@ function AgendaList({ addAgendaToCalendar }) {
               title={agenda.name}
               key={agenda._id}
             >
-              <p>{agenda.name}</p>
-              <p>{agenda.startTime}</p>
-              <MDBBtn
-                className="ms-2"
-                tag="a"
-                color="danger"
-                outline
-                floating
-                onClick={() => handleRemoveAgenda(agenda)}
-                style={{ height: "30px", width: "30px" }}
+              <p
+                style={{
+                  fontFamily: "lato",
+                }}
               >
-                <i
-                  className="fa fa-close"
-                  style={{
-                    fontSize: "20px",
-                    textAlign: "center",
-                    marginTop: "2px",
-                  }}
-                ></i>
-              </MDBBtn>
+                {agenda.name}
+              </p>
+              <button
+                onClick={() => handleRemoveAgenda(agenda)}
+                className="noselect"
+              >
+                <span>Delete</span>
+              </button>
             </div>
           ))}
         </div>

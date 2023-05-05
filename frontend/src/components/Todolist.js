@@ -123,7 +123,6 @@ function Todolist({ addEventToCalendar }) {
       setTasks((prevTasks) =>
         prevTasks.map((t) => (t._id === task._id ? updatedTask : t))
       );
-      toast.success(`Task ${updatedTask.isDone ? "isDone" : "unchecked!"}`);
     } catch (error) {
       toast.error(getError(error));
       dispatch({ type: "UPDATE_FAIL" });
@@ -146,7 +145,6 @@ function Todolist({ addEventToCalendar }) {
       }}
     >
       <h4 className="text-center"> To-do List</h4>
-
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {!loading && !error && (
@@ -160,47 +158,27 @@ function Todolist({ addEventToCalendar }) {
               <div
                 style={{
                   textDecoration: task.isDone ? "line-through" : "none",
+                  fontFamily: "lato",
                 }}
               >
                 <p>{task.name}</p>
-                <p>{task.date}</p>
               </div>
-              <MDBBtn
-                className="ms-2"
-                tag="a"
-                color="success"
-                outline
-                floating
-                onClick={() => handleStrike(task)}
-                style={{ height: "30px", width: "30px" }}
-              >
-                <i
-                  className="fa fa-check"
-                  style={{
-                    fontSize: "20px",
-                    textAlign: "center",
-                    marginTop: "2px",
-                  }}
-                ></i>
-              </MDBBtn>
-              <MDBBtn
-                className="ms-2"
-                tag="a"
-                color="danger"
-                outline
-                floating
-                onClick={() => handleRemove(task)}
-                style={{ height: "30px", width: "30px" }}
-              >
-                <i
-                  className="fa fa-close"
-                  style={{
-                    fontSize: "20px",
-                    textAlign: "center",
-                    marginTop: "2px",
-                  }}
-                ></i>
-              </MDBBtn>
+              <div className="todo-btn">
+                <label class="td-container" onClick={() => handleStrike(task)}>
+                  <input
+                    type="checkbox"
+                    checked={task.isDone ? "checked" : ""}
+                  />
+                  <div class="checkmark"></div>
+                </label>
+                <button
+                  style={{ marginLeft: "5px" }}
+                  onClick={() => handleRemove(task)}
+                  className="noselect"
+                >
+                  <span>Delete</span>
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -217,7 +195,7 @@ function Todolist({ addEventToCalendar }) {
           {""}
           <Form.Control
             type="date"
-            className=" m-1"
+            className="m-1"
             name="date"
             placeholder="Start Date"
             value={taskDate}

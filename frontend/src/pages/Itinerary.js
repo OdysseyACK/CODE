@@ -17,6 +17,7 @@ import axios from "axios";
 import { getError } from "../utils";
 import { EventStore } from "../EventStore";
 import AgendaList from "../components/AgendaList";
+import Footer from "../components/Footer";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -147,7 +148,7 @@ function Itinerary() {
           </div>
         </Col>
       </Row>
-      <div className="nextBack-btn">
+      <div className="nextBack-btn mt-5">
         <MDBBtn
           onClick={() => {
             if (
@@ -163,6 +164,7 @@ function Itinerary() {
         </MDBBtn>
         <MDBBtn onClick={() => save(userInfo)}>Save Event</MDBBtn>
       </div>
+      <Footer />
     </div>
   );
 }

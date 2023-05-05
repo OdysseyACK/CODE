@@ -179,7 +179,7 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <h1 className="text-center" style={{ marginTop: "10%" }}>
+      <h1 className="text-center dashboard-title" style={{ marginTop: "10%" }}>
         Manage Users
       </h1>
 
@@ -187,7 +187,7 @@ function Dashboard() {
       {error && <div>Error: {error}</div>}
 
       {!loading && !error && (
-        <Table striped bordered hover className="mt-3 text-center">
+        <Table bordered hover className="mt-3 text-center dashboard-table">
           <thead>
             <tr>
               <th>#</th>

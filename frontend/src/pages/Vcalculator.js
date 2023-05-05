@@ -15,6 +15,7 @@ import { getError } from "../utils";
 import { EventStore } from "../EventStore";
 import { useNavigate, useParams } from "react-router-dom";
 import VendorCard from "../components/VendorCard";
+import Footer from "../components/Footer";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -230,7 +231,7 @@ function Vcalculator() {
                 </MDBTabsItem>
               ))}
             </MDBTabs>
-            <MDBTabsContent>
+            <MDBTabsContent className="vcalculator-tabcontent">
               <MDBTabsPane show={activeTab === "Artiste"}>
                 <MDBRow>
                   {filteredVendors.map((vendor) => (
@@ -306,8 +307,9 @@ function Vcalculator() {
             </MDBTabsContent>
           </section>
         )}
+
         {/* ===========================================Calculator and Filter====================================== */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div>
           <div className="filter">
             <h5 style={{ textAlign: "center" }}>Filter</h5>
             <label htmlFor="sort">Sort by:</label>
@@ -344,7 +346,7 @@ function Vcalculator() {
                 name="custom-item-name"
                 value={customItemName}
                 onChange={(event) => setCustomItemName(event.target.value)}
-                className="bg-white"
+                className="mt-2 bg-white"
               />
               <MDBInput
                 label="Item price"
@@ -353,7 +355,7 @@ function Vcalculator() {
                 name="custom-item-price"
                 value={customItemPrice}
                 onChange={(event) => setCustomItemPrice(event.target.value)}
-                className="bg-white"
+                className="mt-2 bg-white"
               />
               <MDBBtn
                 size="sm"
@@ -436,6 +438,7 @@ function Vcalculator() {
         </MDBBtn>
         <MDBBtn onClick={next}>Next</MDBBtn>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -14,7 +14,7 @@ import {
   MDBModalBody,
 } from "mdb-react-ui-kit";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ImageUploadButton({ authToken }) {
@@ -23,7 +23,7 @@ export default function ImageUploadButton({ authToken }) {
   const [images, setImages] = useState([]);
   const params = useParams();
   const { id: userId } = params;
-
+  const fileInputRef = useRef(null);
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -60,9 +60,11 @@ export default function ImageUploadButton({ authToken }) {
         }
       );
       console.log(data);
-
       // Update the images state with the new uploaded image
       setImages((prevImages) => [...prevImages, data]);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       console.log(error);
     }
@@ -85,64 +87,71 @@ export default function ImageUploadButton({ authToken }) {
 
   return (
     <div>
-      <form onSubmit={submitImageHandler}>
-        <div className="form-group">
-          <label htmlFor="image">Upload Image</label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            required
-            onChange={handleFileChange}
-          />
+      <div>
+        <div className="upload-btn-div">
+          {" "}
+          <MDBBtn className="mt-3 mb-3" onClick={toggleShow}>
+            Upload images to build your Gallery!
+          </MDBBtn>
         </div>
-        <div>
-          <MDBBtn onClick={toggleShow}>LAUNCH DEMO MODAL</MDBBtn>
-          <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-            <MDBModalDialog>
-              <MDBModalContent>
-                <MDBModalHeader>
-                  <MDBModalTitle>Modal title</MDBModalTitle>
+        <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+          <MDBModalDialog size="sm">
+            <MDBModalContent>
+              <MDBModalHeader>
+                <MDBModalTitle>Upload Photos</MDBModalTitle>
+                <MDBBtn
+                  className="btn-close"
+                  color="none"
+                  onClick={toggleShow}
+                ></MDBBtn>
+              </MDBModalHeader>
+              <MDBModalBody>
+                <form onSubmit={submitImageHandler}>
+                  <div className="form-group">
+                    <MDBInput
+                      type="file"
+                      id="image"
+                      accept="image/*"
+                      ref={fileInputRef}
+                      required
+                      onChange={handleFileChange}
+                    />
+                  </div>
                   <MDBBtn
-                    className="btn-close"
-                    color="none"
+                    className="mt-4"
+                    type="submit"
+                    block
                     onClick={toggleShow}
-                  ></MDBBtn>
-                </MDBModalHeader>
-                <MDBModalBody>Modal body text goes here.</MDBModalBody>
-
-                <MDBModalFooter>
-                  <MDBBtn color="secondary" onClick={toggleShow}>
-                    Close
+                  >
+                    Submit
                   </MDBBtn>
-                  <MDBBtn>Save changes</MDBBtn>
-                </MDBModalFooter>
-              </MDBModalContent>
-            </MDBModalDialog>
-          </MDBModal>
-        </div>
+                </form>
+              </MDBModalBody>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
+      </div>
 
-        <MDBBtn type="submit" className="mb-4" block>
-          Submit
-        </MDBBtn>
-      </form>
       <div className="vendor-gallery">
         {images.map((img) => (
-          <MDBCard
-            background="dark"
-            className="text-white"
-            key={img._id}
-            style={{ height: "auto", width: "400px", margin: "5px" }}
-          >
-            <MDBCardImage overlay src={img.image} alt={img.name} />
-          </MDBCard>
+          <div class="vcard-img">
+            <img src={img.image} alt={img.name} />
+          </div>
         ))}
       </div>
 
       {/* <div key={img._id}>
             <p>{img.name}</p>
             <img src={img.image} alt={img.name} />
-          </div> */}
+          </div>
+           <MDBCard
+            background="dark"
+            className="text-white"
+            key={img._id}
+            style={{ height: "auto", width: "400px", margin: "5px" }}
+          >
+            <MDBCardImage overlay src={img.image} alt={img.name} />
+          </MDBCard> */}
     </div>
   );
 }

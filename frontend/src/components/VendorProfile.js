@@ -12,6 +12,7 @@ import ImageUploadButton from "./ImageUploadButton";
 export default function VendorProfile({ userId }) {
   const [justifyActive, setJustifyActive] = useState("tab1");
   const [vendorDesc, setVendorDesc] = useState("");
+  const [vendorName, setVendorName] = useState("");
   const [loading, setLoading] = useState(true);
 
   const handleJustifyClick = (value) => {
@@ -40,6 +41,7 @@ export default function VendorProfile({ userId }) {
       .then((response) => {
         console.log("User data from client:", response.data); // Log the fetched user data on the client-side
         setVendorDesc(response.data.vendorDesc);
+        setVendorName(response.data.name);
         setLoading(false);
       })
 
@@ -75,7 +77,18 @@ export default function VendorProfile({ userId }) {
       </MDBTabs>
 
       <MDBTabsContent>
-        <MDBTabsPane show={justifyActive === "tab1"}>{vendorDesc}</MDBTabsPane>
+        <MDBTabsPane
+          style={{
+            margin: "50px",
+            display: "justify",
+            color: "white",
+            fontFamily: "lato",
+          }}
+          show={justifyActive === "tab1"}
+        >
+          <h3 style={{ textAlign: "center" }}>{vendorName}</h3>
+          {vendorDesc}
+        </MDBTabsPane>
 
         <MDBTabsPane show={justifyActive === "tab2"}>
           <ImageUploadButton />

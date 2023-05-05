@@ -1,13 +1,5 @@
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBValidation,
-  MDBValidationItem,
-  MDBTextArea,
-} from "mdb-react-ui-kit";
-import { Form } from "react-bootstrap";
 
 const Result = () => {
   return (
@@ -51,64 +43,85 @@ function Contact() {
 
   return (
     <div className="contact-page">
-      <Form
-        style={{ backgroundColor: "none" }}
-        onSubmit={sendEmail}
-        ref={formRef}
-      >
-        <div className="contact-form">
+      <form className="contact-form" onSubmit={sendEmail} ref={formRef}>
+        <div className="mt-5">
           <h2 className="mb-4">Contact Us</h2>
           <p>
-            Didnt see what you're looking for? Let us know!
+            Didn't find what you're looking for? Let us know!
             <br />
             Our team will be in contact to assist you with your event the
-            soonest!
+            soonest possible!
           </p>
-          <Form.Group className="mb-4">
-            <Form.Control
+          <div className="field mb-4">
+            <input
+              className="input-field"
               type="text"
               placeholder="Name*"
               name="fullName"
               required
+              autoComplete="off"
             />
-          </Form.Group>
-          <Form.Group className="mb-4">
-            <Form.Control
+          </div>
+          <div className="field mb-4">
+            <input
+              className="input-field"
               type="email"
               placeholder="Email*"
               name="email"
               required
+              autoComplete="off"
             />
-          </Form.Group>
-          <Form.Group className="mb-4">
-            <Form.Control
+          </div>
+          <div className="field mb-4">
+            <input
+              className="input-field"
               type="text"
               placeholder="Contact Number"
               name="contact"
+              autoComplete="off"
             />
-          </Form.Group>
-          <Form.Group className="mb-4">
-            <Form.Control
+          </div>
+          <div className="field mb-4">
+            <input
+              className="input-field"
               type="text"
               placeholder="Subject*"
               name="subject"
               required
+              autoComplete="off"
             />
-          </Form.Group>
-          <Form.Group className="mb-4">
-            <Form.Control
-              as="textarea"
+          </div>
+          <div className="field mb-4">
+            <textarea
+              className="input-field"
               style={{ height: "120px" }}
               name="message"
               placeholder="Message"
-            />
-          </Form.Group>
-          <MDBBtn type="submit" color="primary" block className="my-4">
-            Send
-          </MDBBtn>
+            ></textarea>
+          </div>
+          <button className="send-button mb-3">
+            <div className="svg-wrapper-1">
+              <div className="svg-wrapper">
+                <svg
+                  height="24"
+                  width="24"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path
+                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <span>Send</span>
+          </button>
           <div className="row">{result ? <Result /> : null}</div>
         </div>
-      </Form>
+      </form>
+      <div className="contact-bottom"></div>
     </div>
   );
 }

@@ -148,25 +148,29 @@ export default function UserProfile({ userId }) {
           <MDBRow>
             {upcomingEvents.map((event) => (
               <MDBCol key={event._id} md="6" lg="4" className="mb-4">
-                <MDBCard>
-                  <MDBCardBody>
-                    <MDBCardTitle>{event.name}</MDBCardTitle>
-                    <MDBCardText>{event.startTime}H</MDBCardText>
-                    <MDBCardText>
+                <div className="event-container">
+                  <div className="box mb-1">
+                    <span className="event-title">{event.name}</span>
+                    <p>Start Time: {event.startTime}H</p>
+                    <p>
+                      Start Date:
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
                       <Countdown eventStartDate={event.startDate} />
-                    </MDBCardText>
-                    <EditEventButton
-                      eventID={event._id}
-                      event={event}
-                      onEventUpdated={handleEventUpdated}
-                    />
-                  </MDBCardBody>
-                </MDBCard>
+                    </p>
+                  </div>
+                </div>
+                <div className="event-btn-wrapper">
+                  {" "}
+                  <EditEventButton
+                    eventID={event._id}
+                    event={event}
+                    onEventUpdated={handleEventUpdated}
+                  />
+                </div>
               </MDBCol>
             ))}
           </MDBRow>
@@ -176,24 +180,25 @@ export default function UserProfile({ userId }) {
           <MDBRow>
             {ongoingEvents.map((event) => (
               <MDBCol key={event._id} md="6" lg="4" className="mb-4">
-                <MDBCard>
-                  <MDBCardBody>
-                    <MDBCardTitle>{event.name}</MDBCardTitle>
-                    <MDBCardText>{event.startTime} H</MDBCardText>
-                    <MDBCardText>
+                <div className="event-container">
+                  <div className="box mb-1">
+                    <span className="event-title">{event.name}</span>
+                    <p>Start Time: {event.startTime}H</p>
+                    <p>
+                      Start Date:
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
-                    </MDBCardText>
-                    <EditEventButton
-                      eventID={event._id}
-                      event={event}
-                      onEventUpdated={handleEventUpdated}
-                    />
-                  </MDBCardBody>
-                </MDBCard>
+                    </p>
+                  </div>
+                </div>
+                <EditEventButton
+                  eventID={event._id}
+                  event={event}
+                  onEventUpdated={handleEventUpdated}
+                />
               </MDBCol>
             ))}
           </MDBRow>
@@ -203,21 +208,28 @@ export default function UserProfile({ userId }) {
           <MDBRow>
             {pastEvents.map((event) => (
               <MDBCol key={event._id} md="6" lg="4" className="mb-4">
-                <MDBCard>
-                  <MDBCardBody>
-                    <MDBCardTitle>{event.name}</MDBCardTitle>
-                    <MDBCardText>
+                <div className="event-container">
+                  <div className="box mb-1">
+                    <span className="event-title">{event.name}</span>
+                    <p>
+                      Start Date:
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
-                      <h3 style={{ color: "red", fontWeight: "bold" }}>
+                      <h4
+                        style={{
+                          color: "red",
+                          fontWeight: "bold",
+                          marginTop: "10px",
+                        }}
+                      >
                         Event Ended
-                      </h3>
-                    </MDBCardText>
-                  </MDBCardBody>
-                </MDBCard>
+                      </h4>
+                    </p>
+                  </div>
+                </div>
               </MDBCol>
             ))}
           </MDBRow>

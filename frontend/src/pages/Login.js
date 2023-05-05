@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   MDBContainer,
   MDBTabs,
@@ -9,7 +9,6 @@ import {
   MDBTabsPane,
   MDBBtn,
   MDBIcon,
-  MDBInput,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import { Helmet } from "react-helmet-async";
@@ -17,6 +16,7 @@ import axios from "axios";
 import { EventStore } from "../EventStore";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import Footer from "../components/Footer";
 
 function Login() {
   const navigate = useNavigate();
@@ -62,16 +62,27 @@ function Login() {
         className="mb-3 d-flex flex-row justify-content-between mt-5"
       >
         <MDBTabsItem>
-          <MDBTabsLink>Login</MDBTabsLink>
+          <MDBTabsLink
+            className="tab"
+            style={{ backgroundColor: "#278b7b", color: "white" }}
+          >
+            Login
+          </MDBTabsLink>
         </MDBTabsItem>
         <MDBTabsItem>
-          <MDBTabsLink href="/register">Register</MDBTabsLink>
+          <MDBTabsLink
+            style={{ backgroundColor: "#278b7b", color: "white" }}
+            className="tab"
+            href="/register"
+          >
+            Register
+          </MDBTabsLink>
         </MDBTabsItem>
       </MDBTabs>
 
-      <MDBTabsContent>
+      <MDBTabsContent className="login-container">
         <MDBTabsPane show>
-          <div className="text-center mb-3">
+          <div className="content text-center mb-3">
             <p>Sign in with:</p>
 
             <div
@@ -116,39 +127,41 @@ function Login() {
             </div>
 
             <p className="text-center mt-3">or:</p>
+
+            <form onSubmit={submitLoginHandler}>
+              <div class="inputbox">
+                <input
+                  className="input"
+                  id="form1"
+                  type="email"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <span>Email</span>
+                <i></i>
+              </div>
+              <div class="inputbox">
+                <input
+                  className="input"
+                  id="form2"
+                  type="password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span>Password</span>
+                <i></i>
+              </div>
+
+              <div className="d-flex justify-content-between mx-4 mb-4">
+                <a href="/contact">Forgot password?</a>
+              </div>
+
+              <button className="login-button">Login</button>
+            </form>
           </div>
-          <form onSubmit={submitLoginHandler}>
-            <MDBInput
-              wrapperClass="mb-4"
-              label="Email address"
-              id="form1"
-              type="email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <MDBInput
-              wrapperClass="mb-4"
-              label="Password"
-              id="form2"
-              type="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <div className="d-flex justify-content-between mx-4 mb-4">
-              <MDBCheckbox
-                name="flexCheck"
-                value=""
-                id="flexCheckDefault"
-                label="Remember me"
-              />
-              <a href="!#">Forgot password?</a>
-            </div>
-
-            <MDBBtn className="mb-4 w-100">Login</MDBBtn>
-          </form>
         </MDBTabsPane>
       </MDBTabsContent>
+      <Footer />
     </MDBContainer>
   );
 }
