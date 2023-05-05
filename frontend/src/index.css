@@ -12,7 +12,7 @@ body {
 
 .site-container {
   min-height: 100vh;
-  background-color: lightgoldenrodyellow;
+  background-color: lightcyan;
 }
 
 main {
@@ -254,6 +254,10 @@ main {
 
 /************************************************************ Homepage PAGE ************************************************************************/
 
+.one-three {
+  background-color: #54556d;
+}
+
 .hero {
   min-height: 90vh;
   height: 100vh;
@@ -449,7 +453,7 @@ main {
   font-weight: 700;
 }
 
-/****************************************************** Features/events sections ******************************************************/
+/****************************************************** Features sections ******************************************************/
 
 .featuresTitle {
   font-size: 50px;
@@ -484,14 +488,43 @@ main {
   color: lightcyan;
 }
 
-.eventTypePic {
-  width: 300px;
-  height: 500px;
+/****************************************************** Events sections ******************************************************/
+
+.custom-shape-divider-bottom-1683291772 {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
 }
 
+.custom-shape-divider-bottom-1683291772 svg {
+  position: relative;
+  display: block;
+  width: calc(128% + 1.3px);
+  height: 157px;
+}
+
+.custom-shape-divider-bottom-1683291772 .shape-fill {
+  fill: #305f66;
+}
+
+.event-section {
+  background-color: #305f66;
+  height: 90vh;
+  padding: 5rem;
+  padding-top: 6rem;
+}
 .eventTypeTitle {
+  margin-bottom: 5rem;
+}
+
+.eventTypeTitle > h1 {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
+  color: white;
+  margin-bottom: 8rem;
 }
 
 .event-card {
@@ -673,7 +706,7 @@ main {
 .birthday-cover {
   top: 0;
   position: absolute;
-  background-color: lightgray;
+  background: linear-gradient(to left, #7f7fd5, #86a8e7, #91eae4);
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -777,6 +810,35 @@ main {
 
 /************************************************************ What we offer Section ************************************************************************/
 
+.custom-shape-divider-top-1683295766 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1683295766 svg {
+  position: relative;
+  display: block;
+  width: calc(108% + 1.3px);
+  height: 117px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1683295766 .shape-fill {
+  fill: #305f66;
+}
+
+.offer-section {
+  background-color: black;
+  height: 90vh;
+}
+
+.offer-title {
+  margin-top: 8rem;
+}
+
 .service-container {
   display: flex;
   flex-direction: row;
@@ -784,6 +846,7 @@ main {
   justify-content: space-around;
   align-items: center;
   align-content: space-around;
+  margin: 6rem;
 }
 
 .service-item-content {
@@ -799,7 +862,18 @@ main {
   margin: 1rem 0.5rem 1rem 0.5rem;
 }
 
-/************************************************************ Register PAGE ************************************************************************/
+/************************************************************ Pur Partners ************************************************************************/
+
+.partners-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  height: 50vh;
+  margin: 8rem;
+}
 
 .sponsors-container {
   display: flex;
@@ -810,14 +884,14 @@ main {
   align-content: center;
 }
 
-.testingFlex {
+.partner-cards {
   display: inline-flex;
-  width: 50%;
-  height: 10rem;
+  width: 700px;
+  height: 200px;
   gap: 0.3rem;
 }
 
-.testingFlex > div {
+.partner-cards > div {
   flex: 2;
   border-radius: 0.5rem;
   background-position: center;
@@ -826,8 +900,8 @@ main {
   transition: all 0.8s cubic-bezier(0.25, 0.4, 0.45, 1.4);
 }
 
-.testingFlex > div:hover {
-  flex: 5;
+.partner-cards > div:hover {
+  flex: 6.5;
 }
 
 /************************************************************ Register PAGE ************************************************************************/
@@ -1208,4 +1282,11 @@ p {
 
 .over-budget {
   color: red;
+}
+
+/************************************************************CONTACT-PAGE*******************************************************************************/
+.vendor-gallery {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
 }

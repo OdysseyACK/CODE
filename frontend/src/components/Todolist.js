@@ -107,6 +107,29 @@ function Todolist({ addEventToCalendar }) {
     }
   };
 
+  const handleStrike = async (task) => {
+    // e.preventDefault();
+    try {
+      const updatedTask = { ...task, isDone: !task.isDone };
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      dispatch({ type: "UPDATE_REQUEST" });
+      await axios.put(`/api/tasks/${task._id}`, updatedTask, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+      dispatch({
+        type: "UPDATE_SUCCESS",
+      });
+      // Update the local state with the updated task
+      setTasks((prevTasks) =>
+        prevTasks.map((t) => (t._id === task._id ? updatedTask : t))
+      );
+      toast.success(`Task ${updatedTask.isDone ? "isDone" : "unchecked!"}`);
+    } catch (error) {
+      toast.error(getError(error));
+      dispatch({ type: "UPDATE_FAIL" });
+    }
+  };
+
   return (
     <div
       id="external-events"
@@ -134,8 +157,32 @@ function Todolist({ addEventToCalendar }) {
               title={task.name}
               key={task._id}
             >
-              <p>{task.name}</p>
-              <p>{task.date}</p>
+              <div
+                style={{
+                  textDecoration: task.isDone ? "line-through" : "none",
+                }}
+              >
+                <p>{task.name}</p>
+                <p>{task.date}</p>
+              </div>
+              <MDBBtn
+                className="ms-2"
+                tag="a"
+                color="success"
+                outline
+                floating
+                onClick={() => handleStrike(task)}
+                style={{ height: "30px", width: "30px" }}
+              >
+                <i
+                  className="fa fa-check"
+                  style={{
+                    fontSize: "20px",
+                    textAlign: "center",
+                    marginTop: "2px",
+                  }}
+                ></i>
+              </MDBBtn>
               <MDBBtn
                 className="ms-2"
                 tag="a"

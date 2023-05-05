@@ -24,7 +24,7 @@ export default function Navbar() {
     <div className="nav-full">
       <div className="navbar-left">
         <a className="brand-logo" href="/">
-          odyssey
+          Odyssey
         </a>
       </div>
       <div className="navbar-right">

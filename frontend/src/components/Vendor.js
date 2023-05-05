@@ -6,7 +6,7 @@ export default function Vendor(props) {
   return (
     <div>
       <div key={user._id}>
-        <Link to={`/profilepage/${user._id}`}>
+        <Link to={`/login?redirect=/profilepage/${user._id}`}>
           <img
             style={{
               maxHeight: "220px",

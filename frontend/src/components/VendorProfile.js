@@ -7,7 +7,7 @@ import {
   MDBTabsPane,
 } from "mdb-react-ui-kit";
 import axios from "axios";
-import ImageUploadButton from "./UploadImage";
+import ImageUploadButton from "./ImageUploadButton";
 
 export default function VendorProfile({ userId }) {
   const [justifyActive, setJustifyActive] = useState("tab1");
@@ -61,7 +61,7 @@ export default function VendorProfile({ userId }) {
             onClick={() => handleJustifyClick("tab1")}
             active={justifyActive === "tab1"}
           >
-            description
+            About the Co.
           </MDBTabsLink>
         </MDBTabsItem>
         <MDBTabsItem>
@@ -69,13 +69,14 @@ export default function VendorProfile({ userId }) {
             onClick={() => handleJustifyClick("tab2")}
             active={justifyActive === "tab2"}
           >
-            Very very very very long link
+            Gallery
           </MDBTabsLink>
         </MDBTabsItem>
       </MDBTabs>
 
       <MDBTabsContent>
         <MDBTabsPane show={justifyActive === "tab1"}>{vendorDesc}</MDBTabsPane>
+
         <MDBTabsPane show={justifyActive === "tab2"}>
           <ImageUploadButton />
         </MDBTabsPane>

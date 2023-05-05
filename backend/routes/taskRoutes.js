@@ -81,4 +81,19 @@ taskRouter.delete(
   })
 );
 
+taskRouter.put(
+  "/:id",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const task = await Task.findById(req.params.id);
+    if (task) {
+      task.isDone = Boolean(req.body.isDone);
+      const updatedTask = await task.save();
+      res.send({ message: "task Updated", task: updatedTask });
+    } else {
+      res.status(404).send({ message: "Task Not Found" });
+    }
+  })
+);
+
 export default taskRouter;

@@ -5,6 +5,13 @@ import {
   MDBCard,
   MDBCardOverlay,
   MDBCardText,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalFooter,
+  MDBModalBody,
 } from "mdb-react-ui-kit";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -71,6 +78,10 @@ export default function ImageUploadButton({ authToken }) {
 
     reader.readAsDataURL(file);
   };
+
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleShow = () => setBasicModal(!basicModal);
 
   return (
     <div>
