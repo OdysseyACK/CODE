@@ -14,6 +14,7 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Countdown from "./Countdown";
+import EditEventButton from "../components/EditEventButton";
 
 export default function UserProfile({ userId }) {
   const [justifyActive, setJustifyActive] = useState("tab1");
@@ -21,6 +22,9 @@ export default function UserProfile({ userId }) {
   const [ongoingEvents, setOngoingEvents] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
+
+  // Add a new state variable to track event updates
+  const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("userInfo")
@@ -44,18 +48,45 @@ export default function UserProfile({ userId }) {
       .catch((error) => {
         console.error("Failed to fetch user events", error);
       });
-  }, [userId]);
+  }, [userId, updated]); // Add updated as a dependency
 
   const filterEvents = (events) => {
     const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const upcoming = events.filter((event) => new Date(event.startDate) > now);
-    const ongoing = events.filter(
-      (event) =>
-        new Date(event.startDate) <= now && new Date(event.endDate) >= now
-    );
+    const upcoming = events.filter((event) => {
+      const eventDate = new Date(event.startDate);
+      const eventDay = new Date(
+        eventDate.getFullYear(),
+        eventDate.getMonth(),
+        eventDate.getDate()
+      );
+      return eventDay > today;
+    });
 
-    const past = events.filter((event) => new Date(event.startDate) < now);
+    const past = events.filter((event) => {
+      const eventDate = new Date(event.startDate);
+      const eventDay = new Date(
+        eventDate.getFullYear(),
+        eventDate.getMonth(),
+        eventDate.getDate()
+      );
+      return eventDay < today;
+    });
+
+    const ongoing = events.filter((event) => {
+      const startDate = new Date(event.startDate);
+      const eventStartDay = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate()
+      );
+      return (
+        eventStartDay.getTime() === today.getTime() &&
+        !upcoming.includes(event) &&
+        !past.includes(event)
+      );
+    });
 
     setOngoingEvents(ongoing);
     setUpcomingEvents(upcoming);
@@ -67,6 +98,20 @@ export default function UserProfile({ userId }) {
       return;
     }
     setJustifyActive(value);
+  };
+
+  const handleEventUpdated = (updatedEvent) => {
+    setEvents(
+      events.map((event) =>
+        event._id === updatedEvent._id ? updatedEvent : event
+      )
+    );
+    filterEvents(
+      events.map((event) =>
+        event._id === updatedEvent._id ? updatedEvent : event
+      )
+    );
+    setUpdated(!updated); // Toggle the updated state variable to trigger a re-fetch of the event data
   };
 
   return (
@@ -97,7 +142,7 @@ export default function UserProfile({ userId }) {
           </MDBTabsLink>
         </MDBTabsItem>
       </MDBTabs>
-
+      {/* =====================Upcoming Events============ */}
       <MDBTabsContent>
         <MDBTabsPane show={justifyActive === "tab1"}>
           <MDBRow>
@@ -106,22 +151,27 @@ export default function UserProfile({ userId }) {
                 <MDBCard>
                   <MDBCardBody>
                     <MDBCardTitle>{event.name}</MDBCardTitle>
+                    <MDBCardText>{event.startTime}H</MDBCardText>
                     <MDBCardText>
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
-                      {/* {new Date(event.startDate).toLocaleDateString()} */}
                       <Countdown eventStartDate={event.startDate} />
                     </MDBCardText>
+                    <EditEventButton
+                      eventID={event._id}
+                      event={event}
+                      onEventUpdated={handleEventUpdated}
+                    />
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
             ))}
           </MDBRow>
         </MDBTabsPane>
-
+        {/* =====================Ongoing Events============ */}
         <MDBTabsPane show={justifyActive === "tab2"}>
           <MDBRow>
             {ongoingEvents.map((event) => (
@@ -129,23 +179,26 @@ export default function UserProfile({ userId }) {
                 <MDBCard>
                   <MDBCardBody>
                     <MDBCardTitle>{event.name}</MDBCardTitle>
-                    <MDBCardText>{event.description}</MDBCardText>
+                    <MDBCardText>{event.startTime} H</MDBCardText>
                     <MDBCardText>
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
-                      {/* {new Date(event.startDate).toLocaleDateString()} */}
-                      <Countdown eventStartDate={event.startDate} />
                     </MDBCardText>
+                    <EditEventButton
+                      eventID={event._id}
+                      event={event}
+                      onEventUpdated={handleEventUpdated}
+                    />
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
             ))}
           </MDBRow>
         </MDBTabsPane>
-
+        {/* ===================== Past Events============ */}
         <MDBTabsPane show={justifyActive === "tab3"}>
           <MDBRow>
             {pastEvents.map((event) => (
@@ -153,14 +206,12 @@ export default function UserProfile({ userId }) {
                 <MDBCard>
                   <MDBCardBody>
                     <MDBCardTitle>{event.name}</MDBCardTitle>
-                    <MDBCardText>{event.description}</MDBCardText>
                     <MDBCardText>
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
-                      {/* {new Date(event.startDate).toLocaleDateString()} */}
                       <h3 style={{ color: "red", fontWeight: "bold" }}>
                         Event Ended
                       </h3>

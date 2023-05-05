@@ -25,7 +25,7 @@ taskRouter.post("/calendar/:id", isAuth, async (req, res) => {
 });
 
 // fetch all tasks from db into calend that is specific to one event
-taskRouter.get("/calendar/:id", async (req, res) => {
+taskRouter.get("/calendar/:id", isAuth, async (req, res) => {
   try {
     const tasks = await Task.find({ belongsTo: req.params.id });
     res.json(tasks);

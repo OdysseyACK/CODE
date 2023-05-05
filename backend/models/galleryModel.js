@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const gallerySchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
     image: { type: String },
     uploadedBy: {
       type: mongoose.Schema.Types.ObjectId,

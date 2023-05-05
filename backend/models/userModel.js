@@ -21,7 +21,6 @@ const userSchema = new mongoose.Schema(
         "Venue",
         "Others",
       ],
-      default: "Others",
       required: false,
     },
     vendorPrice: { type: Number, required: false },

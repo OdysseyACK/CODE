@@ -73,4 +73,22 @@ eventRouter.get("/user/:userId", async (req, res) => {
   }
 });
 
+eventRouter.put(
+  "/:id",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const event = await Event.findById(req.params.id);
+    if (event) {
+      event.name = req.body.eventName;
+      event.type = req.body.eventType;
+      event.startDate = req.body.startDate;
+      event.startTime = req.body.startTime;
+      const updatedEvent = await event.save();
+      res.send({ message: "Event Updated", event: updatedEvent });
+    } else {
+      res.status(404).send({ message: "Event Not Found" });
+    }
+  })
+);
+
 export default eventRouter;

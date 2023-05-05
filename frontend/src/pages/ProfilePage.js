@@ -12,7 +12,9 @@ function ProfilePage() {
   const [error, setError] = useState("");
   const [isVendor, setIsVendor] = useState(false);
   const [showEditButton, setShowEditButton] = useState(false);
-
+  const updateUserData = (updatedUser) => {
+    setUser(updatedUser);
+  };
   const loggedInUserId = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))._id
     : null;
@@ -64,7 +66,9 @@ function ProfilePage() {
         <h1 style={{ marginTop: "10rem" }}>{user.name}</h1>
         {isVendor ? <h1>{user.email}</h1> : ""}
         {isVendor ? <h1>{user.vendorType}</h1> : ""}
-        {showEditButton && <EditProfileButton />}
+        {showEditButton && (
+          <EditProfileButton onUpdateUserData={updateUserData} />
+        )}
       </div>
       {isVendor ? <VendorProfile userId={id} /> : <UserProfile userId={id} />}
     </div>

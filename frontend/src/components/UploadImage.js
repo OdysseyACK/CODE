@@ -69,13 +69,6 @@ export default function UploadImage({ authToken }) {
     <div>
       <form onSubmit={submitImageHandler}>
         <div className="form-group">
-          <MDBInput
-            id="name"
-            label="Name"
-            type="text"
-            required
-            onChange={(e) => setName(e.target.value)}
-          />
           <label htmlFor="image">Upload Image</label>
           <input
             type="file"

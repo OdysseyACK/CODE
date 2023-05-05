@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import { EventStore } from "../EventStore";
 import { getError } from "../utils";
 import LoadingBox from "../components/LoadingBox";
-import { useNavigate, useParams } from "react-router-dom";
 import Avatar from "react-avatar-edit";
 
 const reducer = (state, action) => {
@@ -48,7 +47,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function EditProfileButton() {
+export default function EditProfileButton({ onUpdateUserData }) {
   const [basicModal, setBasicModal] = useState(false);
   const toggleShow = () => setBasicModal(!basicModal);
   const [src, setSrc] = useState(null);
@@ -65,18 +64,13 @@ export default function EditProfileButton() {
     setPreview(view);
   };
 
-  const navigate = useNavigate();
-  const params = useParams();
-  const { id: userId } = params;
-  const { state, dispatch: ctxDispatch } = useContext(EventStore);
-  const { userInfo } = state;
-
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: "",
     });
-
+  const { state, dispatch: ctxDispatch } = useContext(EventStore);
+  const { userInfo } = state;
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
   const [vendorDesc, setVendorDesc] = useState(userInfo.vendorDesc);
@@ -116,6 +110,7 @@ export default function EditProfileButton() {
         ctxDispatch({ type: "UPDATE_SUCCESS", payload: resData });
         localStorage.setItem("userInfo", JSON.stringify(resData));
         toast.success("User updated successfully");
+        onUpdateUserData(resData);
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",

@@ -8,7 +8,6 @@ galleryRouter.post(
   "/profilepage/:id",
   expressAsyncHandler(async (req, res) => {
     const newGallery = new Gallery({
-      name: req.body.name,
       image: req.body.image,
       uploadedBy: req.params.id,
     });

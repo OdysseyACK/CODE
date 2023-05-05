@@ -37,17 +37,9 @@ function Vendors() {
 
   return (
     <div>
-      <section className="hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-slideshow">
-          <div class="slide"></div>
-          <div class="slide"></div>
-        </div>
-        <div className="hero-content text-center sliding-text-container"></div>
-      </section>
-      <div className="container mt-5">
+      <div className="container">
         <section className="vendors">
-          <MDBTabs justify className="mb-3">
+          <MDBTabs justify className="mb-3 ">
             {[
               "Artiste",
               "Catering",
@@ -63,7 +55,7 @@ function Vendors() {
                 onClick={() => handleTabClick(tab)}
                 active={activeTab === tab}
               >
-                {tab}
+                <div className=" qwe123">{tab}</div>
               </MDBTabsItem>
             ))}
           </MDBTabs>
