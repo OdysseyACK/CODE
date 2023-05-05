@@ -17,7 +17,7 @@ export default function HomePage() {
         </div>
         <GetStartedButton />
       </section>
-      <div class="custom-shape-divider-top-1683259948">
+      <div class="custom-shape-divider-top-1683260030">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
@@ -129,56 +129,74 @@ export default function HomePage() {
             <div className="service-container">
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-bowl-rice"></i>
-                  <h5>Catering</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-bowl-rice mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Catering</h5>
+                  </div>
                 </div>
               </div>
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-couch"></i>
-                  <h5>Decor</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-couch mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Decor</h5>
+                  </div>
                 </div>
               </div>
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-guitar"></i>
-                  <h5>Entertainment</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-guitar mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Entertainment</h5>
+                  </div>
                 </div>
               </div>
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-leaf"></i>
-                  <h5>Floral</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-leaf mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Floral</h5>
+                  </div>
                 </div>
               </div>
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-user-tie"></i>
-                  <h5>Organisers</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-user-tie mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Organisers</h5>
+                  </div>
                 </div>
               </div>
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-camera"></i>
-                  <h5>Photography</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-camera mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Photography</h5>
+                  </div>
                 </div>
               </div>
               <div className="service-item">
                 <div className="service-item-content">
-                  <i className="fa-solid fa-2xl fa-location-dot"></i>
-                  <h5>Venue</h5>
+                  <div>
+                    <i className="fa-solid fa-2xl fa-location-dot mb-4"></i>
+                  </div>
+                  <div>
+                    <h5>Venue</h5>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <h1 className="text-center my-5">Portfolio</h1>
-            <div className="portfolio-container"></div>
-
-            <h1 className="text-center my-5">Our Team</h1>
-            <div className="team-container">
-              <div className="team-card"></div>
-              <div className="team-card"></div>
-              <div className="team-card"></div>
             </div>
 
             <div className="partners-container">
@@ -186,75 +204,105 @@ export default function HomePage() {
                 <h2>Our Partners</h2>
               </div>
               <div className="sponsors-container">
-                <div className="slider">
-                  <div className="slide-track">
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/cater1.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/cater2.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/media1.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/decor1.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/decor2.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/floral1.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/photo1.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/organiser3.png"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                    <div className="logo-slide">
-                      <Image
-                        className="img"
-                        src="./images/venue1.jpg"
-                        style={{ width: "13vw" }}
-                      ></Image>
-                    </div>
-                  </div>
+                <div className="testingFlex">
+                  <div
+                    style={{ backgroundImage: "url(./images/cater1.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/cater2.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/media1.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/decor1.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/decor2.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/floral1.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/photo1.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/organiser3.png)" }}
+                  ></div>
+                  <div
+                    style={{ backgroundImage: "url(./images/venue1.jpg)" }}
+                  ></div>
                 </div>
               </div>
             </div>
+
+            {/* <div className="slider">
+                <div className="slide-track">
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/cater1.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/cater2.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/media1.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/decor1.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/decor2.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/floral1.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/photo1.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/organiser3.png"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                  <div className="logo-slide">
+                    <Image
+                      className="img"
+                      src="./images/venue1.jpg"
+                      style={{ width: "13vw" }}
+                    ></Image>
+                  </div>
+                </div>
+              </div> */}
 
             <div className="contact-container">
               <div className="contact-title">
