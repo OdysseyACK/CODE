@@ -12,15 +12,10 @@ body {
 
 .site-container {
   min-height: 100vh;
-  background-color: lightcyan;
+  background-color: #278b7b;
 }
-
 main {
   flex: 1;
-}
-
-.qwe123 {
-  border: 1px dotted red;
 }
 
 /****************************************************** Navbar ******************************************************/
@@ -36,7 +31,7 @@ main {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  z-index: 999;
+  z-index: 3;
 }
 
 .brand-logo {
@@ -79,7 +74,7 @@ main {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  z-index: 99;
+  z-index: 3;
   right: 0;
 }
 
@@ -254,7 +249,7 @@ main {
 
 /************************************************************ Homepage PAGE ************************************************************************/
 
-.one-three {
+.homepage {
   background-color: #54556d;
 }
 
@@ -273,15 +268,15 @@ main {
 }
 
 .heroTitle {
-  font-family: Dongle;
+  font-family: "Varela Round";
   font-weight: 700;
-  font-size: clamp(6rem, 15vw, 10rem);
+  font-size: clamp(6rem, 15vw, 6rem);
   margin: 8rem 2rem -4rem 2rem;
   color: yellow;
 }
 
 .heroBody {
-  font-size: clamp(1.6rem, 2.5vw, 3rem);
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
   padding: 4rem;
   color: lightyellow;
 }
@@ -453,16 +448,25 @@ main {
   font-weight: 700;
 }
 
+/****************************************************** Get Start Modal ******************************************************/
+/* .modal-title {
+  color: white;
+}
+
+.modal-content {
+  background-color: #37373f !important;
+} */
 /****************************************************** Features sections ******************************************************/
 
 .featuresTitle {
+  font-family: "Varela Round";
   font-size: 50px;
   color: lightcyan;
   margin: 7rem;
 }
 
-.features {
-  margin-bottom: 10rem;
+.features-section {
+  height: 100vh;
 }
 
 .feature {
@@ -474,7 +478,7 @@ main {
 }
 
 .featureTitle {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto";
   font-weight: 500;
   font-size: 24px;
   margin-top: 4rem;
@@ -507,23 +511,21 @@ main {
 }
 
 .custom-shape-divider-bottom-1683291772 .shape-fill {
-  fill: #305f66;
+  fill: #c3dd64;
 }
 
 .event-section {
-  background-color: #305f66;
+  background-color: #c3dd64;
   height: 90vh;
   padding: 5rem;
-  padding-top: 6rem;
-}
-.eventTypeTitle {
-  margin-bottom: 5rem;
+  padding-top: 11rem;
 }
 
 .eventTypeTitle > h1 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Varela Round";
+  font-size: 50px;
   font-weight: 700;
-  color: white;
+  color: #54556d;
   margin-bottom: 8rem;
 }
 
@@ -544,13 +546,35 @@ main {
   border-radius: 5% 5% 0 0;
 }
 
+.color-change-5x {
+  animation: color-change-5x 1s ease-in-out infinite alternate both;
+}
+
+@keyframes color-change-5x {
+  0% {
+    background: #19dcea;
+  }
+  25% {
+    background: #b22cff;
+  }
+  50% {
+    background: #ea2222;
+  }
+  75% {
+    background: #f5be10;
+  }
+  100% {
+    background: #3bd80d;
+  }
+}
+
 .wedding-book {
   position: relative;
   border-radius: 10px;
   width: 220px;
   height: 300px;
   -webkit-box-shadow: 1px 1px 12px #000;
-  box-shadow: 1px 1px 12px #000;
+  box-shadow: 1px 1px 12px #181818;
   -webkit-transform: preserve-3d;
   -ms-transform: preserve-3d;
   transform: preserve-3d;
@@ -574,7 +598,11 @@ main {
 .wedding-cover {
   top: 0;
   position: absolute;
-  background-color: lightgray;
+  background: linear-gradient(
+    0deg,
+    rgb(247, 247, 247) 23.8%,
+    rgb(252, 221, 221) 92%
+  );
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -585,7 +613,7 @@ main {
   -ms-transform-origin: 0;
   transform-origin: 0;
   -webkit-box-shadow: 1px 1px 12px #000;
-  box-shadow: 1px 1px 12px #000;
+  box-shadow: 1px 1px 12px #6e6e6e;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -640,7 +668,6 @@ main {
 .party-cover {
   top: 0;
   position: absolute;
-  background-color: lightgray;
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -706,7 +733,14 @@ main {
 .birthday-cover {
   top: 0;
   position: absolute;
-  background: linear-gradient(to left, #7f7fd5, #86a8e7, #91eae4);
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -772,7 +806,12 @@ main {
 .corporate-cover {
   top: 0;
   position: absolute;
-  background-color: lightgray;
+  background: #b8e1fc;
+  background: radial-gradient(
+    circle farthest-corner at center center,
+    #b8e1fc 0%,
+    #231421 100%
+  );
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -810,7 +849,7 @@ main {
 
 /************************************************************ What we offer Section ************************************************************************/
 
-.custom-shape-divider-top-1683295766 {
+.custom-shape-divider-top-1683298748 {
   top: 0;
   left: 0;
   width: 100%;
@@ -818,25 +857,29 @@ main {
   line-height: 0;
 }
 
-.custom-shape-divider-top-1683295766 svg {
+.custom-shape-divider-top-1683298748 svg {
   position: relative;
   display: block;
-  width: calc(108% + 1.3px);
-  height: 117px;
+  width: calc(100% + 1.3px);
+  height: 346px;
   transform: rotateY(180deg);
 }
 
-.custom-shape-divider-top-1683295766 .shape-fill {
-  fill: #305f66;
+.custom-shape-divider-top-1683298748 .shape-fill {
+  fill: #c3dd64;
 }
 
 .offer-section {
-  background-color: black;
-  height: 90vh;
+  height: 50vh;
+  margin-top: -1rem;
+  margin-bottom: 10rem;
 }
 
 .offer-title {
-  margin-top: 8rem;
+  font-family: "Varela Round";
+  font-size: 70px;
+  margin: 6rem;
+  color: #c3dd64;
 }
 
 .service-container {
@@ -847,6 +890,7 @@ main {
   align-items: center;
   align-content: space-around;
   margin: 6rem;
+  margin-top: 3rem;
 }
 
 .service-item-content {
@@ -862,7 +906,27 @@ main {
   margin: 1rem 0.5rem 1rem 0.5rem;
 }
 
-/************************************************************ Pur Partners ************************************************************************/
+/************************************************************ Our Partners ************************************************************************/
+
+.custom-shape-divider-bottom-1683299503 {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1683299503 svg {
+  position: relative;
+  display: block;
+  width: calc(123% + 1.3px);
+  height: 130px;
+}
+
+.custom-shape-divider-bottom-1683299503 .shape-fill {
+  fill: #76c394;
+}
 
 .partners-container {
   display: flex;
@@ -871,8 +935,9 @@ main {
   justify-content: space-around;
   align-items: center;
   align-content: center;
-  height: 50vh;
-  margin: 8rem;
+  height: 90vh;
+  background-color: #76c394;
+  padding-bottom: 8rem;
 }
 
 .sponsors-container {
@@ -884,11 +949,17 @@ main {
   align-content: center;
 }
 
+.partners-title {
+  margin-bottom: -7rem;
+  font-family: "Varela Round";
+  font-weight: 700;
+}
+
 .partner-cards {
   display: inline-flex;
-  width: 700px;
-  height: 200px;
-  gap: 0.3rem;
+  width: 1050px;
+  height: 300px;
+  gap: 0.5rem;
 }
 
 .partner-cards > div {
@@ -904,15 +975,150 @@ main {
   flex: 6.5;
 }
 
+/************************************************************ Login PAGE ************************************************************************/
+.login-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.content {
+  width: 800px;
+  height: auto;
+  padding: 40px 30px;
+  border-radius: 63px;
+  background: #278b7b;
+  box-shadow: -18px -18px 34px #1b5f54, 18px 18px 34px #33b7a2;
+  margin-top: 2em;
+}
+
+@media (max-width: 900px) {
+  .content {
+    width: 500px !important;
+  }
+  .inputbox {
+    width: 400px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    width: 340px !important;
+  }
+  .inputbox {
+    width: 250px !important;
+  }
+}
+
+.login-container a,
+.login-container i {
+  color: white;
+}
+
+.inputbox {
+  position: relative;
+  width: 700px;
+  margin-bottom: 2em;
+}
+
+.inputbox input {
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #23242a;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  z-index: 10;
+}
+
+.inputbox span {
+  position: absolute;
+  left: 0;
+  padding: 20px 10px 10px;
+  font-size: 1em;
+  color: #ffffff;
+  letter-spacing: 00.05em;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.inputbox input:valid ~ span,
+.inputbox input:focus ~ span {
+  color: #befff4;
+  transform: translateX(-10px) translateY(-34px);
+  font-size: 0, 75em;
+}
+
+.inputbox i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #befff4;
+  border: solid 1px rgb(255, 255, 255);
+  border-radius: 6px;
+  transition: 0.5s;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.inputbox input:valid ~ i,
+.inputbox input:focus ~ i {
+  height: 44px;
+}
+
+.login-button {
+  color: white;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #278b7b;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+  box-shadow: 4px 4px 10px #1b5f54, -4px -4px 10px #33b7a2;
+}
+
+.login-button:active {
+  color: #000000;
+  box-shadow: inset 4px 4px 12px #1b5f54, inset -4px -4px 12px #33b7a2;
+}
+
+.tab {
+  color: #ffffff;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #278b7b;
+  border: 1px solid #33b7a2;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #1b5f54, -6px -6px 12px #33b7a2;
+}
+
+.tab:active {
+  color: #ffffff;
+  box-shadow: inset 4px 4px 12px #1b5f54, inset -4px -4px 12px #33b7a2;
+}
+
 /************************************************************ Register PAGE ************************************************************************/
 
 .registerProfile {
   border-radius: 50%;
   max-width: 300px;
   max-height: 300px;
+  box-shadow: 6px 6px 12px #33b7a2, -6px -6px 12px #1b5f54;
 }
 
 /************************************************************ ACCOUNTS PAGE ************************************************************************/
+
+.profile-page {
+  height: 150vh;
+}
 
 .profile-container {
   display: flex;
@@ -920,7 +1126,7 @@ main {
   align-items: center;
   justify-content: center;
   padding-bottom: 5rem;
-  background-image: url("../public/images/homepage-bg.jpg");
+  background-color: #d99620;
 }
 
 .profile-pic {
@@ -939,79 +1145,214 @@ main {
   flex-direction: row;
 }
 
-/************************************************************ VENDORS-ACCOUNTS PAGE **************************************************/
+.edit-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 40px;
+  border: none;
+  padding: 0px 20px;
+  background-color: rgb(16, 150, 190);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px rgb(106, 107, 107);
+  transition-duration: 0.3s;
+}
+
+.edit-svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: white;
+  transition-duration: 0.3s;
+}
+
+.edit-button:hover {
+  color: transparent;
+}
+
+.edit-button:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+.edit-button:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+.event-btn-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.event-container {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+}
+
+@media (max-width: 800px) {
+  .event-container {
+    width: 500px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .event-container {
+    width: 340px !important;
+  }
+}
+
+.event-container::before,
+.event-container::after {
+  content: "";
+  background-color: #fab5704c;
+  position: absolute;
+}
+
+.event-container::before {
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  top: 30%;
+}
+
+.event-container .box {
+  width: 500px;
+  height: auto;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.418);
+  border: 1px solid rgba(255, 255, 255, 0.222);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 0.7rem;
+}
+
+.event-container .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.event-container .box .event-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.event-container .box div p {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.event-container .box div span:nth-child(3) {
+  font-weight: 500;
+  margin-right: 0.2rem;
+}
+
+.event-container .box:hover {
+  box-shadow: 0px 0px 20px 1px #ffbb763f;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+}
+
+/************************************************************ VENDORS **************************************************/
 
 .vendors {
-  margin-top: 8rem;
-}
-
-.vaccount-header {
   display: flex;
-  justify-content: space-around;
-  height: 25vw;
-  width: 35vw;
-  margin: auto;
-  margin-top: 10vh;
-}
-
-.vaccount-photo {
   flex-direction: column;
-  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: center;
+  margin: 9rem;
 }
 
-.vedit-photo {
-  width: 10vw;
-  height: 3vw;
-  margin-left: 20%;
-}
-
-.vedit-photo p {
-  font-size: 1vw;
-}
-
-.vedit-button {
-  width: 7vw;
-  height: 3vw;
-}
-
-.vedit-button p {
-  font-size: 1vw;
-}
-
-.vaccount-content {
+.tab-container {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.vendor-tab {
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #011522;
+  color: white;
+  margin-right: 1px;
+}
+
+.content-container {
+  border: solid 1px black;
+  border-top: none;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
-  height: 45vw;
-  width: 70vw;
-  margin: auto;
+  align-items: center;
+  align-content: center;
+  background-color: #011522;
+  padding: 5rem;
 }
 
-.vaccount-cards {
-  margin: 2vw;
-  height: auto;
-  width: 30vw;
+.tab-content {
+  margin: 1rem;
 }
 
-.about-co {
-  text-align: center;
+.vendor-tab:hover {
+  transform: translateY(-10px);
 }
 
-.about-co h5 {
-  font-style: italic;
+.tab-content {
+  margin-top: 20px;
 }
 
-.about-co p {
-  text-align: justify;
+.tools {
+  display: flex;
+  align-items: center;
+  padding: 0px;
 }
 
-.vaccount-gallery {
-  display: grid;
-  grid-template-columns: repeat(5, 6vw);
-  grid-gap: 10px;
+.circle {
+  padding: 0 2px 0 4px;
 }
 
-.gallery-cards {
-  margin: 2vw;
+.box {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #ff605c;
+}
+
+.yellow {
+  background-color: #ffbd44;
+}
+
+.green {
+  background-color: #00ca4e;
 }
 
 /************************************************************ CALENDAR PAGE ***************************************************************/
@@ -1019,86 +1360,184 @@ main {
   margin-top: 10%;
 }
 
-.month-indicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5%;
+.fc-scrollgrid-sync-inner {
+  background-color: #ffab40;
 }
 
-.month-indicator h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
+.fc-scrollgrid-sync-inner a {
+  color: #00525f;
 }
 
-.month-indicator button {
-  font-size: 20px;
-  font-weight: bold;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+.fc-scrollgrid * {
+  border-color: #00525f !important;
 }
 
-.day-of-week,
-.date-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background-color: white;
-  outline: 1px solid;
-  outline-color: #ffab40;
-}
-
-.day-of-week div {
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  outline: 1px solid;
-  outline-color: #ffab40;
-}
-
-.date-grid {
-  height: 30vw;
-}
-
-.date-grid div {
-  padding: 10px;
-  text-align: right;
-  outline: 1px solid;
-  outline-color: #ffab40;
-}
-
-.date-grid div:hover {
-  background-color: #d9d9d9;
-}
-
-.date-grid div:first-child {
-  grid-column: 1;
-}
-
-/* .checklist {
-  background-color: white;
-  outline: 2px solid;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-} */
-
-/* .add-checklist {
-  margin-top: 90%;
-} */
-
-.todo-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.fc-toolbar-title {
+  color: white;
 }
 
 .add-input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/**************************************************************To-Do List***********************************************/
+.todo-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.todo-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* Hide the default checkbox */
+.td-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.td-container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  background: #01ab72;
+  border-radius: 50px;
+  transition: all 0.7s;
+  --spread: 20px;
+}
+
+/* When the checkbox is checked, add a background */
+.td-container input:checked ~ .checkmark {
+  background: rgb(254, 254, 254);
+  box-shadow: -3px -3px var(--spread) 0px #01ab72,
+    0 -3px var(--spread) 0px #01ab72, 3px -3px var(--spread) 0px #01ab72,
+    3px 0 var(--spread) 0px #01ab72, 3px 3px var(--spread) 0px #01ab72,
+    0 3px var(--spread) 0px #01ab72, -3px 3px var(--spread) 0px #01ab72;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.td-container input:checked ~ .checkmark:after {
+  display: block;
+  animation: checkmark 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Style the checkmark/indicator */
+.td-container .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.5em;
+  height: 0.6em;
+  border: solid #01ab72;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
+/* Add animation for checkmark */
+@keyframes checkmark {
+  from {
+    transform: rotate(-45deg) scale(0);
+  }
+
+  to {
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+/* Style the label text */
+.td-container span {
+  margin-left: 2em;
+  color: #01ab72;
+  font-weight: bold;
+}
+
+/***************************cross button******************/
+.noselect {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.9rem 2rem;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+  font-weight: 700;
+  font-size: 8px;
+  border-radius: 500px;
+  overflow: hidden;
+  background: #f94646;
+  color: ghostwhite;
+}
+
+.noselect span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+}
+
+.noselect:hover span {
+  color: rgb(253, 253, 253);
+}
+
+.noselect::before,
+.noselect::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.noselect::before {
+  content: "";
+  background: #000;
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.noselect:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+
+/*********************************** ITINERARY PAGE *********************************************/
+
+.fc-timegrid-now-indicator-container,
+.fc-timegrid-axis {
+  background-color: #ffab40;
+}
+
+.fc-media-screen {
+  margin-top: 8em;
 }
 
 /************************************************************ PORTFOLIO PAGE ************************************************************/
@@ -1127,8 +1566,7 @@ main {
 
 /************************************************************CONTACT-PAGE*******************************************************************************/
 .contact-page {
-  background-image: url(../public/images/empty-letter.jpg);
-  width: 100vw;
+  background-image: url(../public/images/ben-rosett-nYugmV-SY6s-unsplash.jpg);
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1136,24 +1574,116 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
+  height: 130vh;
 }
 
 .contact-form {
-  background-color: aliceblue;
+  width: 700px;
   height: auto;
-  width: 35vw;
-  border-radius: 5%;
-  padding: 3vw;
   margin: auto;
-  margin-top: 20vh;
-  font-size: 1vw;
-}
-.contact-form h2 {
+  margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 0.4em;
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
   text-align: center;
+  color: white;
 }
 
-.contact-form .form-control {
-  height: 39px;
+@media (max-width: 900px) {
+  .contact-page {
+    width: 700px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-page {
+    width: 300px !important;
+  }
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #ffffff;
+}
+
+.input-field::placeholder {
+  color: white;
+}
+
+.send-button {
+  font-family: inherit;
+  font-size: 20px;
+  background: royalblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.send-button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.send-button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.send-button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.send-button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.send-button:hover span {
+  transform: translateX(5em);
+}
+
+.send-button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
 }
 
 /*****************VENDOR+CALCULATOR PAGE*************/
@@ -1162,34 +1692,38 @@ main {
 }
 
 .vcalculator h2,
-p {
-  margin-top: 5vw;
+.vcalculator p {
+  margin-top: 2em;
   text-align: center;
+  color: white;
 }
 
-.v-vendors {
-  width: 70vw;
-  height: auto;
-}
+/* .v-vendors {
+} */
+
 .filter {
-  background-color: #79bec6;
+  border-radius: 28px;
+  background: #278b7b;
+  box-shadow: 21px -21px 42px #1c6459, -21px 21px 42px #32b29d;
   color: #fff;
   margin: 2vw;
   height: auto;
   padding: 1vw;
-  width: 23vw;
-  border-radius: 8%;
+  width: 400px;
   text-align: center;
 }
 
 .calculator {
-  background-color: #79bec6;
+  border-radius: 28px;
+  background: #278b7b;
+  box-shadow: 21px -21px 42px #1c6459, -21px 21px 42px #32b29d;
   color: #fff;
   margin: 2vw;
   padding: 1vw;
   height: auto;
-  width: 23vw;
-  border-radius: 8%;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .calculator ul {
@@ -1284,9 +1818,35 @@ p {
   color: red;
 }
 
-/************************************************************CONTACT-PAGE*******************************************************************************/
+/************************************************************Vendorprofilepage*******************************************************************************/
 .vendor-gallery {
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.vcard-img img {
+  width: 350px;
+  height: 400px;
+  margin: 20px;
+  border-radius: 10%;
+}
+
+.vcard-img:hover {
+  transform: translateY(-5px);
+  transition: all 0.5s ease-in-out;
+}
+
+.upload-btn-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*********************************** DASHBOARD *******************************************/
+.dashboard-table td,
+.dashboard-table th,
+.dashboard-title {
+  color: white;
 }
