@@ -48,7 +48,7 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <MDBNavbar expand="lg" light bgColor="light" fixed="top">
+          <MDBNavbar expand="lg" fixed="top" className="custom-navbar">
             <MDBContainer fluid>
               <MDBNavbarBrand href="/">Odyssey</MDBNavbarBrand>
               <MDBNavbarToggler
@@ -70,23 +70,30 @@ function App() {
                   className="mr-auto mb-2 mb-lg-0"
                 >
                   <MDBNavbarItem>
-                    <MDBNavbarLink href="/vendors">Vendors</MDBNavbarLink>
+                    <MDBNavbarLink href="/vendors">
+                      <button className="navBtn">Explore</button>
+                    </MDBNavbarLink>
                   </MDBNavbarItem>
                   <MDBNavbarItem>
-                    <MDBNavbarLink href="/portfolio">Portfolio</MDBNavbarLink>
+                    <MDBNavbarLink href="/portfolio">
+                      <button className="navBtn">Portfolio</button>
+                    </MDBNavbarLink>
                   </MDBNavbarItem>
                   <MDBNavbarItem>
-                    <MDBNavbarLink href="/contact">Contact Us</MDBNavbarLink>
+                    <MDBNavbarLink href="/contact">
+                      <button className="navBtn">Contact Us</button>
+                    </MDBNavbarLink>
                   </MDBNavbarItem>
                   {userInfo ? (
                     <MDBNavbarItem>
                       <MDBDropdown>
                         <MDBDropdownToggle
+                          split
                           tag="a"
                           className="nav-link"
                           role="button"
                         >
-                          {userInfo.name}
+                          <button className="navBtn">{userInfo.name}</button>
                         </MDBDropdownToggle>
                         <MDBDropdownMenu>
                           <MDBDropdownItem link>
@@ -114,7 +121,9 @@ function App() {
                     </MDBNavbarItem>
                   ) : (
                     <MDBNavbarItem>
-                      <MDBNavbarLink href="/login">Login</MDBNavbarLink>
+                      <MDBNavbarLink href="/login">
+                        <button className="navBtn">Login</button>
+                      </MDBNavbarLink>
                     </MDBNavbarItem>
                   )}
                 </MDBNavbarNav>

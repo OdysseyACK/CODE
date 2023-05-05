@@ -56,11 +56,10 @@ export default function GetStartedButton() {
 
   return (
     <div className="modal-button">
-      <button onClick={toggleShow} className="learn-more slide-in-left">
-        <span className="circle" aria-hidden="true">
-          <span className="icon arrow"></span>
-        </span>
-        <span className="button-text">Learn More</span>
+      <button onClick={toggleShow} className="get-started slide-in-left">
+        Get Started!
+        <span class="icon-right"></span>
+        <span class="icon-right after"></span>
       </button>
 
       <MDBModal
