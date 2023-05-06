@@ -1691,7 +1691,7 @@ main {
   opacity: 1;
 }
 
-.vcalculator > h2, p {
+.vcalculator-title {
   margin-top: 2em;
   text-align: center;
   color: white;
