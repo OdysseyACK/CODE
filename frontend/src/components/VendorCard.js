@@ -25,6 +25,7 @@ function VendorCard(props) {
             fontSize: "13px",
             fontWeight: "bold",
             fontStyle: "italic",
+            color: "black",
           }}
         >
           {user.vendorPrice ? (
