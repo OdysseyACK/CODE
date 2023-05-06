@@ -4,6 +4,7 @@ import Event from "../models/eventModel.js";
 
 const seedRouter = express.Router();
 
+// delete user
 seedRouter.get("/", async (req, res) => {
   await User.deleteMany({});
   const createdUsers = await User.insertMany(data.users);

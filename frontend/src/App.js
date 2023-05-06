@@ -1,20 +1,5 @@
-import React, { useState, useContext } from "react";
-import {
-  MDBNavbar,
-  MDBContainer,
-  MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBNavbarItem,
-  MDBNavbarLink,
-  MDBCollapse,
-  MDBIcon,
-  MDBNavbarNav,
-  MDBDropdown,
-  MDBDropdownItem,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-} from "mdb-react-ui-kit";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -31,17 +16,8 @@ import AdminRoute from "./components/AdminRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BestNavbar from "./components/BestNavbar";
-import { EventStore } from "./EventStore";
 
 function App() {
-  const { state, dispatch: ctxDispatch } = useContext(EventStore);
-  const { userInfo } = state;
-  const logoutHandler = () => {
-    ctxDispatch({ type: "USER_LOGOUT" });
-    localStorage.removeItem("userInfo");
-    window.location.href = "/login";
-  };
-
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">

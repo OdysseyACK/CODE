@@ -5,11 +5,9 @@ import {
   MDBTabs,
   MDBTabsItem,
   MDBTabsLink,
-  MDBTabsContent,
   MDBTabsPane,
   MDBBtn,
   MDBIcon,
-  MDBInput,
   MDBCheckbox,
   MDBModal,
   MDBModalBody,
@@ -127,7 +125,7 @@ function Register() {
         </MDBTabsItem>
       </MDBTabs>
 
-      <MDBTabsContent className="login-container">
+      <div className="login-container">
         <MDBTabsPane show>
           <div className="content">
             <div className="text-center mb-3">
@@ -214,7 +212,7 @@ function Register() {
             </MDBModal>
 
             <form onSubmit={submitRegisterHandler}>
-              <div class="inputbox">
+              <div className="inputbox">
                 <input
                   className="input"
                   type="text"
@@ -224,7 +222,7 @@ function Register() {
                 <span>Name</span>
                 <i></i>
               </div>
-              <div class="inputbox">
+              <div className="inputbox">
                 <input
                   className="input"
                   type="email"
@@ -234,7 +232,7 @@ function Register() {
                 <span>Email</span>
                 <i></i>
               </div>
-              <div class="inputbox">
+              <div className="inputbox">
                 <input
                   className="input"
                   type="password"
@@ -244,7 +242,7 @@ function Register() {
                 <span>Password</span>
                 <i></i>
               </div>
-              <div class="inputbox">
+              <div className="inputbox">
                 <input
                   className="input"
                   type="password"
@@ -255,7 +253,7 @@ function Register() {
                 <i></i>
               </div>
 
-              <div className="d-flex justify-content-center mb-4">
+              <div className="d-flex justify-content-center flex-column align-items-center mb-4">
                 <MDBCheckbox
                   name="isVendor"
                   id="flexCheck"
@@ -263,13 +261,12 @@ function Register() {
                   onChange={(e) => setIsVendor(e.target.checked)}
                   checked={isVendor}
                 />
+                <button className="login-button mt-4">Sign up</button>
               </div>
-
-              <button className="login-button">Sign up</button>
             </form>
           </div>
         </MDBTabsPane>
-      </MDBTabsContent>
+      </div>
       <Footer />
     </MDBContainer>
   );

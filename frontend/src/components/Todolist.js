@@ -15,19 +15,17 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-    case "UPDATE_REQUEST":
-      return { ...state, loadingUpdate: true };
-    case "UPDATE_SUCCESS":
-      return { ...state, loadingUpdate: false };
-    case "UPDATE_FAIL":
-      return { ...state, loadingUpdate: false };
     default:
       return state;
   }
 };
 
-function Todolist({ addEventToCalendar }) {
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+function Todolist({
+  addEventToCalendar,
+  removeEventFromCalendar,
+  updateCalendarEvents,
+}) {
+  const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -101,14 +99,25 @@ function Todolist({ addEventToCalendar }) {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       setTasks(tasks.filter((t) => t._id !== task._id));
+      removeEventFromCalendar(task._id);
+      const response = await axios.get(`/api/tasks/calendar/${eventId}`, {
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+        },
+      });
+      const newEvents = response.data.map((task) => ({
+        name: task.name,
+        date: task.date,
+      }));
+      updateCalendarEvents(newEvents); // Update the calendar events state
     } catch (error) {
       console.log(error);
       toast.error(getError(error));
     }
   };
 
-  const handleStrike = async (task) => {
-    // e.preventDefault();
+  const handleStrike = async (event, task) => {
+    event.preventDefault();
     try {
       const updatedTask = { ...task, isDone: !task.isDone };
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -164,13 +173,19 @@ function Todolist({ addEventToCalendar }) {
                 <p>{task.name}</p>
               </div>
               <div className="todo-btn">
-                <label class="td-container" onClick={() => handleStrike(task)}>
+                <label
+                  className="td-container"
+                  htmlFor={`checkbox-${task._id}`}
+                >
                   <input
                     type="checkbox"
-                    checked={task.isDone ? "checked" : ""}
+                    id={`checkbox-${task._id}`}
+                    checked={task.isDone}
+                    onChange={(event) => handleStrike(event, task)}
                   />
-                  <div class="checkmark"></div>
+                  <div className="checkmark"></div>
                 </label>
+
                 <button
                   style={{ marginLeft: "5px" }}
                   onClick={() => handleRemove(task)}

@@ -16,7 +16,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getError } from "../utils";
 import { EventStore } from "../EventStore";
 import Todolist from "../components/Todolist";
-import Alert from "sweetalert2";
 import Footer from "../components/Footer";
 
 const reducer = (state, action) => {
@@ -43,9 +42,8 @@ function Calendar() {
   const calendarComponentRef = useRef(null);
   const [calendarEvents, setCalendarEvents] = useState([]);
   const navigate = useNavigate();
-  const [event, setEvent] = useState([]);
   const [date, setDate] = useState(null);
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+  const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -63,9 +61,7 @@ function Calendar() {
         },
       })
       .then((response) => {
-        setEvent(response.data);
         setDate(new Date(response.data.startDate)); // set the initialDate to the event's startDate
-        console.log(response.data.startDate); //
         dispatch({ type: "FETCH_SUCCESS" });
       })
       .catch((error) => {
@@ -116,14 +112,31 @@ function Calendar() {
     );
   }
 
+  const removeEvent = (taskId) => {
+    const calendarApi = calendarComponentRef.current.getApi();
+    const event = calendarApi.getEventById(taskId);
+    if (event) {
+      event.remove();
+    }
+  };
+
+  const updateCalendarEvents = (newEvents) => {
+    setCalendarEvents(newEvents);
+  };
+
   return (
     <div className="animated fadeIn">
+      {loading && <div>Loading...</div>}
+      {error && <div>Error: {error}</div>}
+
       <Row>
         <Col lg={3} sm={3} md={3}>
           <Todolist
             addEventToCalendar={(newTask) =>
               calendarComponentRef.current.getApi().addEvent(newTask)
             }
+            removeEventFromCalendar={removeEvent}
+            updateCalendarEvents={updateCalendarEvents} // Pass the function as a prop
           />
         </Col>
         <Col lg={9} sm={9} md={9}>

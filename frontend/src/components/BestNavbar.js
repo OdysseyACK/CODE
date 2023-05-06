@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { EventStore } from "../EventStore";
 import { Link } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -23,9 +23,9 @@ export default function Navbar() {
   return (
     <div className="nav-full">
       <div className="navbar-left">
-        <a className="brand-logo" href="/">
-          Odyssey
-        </a>
+        <div className="brand-logo">
+          <a href="/">Odyssey</a>
+        </div>
       </div>
       <div className="navbar-right">
         <div className="vendor-btn">

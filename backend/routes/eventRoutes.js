@@ -51,6 +51,7 @@ eventRouter.get(
   })
 );
 
+// fetch events from db with special id
 eventRouter.get(
   "/:id",
   isAuth,
@@ -64,6 +65,7 @@ eventRouter.get(
   })
 );
 
+// fetch events from db that belong so to a specific user
 eventRouter.get("/user/:userId", async (req, res) => {
   try {
     const events = await Event.find({ createdBy: req.params.userId });
@@ -73,6 +75,7 @@ eventRouter.get("/user/:userId", async (req, res) => {
   }
 });
 
+// Update event with specific Id.
 eventRouter.put(
   "/:id",
   isAuth,

@@ -16,28 +16,21 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-    case "UPDATE_REQUEST":
-      return { ...state, loadingUpdate: true };
-    case "UPDATE_SUCCESS":
-      return { ...state, loadingUpdate: false };
-    case "UPDATE_FAIL":
-      return { ...state, loadingUpdate: false };
     default:
       return state;
   }
 };
 
-function AgendaList({ addAgendaToCalendar }) {
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+function AgendaList({ addAgendaToCalendar, removeAgendaFromCalendar }) {
+  const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
 
-  const [event, setEvent] = useState([]);
   const [agenda, setAgenda] = useState([]);
   const [agendaDate, setAgendaDate] = useState("");
   const [agendaName, setAgendaName] = useState("");
-  const [agendaStartTime, setAgendaStartTime] = useState("Start Time");
+  const [agendaStartTime, setAgendaStartTime] = useState("");
   const params = useParams();
   const { id: eventId } = params;
 
@@ -52,7 +45,6 @@ function AgendaList({ addAgendaToCalendar }) {
         },
       })
       .then((response) => {
-        setEvent(response.data);
         setAgendaDate(response.data.startDate); // setAgendaDate as event.startDate
         dispatch({ type: "FETCH_SUCCESS" });
       })
@@ -125,6 +117,7 @@ function AgendaList({ addAgendaToCalendar }) {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       setAgenda(agenda.filter((item) => item._id !== agendaItem._id));
+      removeAgendaFromCalendar(agendaItem._id); // Add this line
       Alert.fire({
         icon: "error",
         title: "Deleted!",
@@ -185,7 +178,7 @@ function AgendaList({ addAgendaToCalendar }) {
           <MDBInput
             type="text"
             name="task"
-            label="Enter new event"
+            label="Enter new agenda"
             value={agendaName}
             onChange={(e) => setAgendaName(e.target.value)}
           />

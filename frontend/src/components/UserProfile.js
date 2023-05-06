@@ -4,10 +4,6 @@ import {
   MDBTabsLink,
   MDBTabsContent,
   MDBTabsPane,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
@@ -116,7 +112,7 @@ export default function UserProfile({ userId }) {
 
   return (
     <div>
-      <MDBTabs justify classname="mb-3">
+      <MDBTabs justify className="mb-3">
         <MDBTabsItem>
           <MDBTabsLink
             onClick={() => handleJustifyClick("tab1")}
@@ -143,7 +139,7 @@ export default function UserProfile({ userId }) {
         </MDBTabsItem>
       </MDBTabs>
       {/* =====================Upcoming Events============ */}
-      <MDBTabsContent>
+      <MDBTabsContent style={{ width: "100vw" }}>
         <MDBTabsPane show={justifyActive === "tab1"}>
           <MDBRow>
             {upcomingEvents.map((event) => (
@@ -151,8 +147,8 @@ export default function UserProfile({ userId }) {
                 <div className="event-container">
                   <div className="box mb-1">
                     <span className="event-title">{event.name}</span>
-                    <p>Start Time: {event.startTime}H</p>
-                    <p>
+                    <div>Start Time: {event.startTime}H</div>
+                    <div>
                       Start Date:
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
@@ -160,7 +156,7 @@ export default function UserProfile({ userId }) {
                         year: "numeric",
                       }).format(new Date(event.startDate))}
                       <Countdown eventStartDate={event.startDate} />
-                    </p>
+                    </div>
                   </div>
                 </div>
                 <div className="event-btn-wrapper">
@@ -183,15 +179,15 @@ export default function UserProfile({ userId }) {
                 <div className="event-container">
                   <div className="box mb-1">
                     <span className="event-title">{event.name}</span>
-                    <p>Start Time: {event.startTime}H</p>
-                    <p>
+                    <div>Start Time: {event.startTime}H</div>
+                    <div>
                       Start Date:
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       }).format(new Date(event.startDate))}
-                    </p>
+                    </div>
                   </div>
                 </div>
                 <EditEventButton
@@ -211,7 +207,7 @@ export default function UserProfile({ userId }) {
                 <div className="event-container">
                   <div className="box mb-1">
                     <span className="event-title">{event.name}</span>
-                    <p>
+                    <div>
                       Start Date:
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
@@ -227,7 +223,7 @@ export default function UserProfile({ userId }) {
                       >
                         Event Ended
                       </h4>
-                    </p>
+                    </div>
                   </div>
                 </div>
               </MDBCol>

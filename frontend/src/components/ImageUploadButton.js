@@ -1,16 +1,11 @@
 import {
   MDBInput,
   MDBBtn,
-  MDBCardImage,
-  MDBCard,
-  MDBCardOverlay,
-  MDBCardText,
   MDBModal,
   MDBModalDialog,
   MDBModalContent,
   MDBModalHeader,
   MDBModalTitle,
-  MDBModalFooter,
   MDBModalBody,
 } from "mdb-react-ui-kit";
 import axios from "axios";
@@ -18,7 +13,6 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ImageUploadButton({ authToken }) {
-  const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
   const params = useParams();
@@ -44,7 +38,6 @@ export default function ImageUploadButton({ authToken }) {
   const submitImageHandler = async (e) => {
     e.preventDefault();
     const formData = {
-      name,
       image,
     };
 
@@ -59,7 +52,6 @@ export default function ImageUploadButton({ authToken }) {
           },
         }
       );
-      console.log(data);
       // Update the images state with the new uploaded image
       setImages((prevImages) => [...prevImages, data]);
       if (fileInputRef.current) {
@@ -134,24 +126,11 @@ export default function ImageUploadButton({ authToken }) {
 
       <div className="vendor-gallery">
         {images.map((img) => (
-          <div class="vcard-img">
+          <div className="vcard-img" key={img._id}>
             <img src={img.image} alt={img.name} />
           </div>
         ))}
       </div>
-
-      {/* <div key={img._id}>
-            <p>{img.name}</p>
-            <img src={img.image} alt={img.name} />
-          </div>
-           <MDBCard
-            background="dark"
-            className="text-white"
-            key={img._id}
-            style={{ height: "auto", width: "400px", margin: "5px" }}
-          >
-            <MDBCardImage overlay src={img.image} alt={img.name} />
-          </MDBCard> */}
     </div>
   );
 }

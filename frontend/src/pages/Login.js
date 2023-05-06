@@ -5,11 +5,9 @@ import {
   MDBTabs,
   MDBTabsItem,
   MDBTabsLink,
-  MDBTabsContent,
   MDBTabsPane,
   MDBBtn,
-  MDBIcon,
-  MDBCheckbox,
+  MDBIcon, // dashboard edit user
 } from "mdb-react-ui-kit";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -52,117 +50,121 @@ function Login() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+    <div>
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <MDBTabs
-        pills
-        justify
-        className="mb-3 d-flex flex-row justify-content-between mt-5"
-      >
-        <MDBTabsItem>
-          <MDBTabsLink
-            className="tab"
-            style={{ backgroundColor: "#278b7b", color: "white" }}
+      <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+        <div>
+          <MDBTabs
+            pills
+            justify
+            className="mb-3 d-flex flex-row justify-content-center mt-5"
           >
-            Login
-          </MDBTabsLink>
-        </MDBTabsItem>
-        <MDBTabsItem>
-          <MDBTabsLink
-            style={{ backgroundColor: "#278b7b", color: "white" }}
-            className="tab"
-            href="/register"
-          >
-            Register
-          </MDBTabsLink>
-        </MDBTabsItem>
-      </MDBTabs>
-
-      <MDBTabsContent className="login-container">
-        <MDBTabsPane show>
-          <div className="content text-center mb-3">
-            <p>Sign in with:</p>
-
-            <div
-              className="d-flex justify-content-between mx-auto"
-              style={{ width: "40%" }}
-            >
-              <MDBBtn
-                tag="a"
-                color="none"
-                className="m-1"
-                style={{ color: "#1266f1" }}
+            <MDBTabsItem>
+              <MDBTabsLink
+                className="tab"
+                style={{ backgroundColor: "#278b7b", color: "white" }}
               >
-                <MDBIcon fab icon="facebook-f" size="sm" />
-              </MDBBtn>
-
-              <MDBBtn
-                tag="a"
-                color="none"
-                className="m-1"
-                style={{ color: "#1266f1" }}
+                Login
+              </MDBTabsLink>
+            </MDBTabsItem>
+            <MDBTabsItem>
+              <MDBTabsLink
+                style={{ backgroundColor: "#278b7b", color: "white" }}
+                className="tab"
+                href="/register"
               >
-                <MDBIcon fab icon="twitter" size="sm" />
-              </MDBBtn>
+                Register
+              </MDBTabsLink>
+            </MDBTabsItem>
+          </MDBTabs>
+        </div>
 
-              <MDBBtn
-                tag="a"
-                color="none"
-                className="m-1"
-                style={{ color: "#1266f1" }}
-              >
-                <MDBIcon fab icon="google" size="sm" />
-              </MDBBtn>
+        <div className="login-container">
+          <MDBTabsPane show>
+            <div className="content text-center mb-3">
+              <p>Sign in with:</p>
 
-              <MDBBtn
-                tag="a"
-                color="none"
-                className="m-1"
-                style={{ color: "#1266f1" }}
+              <div
+                className="d-flex justify-content-between mx-auto"
+                style={{ width: "40%" }}
               >
-                <MDBIcon fab icon="github" size="sm" />
-              </MDBBtn>
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <MDBIcon fab icon="facebook-f" size="sm" />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <MDBIcon fab icon="twitter" size="sm" />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <MDBIcon fab icon="google" size="sm" />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <MDBIcon fab icon="github" size="sm" />
+                </MDBBtn>
+              </div>
+
+              <p className="text-center mt-3">or:</p>
+
+              <form onSubmit={submitLoginHandler}>
+                <div className="inputbox">
+                  <input
+                    className="input"
+                    id="form1"
+                    type="email"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <span>Email</span>
+                  <i></i>
+                </div>
+                <div className="inputbox">
+                  <input
+                    className="input"
+                    id="form2"
+                    type="password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <span>Password</span>
+                  <i></i>
+                </div>
+
+                <div className="d-flex justify-content-between mx-4 mb-4">
+                  <a href="/contact">Forgot password?</a>
+                </div>
+
+                <button className="login-button">Login</button>
+              </form>
             </div>
-
-            <p className="text-center mt-3">or:</p>
-
-            <form onSubmit={submitLoginHandler}>
-              <div class="inputbox">
-                <input
-                  className="input"
-                  id="form1"
-                  type="email"
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <span>Email</span>
-                <i></i>
-              </div>
-              <div class="inputbox">
-                <input
-                  className="input"
-                  id="form2"
-                  type="password"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <span>Password</span>
-                <i></i>
-              </div>
-
-              <div className="d-flex justify-content-between mx-4 mb-4">
-                <a href="/contact">Forgot password?</a>
-              </div>
-
-              <button className="login-button">Login</button>
-            </form>
-          </div>
-        </MDBTabsPane>
-      </MDBTabsContent>
+          </MDBTabsPane>
+        </div>
+      </MDBContainer>
       <Footer />
-    </MDBContainer>
+    </div>
   );
 }
 

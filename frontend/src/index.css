@@ -34,11 +34,17 @@ main {
   z-index: 3;
 }
 
-.brand-logo {
+.brand-logo > a {
   font-size: 70px;
   font-weight: 700;
   color: black;
   font-family: Dongle;
+  transition: 1s;
+}
+
+.brand-logo > a:hover {
+  color: white !important;
+  letter-spacing: 1rem;
 }
 
 .navbar-right {
@@ -1114,10 +1120,11 @@ main {
   box-shadow: 6px 6px 12px #33b7a2, -6px -6px 12px #1b5f54;
 }
 
-/************************************************************ ACCOUNTS PAGE ************************************************************************/
+/************************************************************ USER PROFILE PAGE ************************************************************************/
 
 .profile-page {
-  height: 150vh;
+  height: 100vh;
+  width: 100vw;
 }
 
 .profile-container {
@@ -1691,15 +1698,35 @@ main {
   opacity: 1;
 }
 
+.vendor-tabs {
+  color: white;
+}
+
+.vcalculator-header {
+  color: white;
+}
+
+.vcalculator {
+  margin-top: 10em;
+}
+
 .vcalculator h2,
 .vcalculator p {
   margin-top: 2em;
   text-align: center;
-  color: white;
 }
 
-/* .v-vendors {
-} */
+.vcalc-container {
+  display: flex;
+}
+
+.tab-content {
+  width: 800px;
+}
+
+.v-content {
+  margin-top: 5em;
+}
 
 .filter {
   border-radius: 28px;
@@ -1823,8 +1850,8 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
   margin: 20px;
+  width: 100vw;
 }
 
 .vcard-img img {
@@ -1840,6 +1867,7 @@ main {
 }
 
 .upload-btn-div {
+  width: 100vw;
   display: flex;
   justify-content: space-around;
 }

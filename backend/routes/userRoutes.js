@@ -38,7 +38,7 @@ userRouter.post(
   })
 );
 
-// update user profile
+// update user profile in accounts
 userRouter.put(
   "/account",
   isAuth,
@@ -149,6 +149,7 @@ userRouter.get(
   })
 );
 
+// fetch all users from db that is a vendor
 userRouter.get(
   "/vendors",
   expressAsyncHandler(async (req, res) => {
@@ -161,6 +162,7 @@ userRouter.get(
   })
 );
 
+// fetch all users from db that belongs to specific user
 userRouter.get("/users/:userId", async (req, res) => {
   try {
     const user = await User.findOne({ userId: req.params.userId });
@@ -175,6 +177,7 @@ userRouter.get("/users/:userId", async (req, res) => {
   }
 });
 
+// update all users from db that belongs to specific user
 userRouter.put(
   "/dashboard",
   isAdmin,
@@ -194,6 +197,7 @@ userRouter.put(
   })
 );
 
+// get specific user
 userRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {

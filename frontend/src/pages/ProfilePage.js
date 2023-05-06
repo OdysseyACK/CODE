@@ -40,7 +40,6 @@ function ProfilePage() {
       .then((response) => {
         setUser(response.data);
         setIsVendor(response.data.isVendor);
-        console.log(`Is vendor: ${response.data.isVendor}`);
         setLoading(false);
         if (loggedInUserId === id) {
           setShowEditButton(true);

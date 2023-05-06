@@ -5,7 +5,7 @@ import expressAsyncHandler from "express-async-handler";
 
 const taskRouter = express.Router();
 
-// create new task
+// create new task in calendar
 taskRouter.post("/calendar/:id", isAuth, async (req, res) => {
   try {
     const { name, date, isDone } = req.body;
@@ -81,6 +81,7 @@ taskRouter.delete(
   })
 );
 
+//edit that task belongs to specific ID
 taskRouter.put(
   "/:id",
   isAuth,

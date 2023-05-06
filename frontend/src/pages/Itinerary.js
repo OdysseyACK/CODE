@@ -5,13 +5,12 @@ import React, {
   useReducer,
   useContext,
 } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
-import Alert from "sweetalert2";
-import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+import interactionPlugin from "@fullcalendar/interaction";
+import { MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { getError } from "../utils";
@@ -27,12 +26,6 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-    case "UPDATE_REQUEST":
-      return { ...state, loadingUpdate: true };
-    case "UPDATE_SUCCESS":
-      return { ...state, loadingUpdate: false };
-    case "UPDATE_FAIL":
-      return { ...state, loadingUpdate: false };
 
     default:
       return state;
@@ -44,8 +37,8 @@ function Itinerary() {
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [date, setDate] = useState(null);
   const navigate = useNavigate();
-  const [event, setEvent] = useState([]);
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+
+  const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -56,7 +49,6 @@ function Itinerary() {
   const { userInfo } = state;
 
   useEffect(() => {
-    console.log("eventId:", eventId); // Add this line
     axios
       .get(`/api/events/${eventId}`, {
         headers: {
@@ -64,7 +56,6 @@ function Itinerary() {
         },
       })
       .then((response) => {
-        setEvent(response.data);
         setDate(new Date(response.data.startDate)); // set the initialDate to the event's startDate
         dispatch({ type: "FETCH_SUCCESS" });
       })
@@ -85,6 +76,7 @@ function Itinerary() {
         });
         setCalendarEvents(
           response.data.map((agenda) => ({
+            id: agenda._id,
             name: agenda.name,
             date: agenda.date,
             startTime: agenda.startTime,
@@ -95,7 +87,7 @@ function Itinerary() {
       }
     };
     fetchAgenda();
-  }, [eventId]);
+  }, [eventId, calendarEvents]); // add calendarEvents as a dependency here
 
   const back = (event) => {
     navigate(`/calendar/${eventId}`);
@@ -115,6 +107,12 @@ function Itinerary() {
     );
   }
 
+  const removeAgendaFromCalendar = (agendaId) => {
+    setCalendarEvents((prevEvents) =>
+      prevEvents.filter((event) => event.id !== agendaId)
+    );
+  };
+
   return (
     <div className="animated fadeIn p-4">
       <Row>
@@ -123,10 +121,14 @@ function Itinerary() {
             addAgendaToCalendar={(newAgenda) =>
               calendarComponentRef.current.getApi().addEvent(newAgenda)
             }
+            removeAgendaFromCalendar={removeAgendaFromCalendar} // Add this line
           />
         </Col>
         <Col lg={9} sm={9} md={9}>
           <div className="itinerary mt-5" id="myitinerary">
+            {error && <div>Error: {error}</div>}
+            {loading && <div>Loading...</div>}
+
             {date && (
               <FullCalendar
                 initialView="timeGridDay"

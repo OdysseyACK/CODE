@@ -25,14 +25,9 @@ function Contact() {
         formRef.current,
         "JNxjr8-f_HvdXdbAx"
       )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+      .then((error) => {
+        console.log(error.text);
+      });
     e.target.reset();
     showResult(true);
 

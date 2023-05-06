@@ -4,6 +4,7 @@ import Gallery from "../models/galleryModel.js";
 
 const galleryRouter = express.Router();
 
+//create image in profile page tagging the userID
 galleryRouter.post(
   "/profilepage/:id",
   expressAsyncHandler(async (req, res) => {
@@ -16,6 +17,7 @@ galleryRouter.post(
   })
 );
 
+//read image in profile page belonging to the userID
 galleryRouter.get(
   "/profilepage/:id",
   expressAsyncHandler(async (req, res) => {

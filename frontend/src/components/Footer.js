@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBFooter, MDBContainer, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
+import { MDBContainer, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 
 export default function Footer() {
   return (
@@ -7,10 +7,6 @@ export default function Footer() {
       className="Footer"
       style={{ backgroundColor: "#278b7b", color: "white", marginTop: "100px" }}
     >
-      {/* <MDBFooter
-      className="text-center text-white"
-      style={{ backgroundColor: "#04b4ac" }}
-    > */}
       <MDBContainer className="pt-4" style={{ textAlign: "center" }}>
         <h3 style={{ fontFamily: "Dancing Script", fontStyle: "italic" }}>
           Connect With Us:
@@ -89,8 +85,6 @@ export default function Footer() {
           </MDBBtn>
         </section>
       </MDBContainer>
-
-      {/* </MDBFooter> */}
       <div
         className="text-center text-white p-3"
         style={{ backgroundColor: "#278b7b" }}

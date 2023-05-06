@@ -39,7 +39,6 @@ export default function VendorProfile({ userId }) {
         },
       })
       .then((response) => {
-        console.log("User data from client:", response.data); // Log the fetched user data on the client-side
         setVendorDesc(response.data.vendorDesc);
         setVendorName(response.data.name);
         setLoading(false);
@@ -49,7 +48,7 @@ export default function VendorProfile({ userId }) {
         console.error("Failed to fetch user data", error);
         setLoading(false);
       });
-  }, []);
+  }, [userId]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -76,13 +75,14 @@ export default function VendorProfile({ userId }) {
         </MDBTabsItem>
       </MDBTabs>
 
-      <MDBTabsContent>
+      <MDBTabsContent style={{ width: "100vw", height: "80vh" }}>
         <MDBTabsPane
           style={{
             margin: "50px",
             display: "justify",
             color: "white",
             fontFamily: "lato",
+            textAlign: "center",
           }}
           show={justifyActive === "tab1"}
         >
