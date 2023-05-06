@@ -31,7 +31,7 @@ function Vendors() {
   return (
     <div>
       <section className="vendors">
-        <div className="tab-container">
+        <div className="vendors-tab-container">
           {[
             "Artiste",
             "Catering",
@@ -63,7 +63,7 @@ function Vendors() {
           ))}
         </div>
 
-        <div className="content-container">
+        <div className="vendors-content-container">
           {filteredVendors.map((vendor) => (
             <Vendor key={vendor._id} user={vendor} />
           ))}

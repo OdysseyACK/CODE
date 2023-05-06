@@ -1286,7 +1286,7 @@ main {
   margin: 9rem;
 }
 
-.tab-container {
+.vendors-tab-container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -1306,7 +1306,7 @@ main {
   margin-right: 1px;
 }
 
-.content-container {
+.vendors-content-container {
   border: solid 1px black;
   border-top: none;
   display: inline-flex;
@@ -1693,7 +1693,7 @@ main {
   }
 }
 
-/*****************VENDOR+CALCULATOR PAGE*************/
+/*************************************************************VENDOR+CALCULATOR PAGE********************************************************************/
 .btn:hover .vcard-text {
   opacity: 1;
 }

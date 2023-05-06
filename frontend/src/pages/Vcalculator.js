@@ -208,12 +208,10 @@ function Vcalculator() {
 
   return (
     <div className="container vcalculator">
-      <div className="vcalculator-header">
-        <h2>Select the ideal partners that suit your event.</h2>
-        <p>
-          Our partners will be in contact with you within the next working day!
-        </p>
-      </div>
+      <h2>Select the ideal partners that suit your event.</h2>
+      <p>
+        Our partners will be in contact with you within the next working day!
+      </p>
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       <div className="v-content">
