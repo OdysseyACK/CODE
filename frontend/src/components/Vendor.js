@@ -4,7 +4,7 @@ export default function Vendor(props) {
   const { user } = props;
 
   return (
-    <div className="tab-content" key={user._id}>
+    <div className="vendor-tab-content" key={user._id}>
       <Link to={`/login?redirect=/profilepage/${user._id}`}>
         <img
           style={{
