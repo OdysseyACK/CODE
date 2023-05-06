@@ -112,9 +112,6 @@ function Vcalculator() {
     const existingItem = cartItems.find(
       (cartItem) => cartItem._id === user._id
     );
-        if (existingItem) {
-      existingItem.quantity += 1;
-      setCartItems([...cartItems]);
     if (customItemName && customItemPrice) {
       setCartItems([
         ...cartItems,
