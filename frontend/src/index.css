@@ -1686,13 +1686,12 @@ main {
   }
 }
 
-/*****************VENDOR+CALCULATOR PAGE*************/
+/*************************************************************VENDOR+CALCULATOR PAGE********************************************************************/
 .btn:hover .vcard-text {
   opacity: 1;
 }
 
-.vcalculator h2,
-.vcalculator p {
+.vcalculator > h2, p {
   margin-top: 2em;
   text-align: center;
   color: white;
