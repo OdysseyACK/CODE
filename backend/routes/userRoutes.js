@@ -6,6 +6,35 @@ import User from "../models/userModel.js";
 
 const userRouter = express.Router();
 
+// register
+userRouter.post(
+  "/register",
+  expressAsyncHandler(async (req, res) => {
+    const userExists = await User.findOne({ email: req.body.email });
+    if (userExists) {
+      res.status(400).send({ message: "User with this email already exists" });
+    } else {
+      const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        isVendor: req.body.isVendor,
+        profilePic: req.body.profilePic,
+        password: bcrypt.hashSync(req.body.password),
+      });
+      const user = await newUser.save();
+      res.send({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        profilePic: user.profilePic,
+        isVendor: user.isVendor,
+        isAdmin: user.isAdmin,
+        token: generateToken(user),
+      });
+    }
+  })
+);
+
 // login
 userRouter.post(
   "/login",
@@ -26,15 +55,17 @@ userRouter.post(
           });
           return;
         } else {
+          // if user has been disabled by admin
           res.status(401).send({
             message:
               "Account is disabled. Please contact admin for more information.",
           });
           return;
         }
-      }
+      } // if user exists but wrong password
+      res.status(401).send({ message: "Invalid password!" });
     }
-    res.status(401).send({ message: "Invalid email or password" });
+    res.status(401).send({ message: "User with this email does not exist" });
   })
 );
 
@@ -108,31 +139,6 @@ userRouter.put(
     } else {
       res.status(404).send({ message: "User not found" });
     }
-  })
-);
-
-// register
-userRouter.post(
-  "/register",
-  expressAsyncHandler(async (req, res) => {
-    const newUser = new User({
-      name: req.body.name,
-      email: req.body.email,
-      isVendor: req.body.isVendor,
-      profilePic: req.body.profilePic,
-      password: bcrypt.hashSync(req.body.password),
-    });
-    const user = await newUser.save();
-    res.send({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      profilePic: user.profilePic,
-      isVendor: user.isVendor,
-      isAdmin: user.isAdmin,
-
-      token: generateToken(user),
-    });
   })
 );
 

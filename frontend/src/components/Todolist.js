@@ -153,7 +153,13 @@ function Todolist({
         borderStyle: "solid",
       }}
     >
-      <h4 className="text-center"> To-do List</h4>
+      <div className="text-center">
+        <h4> To-do List</h4>
+        <p style={{ fontSize: "1em" }}>
+          Keep track with tasks before the event!
+        </p>
+        <p style={{ marginTop: "-1em" }}>e.g. "Buy cake on 04/05/2023"</p>
+      </div>
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {!loading && !error && (
@@ -210,7 +216,6 @@ function Todolist({
           {""}
           <Form.Control
             type="date"
-            className="m-1"
             name="date"
             placeholder="Start Date"
             value={taskDate}

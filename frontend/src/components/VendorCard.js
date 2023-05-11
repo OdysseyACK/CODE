@@ -12,7 +12,10 @@ function VendorCard(props) {
   const { user, addItem } = props;
 
   return (
-    <MDBCard className="btn" style={{ width: "250px", height: "365px" }}>
+    <MDBCard
+      className="btn"
+      style={{ width: "300px", height: "430px", marginBottom: "2em" }}
+    >
       <MDBCardImage
         src={user.profilePic ? user.profilePic : "./images/default.jpg"}
         position="top"

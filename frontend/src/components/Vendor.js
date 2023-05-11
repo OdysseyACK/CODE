@@ -7,6 +7,7 @@ export default function Vendor(props) {
     <div className="vendor-tab-content" key={user._id}>
       <Link to={`/login?redirect=/profilepage/${user._id}`}>
         <img
+          className="vendor-img"
           style={{
             maxHeight: "220px",
             maxWidth: "220px",

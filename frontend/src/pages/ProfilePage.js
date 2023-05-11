@@ -62,7 +62,12 @@ function ProfilePage() {
   return (
     <div className="profile-page">
       <div className="profile-container">
-        <img className="profile-pic" src={user.profilePic} alt="Profile pic" />
+        <img
+          className="profile-pic"
+          src={user.profilePic || "./images/default.jpg"}
+          alt=""
+        />
+
         <h1 style={{ marginTop: "10rem" }}>{user.name}</h1>
         {isVendor ? <h1>{user.email}</h1> : ""}
         {isVendor ? <h1>{user.vendorType}</h1> : ""}

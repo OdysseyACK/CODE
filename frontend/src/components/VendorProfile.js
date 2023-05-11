@@ -55,7 +55,14 @@ export default function VendorProfile({ userId }) {
   }
 
   return (
-    <div>
+    <div
+      className="vendor-profile"
+      style={{
+        height: "100vh",
+        backgroundColor: "#278b7b",
+        marginBottom: "-100px",
+      }}
+    >
       <MDBTabs justify className="mb-3">
         <MDBTabsItem>
           <MDBTabsLink
@@ -75,7 +82,7 @@ export default function VendorProfile({ userId }) {
         </MDBTabsItem>
       </MDBTabs>
 
-      <MDBTabsContent style={{ width: "100vw", height: "80vh" }}>
+      <MDBTabsContent className="vendor-desc">
         <MDBTabsPane
           style={{
             margin: "50px",

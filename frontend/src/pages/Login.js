@@ -65,6 +65,7 @@ function Login() {
               <MDBTabsLink
                 className="tab"
                 style={{ backgroundColor: "#278b7b", color: "white" }}
+                active
               >
                 Login
               </MDBTabsLink>
@@ -84,51 +85,7 @@ function Login() {
         <div className="login-container">
           <MDBTabsPane show>
             <div className="content text-center mb-3">
-              <p>Sign in with:</p>
-
-              <div
-                className="d-flex justify-content-between mx-auto"
-                style={{ width: "40%" }}
-              >
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="facebook-f" size="sm" />
-                </MDBBtn>
-
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="twitter" size="sm" />
-                </MDBBtn>
-
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="google" size="sm" />
-                </MDBBtn>
-
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="github" size="sm" />
-                </MDBBtn>
-              </div>
-
-              <p className="text-center mt-3">or:</p>
-
+              <h2 className="mt-3 mb-5">Sign In</h2>
               <form onSubmit={submitLoginHandler}>
                 <div className="inputbox">
                   <input
@@ -139,7 +96,7 @@ function Login() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <span>Email</span>
-                  <i></i>
+                  <i></i> {/*css*/}
                 </div>
                 <div className="inputbox">
                   <input
@@ -150,7 +107,7 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <span>Password</span>
-                  <i></i>
+                  <i></i> {/*css*/}
                 </div>
 
                 <div className="d-flex justify-content-between mx-4 mb-4">

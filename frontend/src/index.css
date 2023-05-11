@@ -1005,6 +1005,12 @@ main {
   .inputbox {
     width: 400px !important;
   }
+  .registerProfile {
+    max-width: 200px !important;
+  }
+  .register-avatar {
+    width: 500px !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1013,6 +1019,12 @@ main {
   }
   .inputbox {
     width: 250px !important;
+  }
+  .registerProfile {
+    max-width: 150px !important;
+  }
+  .register-avatar {
+    width: 500px !important;
   }
 }
 
@@ -1111,6 +1123,10 @@ main {
   box-shadow: inset 4px 4px 12px #1b5f54, inset -4px -4px 12px #33b7a2;
 }
 
+.tab.active {
+  box-shadow: inset 4px 4px 12px #1b5f54, inset -4px -4px 12px #33b7a2;
+}
+
 /************************************************************ Register PAGE ************************************************************************/
 
 .registerProfile {
@@ -1118,6 +1134,7 @@ main {
   max-width: 300px;
   max-height: 300px;
   box-shadow: 6px 6px 12px #33b7a2, -6px -6px 12px #1b5f54;
+  cursor: pointer;
 }
 
 /************************************************************ USER PROFILE PAGE ************************************************************************/
@@ -1270,7 +1287,7 @@ main {
 }
 
 .event-container .box:hover {
-  box-shadow: 0px 0px 20px 1px #ffbb763f;
+  box-shadow: 0px 0px 20px 10px #ffe6005d;
   border: 1px solid rgba(255, 255, 255, 0.454);
 }
 
@@ -1286,6 +1303,31 @@ main {
   margin: 9rem;
 }
 
+.vendors-content-container {
+  border: solid 1px black;
+  border-radius: 3px;
+  border-top: none;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  background-color: #011522;
+  padding: 5rem;
+  margin-top: -10px;
+}
+
+.vendor-img {
+  transition: transform 0.2s;
+  filter: drop-shadow(8px 8px 10px rgb(34, 34, 34));
+  margin-bottom: 2em;
+}
+
+.vendor-img:hover {
+  transform: scale(1.2);
+}
+
 .vendors-tab-container {
   display: flex;
   flex-direction: row;
@@ -1299,36 +1341,23 @@ main {
   border-bottom: none;
   border-radius: 5px 5px 0 0;
   width: 100%;
+  height: 30px;
   display: flex;
   align-items: center;
   background-color: #011522;
   color: white;
   margin-right: 1px;
-}
-
-.vendors-content-container {
-  border: solid 1px black;
-  border-top: none;
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  background-color: #011522;
-  padding: 5rem;
-}
-
-.tab-content {
-  margin: 1rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
 .vendor-tab:hover {
   transform: translateY(-10px);
 }
 
-.tab-content {
-  margin-top: 20px;
+.vendor-tab.active {
+  transform: translateY(-10px);
 }
 
 .tools {
@@ -1383,12 +1412,6 @@ main {
   color: white;
 }
 
-.add-input {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 /**************************************************************To-Do List***********************************************/
 .todo-list {
   display: flex;
@@ -1402,6 +1425,12 @@ main {
   flex-direction: row;
   align-items: center;
 }
+
+.add-input {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Hide the default checkbox */
 .td-container input {
   position: absolute;
@@ -1721,7 +1750,8 @@ main {
 }
 
 .tab-content {
-  width: 800px;
+  width: 1200px;
+  height: 1000px;
 }
 
 .v-content {
@@ -1854,9 +1884,52 @@ main {
   width: 100vw;
 }
 
+.vendor-desc {
+  width: 100vw;
+}
+
+@media (max-width: 1080px) {
+  .profile-page {
+    width: 1000px !important;
+  }
+  .vendor-gallery {
+    width: 1000px !important;
+  }
+  .vcard-img img {
+    width: 150px !important;
+    height: 200px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-page {
+    width: 1000px !important;
+  }
+  .vendor-gallery {
+    width: 900px !important;
+  }
+  .vcard-img img {
+    width: 100px !important;
+    height: 150px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .profile-page {
+    width: 1000px !important;
+  }
+  .vendor-gallery {
+    width: 900px !important;
+  }
+  .vcard-img img {
+    width: 100px !important;
+    height: 150px !important;
+  }
+}
+
 .vcard-img img {
-  width: 350px;
-  height: 400px;
+  width: 300px;
+  height: 350px;
   margin: 20px;
   border-radius: 10%;
 }

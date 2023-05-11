@@ -144,7 +144,11 @@ function AgendaList({ addAgendaToCalendar, removeAgendaFromCalendar }) {
         borderStyle: "solid",
       }}
     >
-      <h4 className="text-center"> Programme Rundown</h4>
+      <div className="text-center">
+        <h4>Programme Rundown</h4>
+        <p>Plan your agenda for the d-day!"</p>
+        <p style={{ marginTop: "-1em" }}>e.g. "Receive guests at 8 am</p>
+      </div>
 
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
@@ -184,7 +188,6 @@ function AgendaList({ addAgendaToCalendar, removeAgendaFromCalendar }) {
           />
           <Form.Control
             type="time"
-            className="m-1"
             name="time"
             value={agendaStartTime}
             placeholder="Start Time"

@@ -44,7 +44,7 @@ function Vendors() {
           ].map((tab) => (
             <div
               key={tab}
-              className="vendor-tab"
+              className={`vendor-tab ${activeTab === tab ? "active" : ""}`}
               onClick={() => handleTabClick(tab)}
             >
               <div className="tools">
@@ -58,7 +58,7 @@ function Vendors() {
                   <span className="green box"></span>
                 </div>
               </div>
-              {tab}
+              <span className="tab-text">{tab}</span>
             </div>
           ))}
         </div>

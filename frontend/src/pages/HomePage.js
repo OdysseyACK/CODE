@@ -257,7 +257,7 @@ export default function HomePage() {
         </svg>
       </div>
 
-      <div className="partners-section">
+      <div className="partners-section" style={{ marginBottom: "-100px" }}>
         <div className="partners-container">
           <div className="partners-title">
             <h2>Our Partners</h2>

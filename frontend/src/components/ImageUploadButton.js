@@ -9,23 +9,32 @@ import {
   MDBModalBody,
 } from "mdb-react-ui-kit";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { EventStore } from "../EventStore";
 
 export default function ImageUploadButton({ authToken }) {
   const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
   const params = useParams();
-  const { id: userId } = params;
+  const { state } = useContext(EventStore);
+  const { userInfo } = state;
+  const { id: vendorId } = useParams();
   const fileInputRef = useRef(null);
+  const [basicModal, setBasicModal] = useState(false);
+  const toggleShow = () => setBasicModal(!basicModal);
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const { data } = await axios.get(`/api/gallery/profilepage/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const { data } = await axios.get(
+          `/api/gallery/profilepage/${vendorId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
         setImages(data);
       } catch (error) {
         console.log(error);
@@ -33,7 +42,7 @@ export default function ImageUploadButton({ authToken }) {
     };
 
     fetchImages();
-  }, [userId, authToken]);
+  }, [vendorId, authToken]);
 
   const submitImageHandler = async (e) => {
     e.preventDefault();
@@ -43,7 +52,7 @@ export default function ImageUploadButton({ authToken }) {
 
     try {
       const { data } = await axios.post(
-        `/api/gallery/profilepage/${userId}`,
+        `/api/gallery/profilepage/${vendorId}`,
         formData,
         {
           headers: {
@@ -73,56 +82,56 @@ export default function ImageUploadButton({ authToken }) {
     reader.readAsDataURL(file);
   };
 
-  const [basicModal, setBasicModal] = useState(false);
-
-  const toggleShow = () => setBasicModal(!basicModal);
+  const isCurrentUserVendor = userInfo && userInfo._id === vendorId;
 
   return (
     <div>
-      <div>
-        <div className="upload-btn-div">
-          {" "}
-          <MDBBtn className="mt-3 mb-3" onClick={toggleShow}>
-            Upload images to build your Gallery!
-          </MDBBtn>
-        </div>
-        <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-          <MDBModalDialog size="sm">
-            <MDBModalContent>
-              <MDBModalHeader>
-                <MDBModalTitle>Upload Photos</MDBModalTitle>
-                <MDBBtn
-                  className="btn-close"
-                  color="none"
-                  onClick={toggleShow}
-                ></MDBBtn>
-              </MDBModalHeader>
-              <MDBModalBody>
-                <form onSubmit={submitImageHandler}>
-                  <div className="form-group">
-                    <MDBInput
-                      type="file"
-                      id="image"
-                      accept="image/*"
-                      ref={fileInputRef}
-                      required
-                      onChange={handleFileChange}
-                    />
-                  </div>
+      {isCurrentUserVendor && (
+        <div>
+          <div className="upload-btn-div">
+            {" "}
+            <MDBBtn className="mt-3 mb-3" onClick={toggleShow}>
+              Upload images to build your Gallery!
+            </MDBBtn>
+          </div>
+          <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+            <MDBModalDialog size="sm">
+              <MDBModalContent>
+                <MDBModalHeader>
+                  <MDBModalTitle>Upload Photos</MDBModalTitle>
                   <MDBBtn
-                    className="mt-4"
-                    type="submit"
-                    block
+                    className="btn-close"
+                    color="none"
                     onClick={toggleShow}
-                  >
-                    Submit
-                  </MDBBtn>
-                </form>
-              </MDBModalBody>
-            </MDBModalContent>
-          </MDBModalDialog>
-        </MDBModal>
-      </div>
+                  ></MDBBtn>
+                </MDBModalHeader>
+                <MDBModalBody>
+                  <form onSubmit={submitImageHandler}>
+                    <div className="form-group">
+                      <MDBInput
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        required
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                    <MDBBtn
+                      className="mt-4"
+                      type="submit"
+                      block
+                      onClick={toggleShow}
+                    >
+                      Submit
+                    </MDBBtn>
+                  </form>
+                </MDBModalBody>
+              </MDBModalContent>
+            </MDBModalDialog>
+          </MDBModal>
+        </div>
+      )}
 
       <div className="vendor-gallery">
         {images.map((img) => (

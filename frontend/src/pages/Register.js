@@ -7,7 +7,6 @@ import {
   MDBTabsLink,
   MDBTabsPane,
   MDBBtn,
-  MDBIcon,
   MDBCheckbox,
   MDBModal,
   MDBModalBody,
@@ -38,6 +37,7 @@ function Register() {
   const [isActive] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [profilePic, setProfilePic] = useState("");
 
   const [uploadModal, setUploadModal] = useState(false);
   const toggleShow = () => setUploadModal(!uploadModal);
@@ -74,7 +74,7 @@ function Register() {
           password: password.trim(),
           isActive,
           isVendor,
-          profilePic: preview,
+          profilePic: preview || "./images/default.jpg", // if user did not select profilePic, use default pic
         });
         // update the user information in the store and save it in local storage
         ctxDispatch({ type: "USER_LOGIN", payload: data });
@@ -119,6 +119,7 @@ function Register() {
             className="tab"
             href="/register"
             style={{ backgroundColor: "#278b7b", color: "white" }}
+            active
           >
             Register
           </MDBTabsLink>
@@ -128,53 +129,6 @@ function Register() {
       <div className="login-container">
         <MDBTabsPane show>
           <div className="content">
-            <div className="text-center mb-3">
-              <p>Sign up with:</p>
-
-              <div
-                className="d-flex justify-content-between mx-auto"
-                style={{ width: "40%" }}
-              >
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="facebook-f" size="sm" />
-                </MDBBtn>
-
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="twitter" size="sm" />
-                </MDBBtn>
-
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="google" size="sm" />
-                </MDBBtn>
-
-                <MDBBtn
-                  tag="a"
-                  color="none"
-                  className="m-1"
-                  style={{ color: "#1266f1" }}
-                >
-                  <MDBIcon fab icon="github" size="sm" />
-                </MDBBtn>
-              </div>
-
-              <p className="text-center mt-3">or:</p>
-            </div>
-
             <div className="d-flex align-items-center justify-content-center mb-4">
               <img
                 id="imgId"
@@ -188,7 +142,9 @@ function Register() {
               <MDBModalDialog centered size="lg">
                 <MDBModalContent>
                   <MDBModalHeader>
-                    <MDBModalTitle>Upload Profile Picture</MDBModalTitle>
+                    <MDBModalTitle style={{ color: "#4f4f4f" }}>
+                      Upload Profile Picture
+                    </MDBModalTitle>
                     <MDBBtn
                       className="btn-close"
                       color="none"
@@ -220,7 +176,7 @@ function Register() {
                   onChange={(e) => setName(e.target.value)}
                 />
                 <span>Name</span>
-                <i></i>
+                <i></i> {/*css*/}
               </div>
               <div className="inputbox">
                 <input
@@ -230,7 +186,7 @@ function Register() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <span>Email</span>
-                <i></i>
+                <i></i> {/*css*/}
               </div>
               <div className="inputbox">
                 <input
@@ -240,7 +196,7 @@ function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <span>Password</span>
-                <i></i>
+                <i></i> {/*css*/}
               </div>
               <div className="inputbox">
                 <input
@@ -250,7 +206,7 @@ function Register() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <span>Confirm Password</span>
-                <i></i>
+                <i></i> {/*css*/}
               </div>
 
               <div className="d-flex justify-content-center flex-column align-items-center mb-4">

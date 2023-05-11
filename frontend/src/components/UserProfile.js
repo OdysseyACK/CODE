@@ -139,7 +139,7 @@ export default function UserProfile({ userId }) {
         </MDBTabsItem>
       </MDBTabs>
       {/* =====================Upcoming Events============ */}
-      <MDBTabsContent style={{ width: "100vw" }}>
+      <MDBTabsContent style={{ width: "100vw", height: "40vh" }}>
         <MDBTabsPane show={justifyActive === "tab1"}>
           <MDBRow>
             {upcomingEvents.map((event) => (
@@ -190,11 +190,14 @@ export default function UserProfile({ userId }) {
                     </div>
                   </div>
                 </div>
-                <EditEventButton
-                  eventID={event._id}
-                  event={event}
-                  onEventUpdated={handleEventUpdated}
-                />
+                <div className="event-btn-wrapper">
+                  {" "}
+                  <EditEventButton
+                    eventID={event._id}
+                    event={event}
+                    onEventUpdated={handleEventUpdated}
+                  />
+                </div>
               </MDBCol>
             ))}
           </MDBRow>

@@ -45,29 +45,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
-// app.post("/users/:id/photo", upload.single("photo"), async (req, res) => {
-//   const user = await User.findById(req.params.id);
-//   if (!user) {
-//     return res.status(404).send({ error: "User not found" });
-//   }
-//   user.photo = req.file.buffer;
-//   await user.save();
-
-//   res.send(user);
-// });
-
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
 });
-
-// // Route to get user profile photo
-// app.get("/profile-photo/:userId", (req, res) => {
-//   // Get user's profile photo from the database
-//   const userId = req.params.userId;
-//   const user = getUser(userId);
-//   const profilePhoto = user.profilePhoto;
-
-//   // Send profile photo as response
-//   res.sendFile(profilePhoto);
-// });

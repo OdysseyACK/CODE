@@ -210,9 +210,7 @@ function Vcalculator() {
     <div className="container vcalculator">
       <div className="vcalculator-header">
         <h2>Select the ideal partners that suit your event.</h2>
-        <p>
-          Our partners will be in contact with you within the next working day!
-        </p>
+        <p>Use our budget calculator to estimate your costs!</p>
       </div>
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
