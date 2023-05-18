@@ -1107,6 +1107,14 @@ main {
   height: 44px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  z-index: 1;
+}
+
 .login-button {
   color: white;
   padding: 0.7em 1.7em;
