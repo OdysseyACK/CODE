@@ -29,7 +29,7 @@ function Vendors() {
   );
 
   return (
-    <div>
+    <div className="vendors-container">
       <section className="vendors">
         <div className="vendors-tab-container">
           {[

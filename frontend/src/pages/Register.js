@@ -96,135 +96,141 @@ function Register() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
-      <Helmet>
-        <title>Login/Register</title>
-      </Helmet>
-      <MDBTabs
-        pills
-        justify
-        className="mb-3 d-flex flex-row justify-content-between mt-5"
-      >
-        <MDBTabsItem>
-          <MDBTabsLink
-            className="tab"
-            href="/login"
-            style={{ backgroundColor: "#278b7b", color: "white" }}
-          >
-            Login
-          </MDBTabsLink>
-        </MDBTabsItem>
-        <MDBTabsItem>
-          <MDBTabsLink
-            className="tab"
-            href="/register"
-            style={{ backgroundColor: "#278b7b", color: "white" }}
-            active
-          >
-            Register
-          </MDBTabsLink>
-        </MDBTabsItem>
-      </MDBTabs>
+    <div className="register-page-container">
+      <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+        <Helmet>
+          <title>Login/Register</title>
+        </Helmet>
+        <MDBTabs
+          pills
+          justify
+          className="mb-3 d-flex flex-row justify-content-between mt-5"
+        >
+          <MDBTabsItem>
+            <MDBTabsLink
+              className="tab"
+              href="/login"
+              style={{ backgroundColor: "#278b7b", color: "white" }}
+            >
+              Login
+            </MDBTabsLink>
+          </MDBTabsItem>
+          <MDBTabsItem>
+            <MDBTabsLink
+              className="tab"
+              href="/register"
+              style={{ backgroundColor: "#278b7b", color: "white" }}
+              active
+            >
+              Register
+            </MDBTabsLink>
+          </MDBTabsItem>
+        </MDBTabs>
 
-      <div className="login-container">
-        <MDBTabsPane show>
-          <div className="content">
-            <div className="d-flex align-items-center justify-content-center mb-4">
-              <img
-                id="imgId"
-                className="registerProfile"
-                src={src ? src : "./images/default.jpg"}
-                onClick={toggleShow}
-                alt=""
-              />
+        <div className="login-container">
+          <MDBTabsPane show>
+            <div className="content">
+              <div className="d-flex align-items-center justify-content-center mb-4">
+                <img
+                  id="imgId"
+                  className="registerProfile"
+                  src={src ? src : "./images/default.jpg"}
+                  onClick={toggleShow}
+                  alt=""
+                />
+              </div>
+              <MDBModal
+                tabIndex="-1"
+                show={uploadModal}
+                setShow={setUploadModal}
+              >
+                <MDBModalDialog centered size="lg">
+                  <MDBModalContent>
+                    <MDBModalHeader>
+                      <MDBModalTitle style={{ color: "#4f4f4f" }}>
+                        Upload Profile Picture
+                      </MDBModalTitle>
+                      <MDBBtn
+                        className="btn-close"
+                        color="none"
+                        onClick={toggleShow}
+                      ></MDBBtn>
+                    </MDBModalHeader>
+                    <MDBModalBody>
+                      <Avatar
+                        width={770}
+                        height={300}
+                        onClose={onClose}
+                        onCrop={onCrop}
+                        src={src}
+                      />
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                      <MDBBtn onClick={onSaveChanges}>Save Changes</MDBBtn>
+                    </MDBModalFooter>
+                  </MDBModalContent>
+                </MDBModalDialog>
+              </MDBModal>
+
+              <form onSubmit={submitRegisterHandler}>
+                <div className="inputbox">
+                  <input
+                    className="input"
+                    type="text"
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <span>Name</span>
+                  <i></i> {/*css*/}
+                </div>
+                <div className="inputbox">
+                  <input
+                    className="input"
+                    type="email"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <span>Email</span>
+                  <i></i> {/*css*/}
+                </div>
+                <div className="inputbox">
+                  <input
+                    className="input"
+                    type="password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <span>Password</span>
+                  <i></i> {/*css*/}
+                </div>
+                <div className="inputbox">
+                  <input
+                    className="input"
+                    type="password"
+                    required
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  <span>Confirm Password</span>
+                  <i></i> {/*css*/}
+                </div>
+
+                <div className="d-flex justify-content-center flex-column align-items-center mb-4">
+                  <MDBCheckbox
+                    name="isVendor"
+                    id="flexCheck"
+                    label="I am registering as a vendor"
+                    onChange={(e) => setIsVendor(e.target.checked)}
+                    checked={isVendor}
+                  />
+                  <button className="login-button mt-4">Sign up</button>
+                </div>
+              </form>
             </div>
-            <MDBModal tabIndex="-1" show={uploadModal} setShow={setUploadModal}>
-              <MDBModalDialog centered size="lg">
-                <MDBModalContent>
-                  <MDBModalHeader>
-                    <MDBModalTitle style={{ color: "#4f4f4f" }}>
-                      Upload Profile Picture
-                    </MDBModalTitle>
-                    <MDBBtn
-                      className="btn-close"
-                      color="none"
-                      onClick={toggleShow}
-                    ></MDBBtn>
-                  </MDBModalHeader>
-                  <MDBModalBody>
-                    <Avatar
-                      width={770}
-                      height={300}
-                      onClose={onClose}
-                      onCrop={onCrop}
-                      src={src}
-                    />
-                  </MDBModalBody>
-                  <MDBModalFooter>
-                    <MDBBtn onClick={onSaveChanges}>Save Changes</MDBBtn>
-                  </MDBModalFooter>
-                </MDBModalContent>
-              </MDBModalDialog>
-            </MDBModal>
-
-            <form onSubmit={submitRegisterHandler}>
-              <div className="inputbox">
-                <input
-                  className="input"
-                  type="text"
-                  required
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <span>Name</span>
-                <i></i> {/*css*/}
-              </div>
-              <div className="inputbox">
-                <input
-                  className="input"
-                  type="email"
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <span>Email</span>
-                <i></i> {/*css*/}
-              </div>
-              <div className="inputbox">
-                <input
-                  className="input"
-                  type="password"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <span>Password</span>
-                <i></i> {/*css*/}
-              </div>
-              <div className="inputbox">
-                <input
-                  className="input"
-                  type="password"
-                  required
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <span>Confirm Password</span>
-                <i></i> {/*css*/}
-              </div>
-
-              <div className="d-flex justify-content-center flex-column align-items-center mb-4">
-                <MDBCheckbox
-                  name="isVendor"
-                  id="flexCheck"
-                  label="I am registering as a vendor"
-                  onChange={(e) => setIsVendor(e.target.checked)}
-                  checked={isVendor}
-                />
-                <button className="login-button mt-4">Sign up</button>
-              </div>
-            </form>
-          </div>
-        </MDBTabsPane>
-      </div>
-      <Footer />
-    </MDBContainer>
+          </MDBTabsPane>
+        </div>
+        <Footer />
+      </MDBContainer>
+    </div>
   );
 }
 

@@ -178,7 +178,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="container">
+    <div className="dashboard-container">
       <h1 className="text-center dashboard-title" style={{ marginTop: "10%" }}>
         Manage Users
       </h1>

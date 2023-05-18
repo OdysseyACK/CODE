@@ -47,7 +47,7 @@ export default function HomePage() {
         <div className="features-section">
           <h1 className="featuresTitle text-center">Features</h1>
           <MDBRow className="features">
-            <MDBCol sm={12} md={4} lg={4} className="mb-5">
+            <MDBCol size={6} sm={6} md={4} lg={4} className="mb-5">
               <div className="d-flex justify-content-center">
                 <div className=" feature text-center">
                   <h3 className="featureTitle">Event Calendar</h3>
@@ -58,7 +58,7 @@ export default function HomePage() {
                 </div>
               </div>
             </MDBCol>
-            <MDBCol sm={12} md={4} lg={4} className="mb-5">
+            <MDBCol size={6} sm={6} md={4} lg={4} className="mb-5">
               <div className="d-flex justify-content-center">
                 <div className="feature text-center">
                   <h3 className="featureTitle">Budget Calculator</h3>
@@ -68,7 +68,7 @@ export default function HomePage() {
                 </div>
               </div>
             </MDBCol>
-            <MDBCol sm={12} md={4} lg={4} className="mb-5">
+            <MDBCol size={6} sm={6} md={4} lg={4} className="mb-5">
               <div className="d-flex justify-content-center">
                 <div className="feature text-center">
                   <h3 className="featureTitle">Vendor Directory</h3>
@@ -109,10 +109,10 @@ export default function HomePage() {
 
       <div className="event-section">
         <div className="eventTypeTitle">
-          <h1 className=" text-center">Types of Events</h1>
+          <h1 className="text-center">Types of Events</h1>
         </div>
-        <MDBRow className="text-center">
-          <MDBCol sm={12} md={6} lg={3} className="mb-5">
+        <MDBRow className="text-center event-row">
+          <MDBCol size={6} sm={4} md={3} lg={3} className="mb-5">
             <div className="d-flex justify-content-center">
               <div className="birthday-book">
                 <div className="birthday-cover">
@@ -121,7 +121,7 @@ export default function HomePage() {
               </div>
             </div>
           </MDBCol>
-          <MDBCol sm={12} md={6} lg={3} className="mb-5">
+          <MDBCol size={6} sm={4} md={3} lg={3} className="mb-5">
             <div className="d-flex justify-content-center">
               <div className="corporate-book">
                 <div className="corporate-cover">
@@ -130,7 +130,7 @@ export default function HomePage() {
               </div>
             </div>
           </MDBCol>
-          <MDBCol sm={12} md={6} lg={3} className="mb-5">
+          <MDBCol size={6} sm={4} md={3} lg={3} className="mb-5">
             <div className="d-flex justify-content-center">
               <div className="party-book">
                 <div className="party-cover color-change-5x">
@@ -139,7 +139,7 @@ export default function HomePage() {
               </div>
             </div>
           </MDBCol>
-          <MDBCol sm={12} md={6} lg={3} className="mb-5">
+          <MDBCol size={6} sm={4} md={3} lg={3} className="mb-5">
             <div className="d-flex justify-content-center">
               <div className="wedding-book">
                 <div className="wedding-cover">

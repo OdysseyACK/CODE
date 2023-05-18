@@ -50,7 +50,7 @@ function Login() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <div>
+    <div className="login-page-container">
       <Helmet>
         <title>Login</title>
       </Helmet>

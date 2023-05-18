@@ -18,6 +18,12 @@ main {
   flex: 1;
 }
 
+@media (max-width: 900px) {
+  #root {
+    width: 1000px;
+  }
+}
+
 /****************************************************** Navbar ******************************************************/
 
 .nav-full {
@@ -254,9 +260,20 @@ main {
 }
 
 /************************************************************ Homepage PAGE ************************************************************************/
-
 .homepage {
   background-color: #54556d;
+}
+
+@media (max-width: 1000px) {
+  .homepage {
+    width: 1000px;
+  }
+}
+
+@media (max-width: 390px) {
+  .homepage {
+    width: 1000px;
+  }
 }
 
 .hero {
@@ -454,14 +471,6 @@ main {
   font-weight: 700;
 }
 
-/****************************************************** Get Start Modal ******************************************************/
-/* .modal-title {
-  color: white;
-}
-
-.modal-content {
-  background-color: #37373f !important;
-} */
 /****************************************************** Features sections ******************************************************/
 
 .featuresTitle {
@@ -481,6 +490,7 @@ main {
   border-radius: 55px;
   background: #54556d;
   box-shadow: 16px 16px 32px #3c3d4e, -16px -16px 32px #6c6d8c;
+  z-index: 1;
 }
 
 .featureTitle {
@@ -535,21 +545,15 @@ main {
   margin-bottom: 8rem;
 }
 
-.event-card {
-  width: 200px;
-  background-color: white;
-  border-radius: 5%;
-  margin: 2rem;
-}
-.event-card h3 {
-  font-family: "Roboto", sans-serif;
-}
-
-.event-card img {
-  height: 300px;
-  width: 200px;
-  object-fit: cover;
-  border-radius: 5% 5% 0 0;
+@media (max-width: 400px) {
+  .birthday-book,
+  .corporate-book,
+  .party-book,
+  .wedding-book {
+    width: 140px !important;
+    height: 220px !important;
+    z-index: 1;
+  }
 }
 
 .color-change-5x {
@@ -999,11 +1003,17 @@ main {
 }
 
 @media (max-width: 900px) {
+  .login-page-container {
+    height: 160vh;
+  }
+  .register-page-container {
+    height: 160vh;
+  }
   .content {
-    width: 500px !important;
+    width: 750px !important;
   }
   .inputbox {
-    width: 400px !important;
+    width: 600px !important;
   }
   .registerProfile {
     max-width: 200px !important;
@@ -1014,11 +1024,17 @@ main {
 }
 
 @media (max-width: 600px) {
+  .login-page-container {
+    height: 244vh;
+  }
+  .register-page-container {
+    height: 244vh;
+  }
   .content {
-    width: 340px !important;
+    width: 700px !important;
   }
   .inputbox {
-    width: 250px !important;
+    width: 600px !important;
   }
   .registerProfile {
     max-width: 150px !important;
@@ -1083,7 +1099,7 @@ main {
   border-radius: 6px;
   transition: 0.5s;
   pointer-events: none;
-  z-index: 9;
+  /* z-index: 9; */
 }
 
 .inputbox input:valid ~ i,
@@ -1292,6 +1308,25 @@ main {
 }
 
 /************************************************************ VENDORS **************************************************/
+@media (max-width: 900px) {
+  .vendors-container {
+    height: 120vh;
+  }
+  .vendors-content-container {
+    width: 750px;
+    height: 100vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .vendors-container {
+    height: 240vh;
+  }
+  .vendors-content-container {
+    width: 750px;
+    height: 150vh;
+  }
+}
 
 .vendors {
   display: flex;
@@ -1610,7 +1645,7 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
-  height: 130vh;
+  height: 100vh;
 }
 
 .contact-form {
@@ -1633,13 +1668,33 @@ main {
 
 @media (max-width: 900px) {
   .contact-page {
-    width: 700px !important;
+    width: 1000px !important;
+    height: 166vh;
+  }
+  .contact-form {
+    width: 800px !important;
+    height: 800px;
   }
 }
 
 @media (max-width: 600px) {
   .contact-page {
-    width: 300px !important;
+    width: 1000px !important;
+    height: 166vh;
+  }
+  .contact-form {
+    width: 600px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .contact-page {
+    width: 1000px !important;
+    height: 255vh !important;
+  }
+  .contact-form {
+    width: 800px !important;
+    height: 100vh;
   }
 }
 
@@ -1950,4 +2005,13 @@ main {
 .dashboard-table th,
 .dashboard-title {
   color: white;
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    width: 1000px !important;
+  }
+  #root {
+    width: 1000px;
+  }
 }
